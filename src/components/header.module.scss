@@ -1,0 +1,33 @@
+@import '../styles/variables';
+
+header {
+  background: $header-color;
+  width: 100%;
+  .content {
+    display: flex;
+    max-width: $container-width;
+    margin: 0 auto;
+    align-items: center;
+    padding: $gap $half-gap;
+  }
+  .pageHeadingWrapper {
+    display: flex;
+    flex-direction: column;
+    padding-left: $gap;
+    color: white;
+    .heading {
+      color: white;
+      margin: 0;
+    }
+    .claim {
+      margin: $half-gap 0 0 0;
+    }
+  }
+
+  .logo {
+    min-width: 64px;
+    @include not-s {
+      min-width: 92px;
+    }
+  }
+}

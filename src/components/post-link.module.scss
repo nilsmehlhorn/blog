@@ -1,0 +1,9 @@
+@import "../styles/variables";
+
+.link {
+  text-decoration: none;
+}
+
+.thumbTitle, .thumbSub {
+  margin-bottom: $half-gap;
+}

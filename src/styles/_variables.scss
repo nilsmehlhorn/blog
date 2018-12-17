@@ -1,0 +1,29 @@
+$container-width: 960px;
+
+$gap: 16px;
+$half-gap: 8px;
+
+$header-color: #2e4057;
+$background-color: #f7f7f7;
+$dark-gray: #3a3a3a;
+
+$break-m: 768px;
+$break-l: 1024px;
+
+@mixin not-s {
+  @media (min-width: #{$break-m}) {
+    @content;
+  }
+}
+
+@mixin m {
+  @media (min-width: #{$break-m}) and (max-width: #{$break-l - 1px}) {
+    @content;
+  }
+}
+
+@mixin l {
+  @media (min-width: #{$break-l}) {
+    @content;
+  }
+}

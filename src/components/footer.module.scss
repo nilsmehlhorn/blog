@@ -1,0 +1,31 @@
+@import "../styles/variables";
+
+.footer {
+  display: flex;
+  background: $header-color;
+  flex-shrink: 0;
+  width: 100%;
+  .content {
+    display: flex;
+    flex-direction: column;
+    max-width: $container-width;
+    margin: 0 auto;
+    align-items: center;
+    padding: $gap 0;
+    color: white;
+    .copyright {
+      margin-bottom: 0;
+    }
+    .links {
+      a {
+        color: white;
+        &:not(&:last-child) {
+          margin-right: $half-gap;
+        }
+      }
+    }
+    .iconCredits > a {
+      color: white;
+    }
+  }
+}
