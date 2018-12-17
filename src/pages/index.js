@@ -7,19 +7,19 @@ import PostLink from '../components/post-link'
 
 const IndexPage = ({
                      data: {
+                       site,
                        allMarkdownRemark: {edges}
                      }
                    }) => {
   const Posts = edges
     .filter(edge => edge.node.frontmatter.published)
     .map((edge, i) => {
-      console.log(edge)
       const post = <PostLink key={edge.node.id} post={edge.node}/>
       return i > 0 ? [<hr/>, post] : post
     })
 
   return <Layout>
-    <SEO title="Start" keywords={['blog', 'software', 'angular']}/>
+    <SEO title={site.siteMetadata.title} keywords={['blog', 'software', 'angular']}/>
     {Posts}
   </Layout>
 }
@@ -28,6 +28,11 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {

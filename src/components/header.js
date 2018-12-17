@@ -16,6 +16,11 @@ const Header = ({siteTitle}) => (
             }
           }
         }
+        site {
+          siteMetadata {
+            title
+          }
+        }
       }
     `}
     render={data => (
@@ -26,7 +31,7 @@ const Header = ({siteTitle}) => (
           </Link>
           <div className={styles.pageHeadingWrapper}>
             <h1 className={styles.heading}>
-              Candid Code
+              {data.site.siteMetadata.title}
             </h1>
             <p className={styles.claim}>Blog by Nils Mehlhorn</p>
           </div>

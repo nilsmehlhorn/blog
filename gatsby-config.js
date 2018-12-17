@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: 'Code Culture',
-    description: 'Software thoughts by a software person',
+    title: 'Candid Code',
+    description: 'Blog by Nils Mehlhorn',
     author: '@n_mehlhorn'
   },
   plugins: [
@@ -26,8 +26,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Nils\' Blog',
-        short_name: 'nils-blog',
+        name: 'Candid Code',
+        short_name: 'candid-code',
         start_url: '/',
         background_color: '#db0404',
         theme_color: '#db0404',
