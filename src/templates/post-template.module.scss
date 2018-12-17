@@ -1,5 +1,16 @@
 @import "../styles/variables";
 
-.heading {
+.heading, .date {
   margin-bottom: $half-gap;
+}
+
+.tags {
+  display: flex;
+  margin-bottom: 1.5rem;
+  .tag {
+    padding: 0 $quarter-gap;
+    background: $header-color;
+    color: white;
+    margin-right: $quarter-gap;
+  }
 }
