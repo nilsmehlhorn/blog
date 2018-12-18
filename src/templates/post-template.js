@@ -1,6 +1,7 @@
 import React from "react"
 import {graphql} from "gatsby"
 import Layout from "../components/layout"
+import Tags from "../components/tags"
 import SEO from '../components/seo'
 
 import styles from './post-template.module.scss'
@@ -10,8 +11,6 @@ export default function Template({
                                  }) {
   const {markdownRemark} = data
   const {frontmatter, html} = markdownRemark
-  const Tags = frontmatter.tags
-    .map(tag => <small className={styles.tag}>{tag}</small>)
   return (
     <Layout>
       <SEO keywords={frontmatter.tags} title={frontmatter.title}/>
@@ -19,7 +18,7 @@ export default function Template({
         <div className="post">
           <h1 className={styles.heading}>{frontmatter.title}</h1>
           <p className={styles.date}>{frontmatter.date}</p>
-          <section className={styles.tags}>{Tags}</section>
+          <Tags tags={frontmatter.tags}/>
           <div
             className="post-content"
             dangerouslySetInnerHTML={{__html: html}}
