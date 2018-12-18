@@ -1,0 +1,9 @@
+@import "../styles/variables";
+
+.bio {
+  color: white;
+  margin-top: $gap;
+  padding: $gap;
+  border-radius: $gap;
+  background-color: $header-color;
+}
