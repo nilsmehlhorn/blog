@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Candid Code',
+    title: 'Lessons Unlearned',
     description: 'Blog by Nils Mehlhorn',
     author: '@n_mehlhorn'
   },
@@ -26,8 +26,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Candid Code',
-        short_name: 'candid-code',
+        name: 'Lessons Unlearned',
+        short_name: 'lessons-unlearned',
         start_url: '/',
         background_color: '#db0404',
         theme_color: '#db0404',
