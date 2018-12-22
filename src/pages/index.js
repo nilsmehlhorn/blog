@@ -4,6 +4,7 @@ import {graphql} from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import PostLink from '../components/post-link'
+import Bio from '../components/bio'
 
 const IndexPage = ({
                      data: {
@@ -20,6 +21,7 @@ const IndexPage = ({
 
   return <Layout>
     <SEO title={site.siteMetadata.title} keywords={['blog', 'software', 'angular']}/>
+    <Bio/>
     {Posts}
   </Layout>
 }
@@ -43,6 +45,7 @@ export const pageQuery = graphql`
             path
             title
             published
+            tags
           }
         }
       }
