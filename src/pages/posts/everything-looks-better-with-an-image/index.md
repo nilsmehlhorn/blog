@@ -1,6 +1,6 @@
 ---
 path: "/posts/everything-looks-better-with-an-image"
-date: "2018-12-17"
+date: "2018-12-22"
 title: "Everything looks better with an image"
 published: true
 tags: ["web development", "ui", "frontend"]
@@ -21,17 +21,18 @@ That seldom worked out for me when trying to solve specific problems instead of 
 app. Well, it technically works, but they'll give you the looks. Popular end-consumer apps really spoiled the game for
 enterprise interfaces - you're *expected* to keep up. So, in order to have something to start off on, someone decided
 to integrate a UI framework. Maybe that someone even went above and beyond and checked if the provided components match
-roughly with the app's core use-cases, rather than just picking the one that's easiest to setup. Still, most of the
-times you'll hit the limits in no time. Now what? You're already knee deep into those juicy dropdowns, modals and 
-side-navs. You're not quite sure anymore what's framework and what's just straight up magic. 
-// framework has to fit
-// hard to extend vagualy defined framework
+roughly with the app's core use-cases, rather than just picking the one that's easiest to setup. Still, in most cases
+ you'll hit the limits in no time. Now what? You're already knee deep into those juicy dropdowns, modals and 
+side-navs. You're not quite sure anymore what's framework and what's just straight up magic.
 
 Instead, keep your UI frameworks at an [arms-length](https://blog.cleancoder.com/uncle-bob/2011/09/30/Screaming-Architecture.html).
-Establish simple and extensible mechanisms - mostly, learn modern web-development. Get familiar with the good CSS stuff 
-that's come up like media queries, modularization, variables, flexbox, grid - to name a few. Don't shy away from 
-building you own components. With modern tooling it's a breeze. You can actually still write HTML, (S)CSS and JS 
-yourself and end up with way less of it while solving your specific use-case. The web is over-engineered enough as it is.
+Establish simple and extensible mechanisms - mostly, learn modern web-development. Get familiar with the good stuff 
+that's come up like media queries, modularization, flexbox, grid - to name a few. Don't shy away from 
+building you own components. With modern tooling it's a breeze. 
+You can actually still write HTML, (S)CSS and JS yourself and end up with way less of it while solving your specific 
+use-case. The web may be over-engineered but try to use it to your advantage. Once you're inside a certain UI framework,
+it becomes difficult to color outside the lines. Work with abstractions. Don't use a component, if it ties you
+to a [bunch of too specific boilerplate for a mediocre solution](https://material.angular.io/components/table/overview).
 
 ## Establish facts
 
@@ -41,8 +42,9 @@ stretch a design at will. Desktop and mobile differ in more than just screen siz
 reworking something over and over again because you found yet another place where it looks off (unrelated hint: 
 don't even try to use [grid in IE](https://rachelandrew.co.uk/archives/2016/11/26/should-i-try-to-use-the-ie-implementation-of-css-grid-layout/)).
 A great way to minimize such iterations is by establishing a style guide. Setup guidelines for things like typography, 
-colors, navigation patterns and extend them as you go. Yet, consider the return of investment here. It's great for
-on-boarding and speeds up development for on-off views but it must be worth it. // meh
+colors, navigation patterns and extend them as you go. You may do this inside some document, yet just like any other
+artifact, distance from code correlates with obsolescence. There are [better options](https://github.com/storybooks/storybook).
+ The facts have to be easy to access and hard to evade.
 
 ## Interfaces are boring
 
@@ -50,16 +52,14 @@ Accept it, your enterprisy CRUD app may never win any design award. It won't hol
 phone. Yet, it doesn't have to in most cases. Your interface isn't supposed to stand out. You just need a place to put
 content - and if there isn't too much content, fake it. Take a look at the designs you've recognized over the last 
 time - I'll bet they've got huge shiny photography and playful pictographs all over the place. Don't overdo it, start 
-simple and start with content.
+simple and start with content. Work things out over time and minimize complexity.
 
-// target audience, product building or solving a business problem
+## It's a freelance economy
 
-## Skip the middleman, it's a freelance economy
-// you can buy a logo, component, a landing page design or even a whole corporate identity for the cash people spend on lunch in San Francisco
-// you don't need to hire an agency for some sweet assets
-// take a look at the designs you've recognized over the last time
-// i'll bet they've got sleek imagery - in the end it's always about content
+Nowadays you can buy a logo, a set of UI components, a landing page design or even a whole corporate identity for the 
+cash you pay developers per hour. It's not absolutely necessary to hire an agency for some sweet assets.
+Do the math on "build or buy" rather than staying in the comfort zone and letting people do work outside of
+their competency at exponentially higher costs.
 
-// Wrapping up
-// You'll have to spent time on design / hire a designer 
-// work things out over time  - minimize complexity - technically and in regards to usablity
+Like software development, design isn't diligence work. You can't cut the process short and expect the same
+ results. It's easier than ever to build great user experiences, if you're not saving in the wrong places.
