@@ -50,6 +50,10 @@ function SEO({description, lang, meta, keywords, title}) {
               {
                 name: 'twitter:description',
                 content: metaDescription
+              },
+              {
+                name: 'twitter:image',
+                content: data.site.siteMetadata.baseUrl + data.img.childImageSharp.fixed.src
               }
             ]
               .concat(
@@ -91,6 +95,14 @@ const detailsQuery = graphql`
         title
         description
         author
+        baseUrl
+      }
+    }
+    img: file(relativePath: { eq: "icon.png" }) {
+      childImageSharp {
+        fixed(width: 256, height: 256) {
+          ...GatsbyImageSharpFixed
+        }
       }
     }
   }

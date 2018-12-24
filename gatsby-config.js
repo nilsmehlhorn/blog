@@ -2,7 +2,8 @@ module.exports = {
   siteMetadata: {
     title: 'Lessons Unlearned',
     description: 'Blog by Nils Mehlhorn',
-    author: '@n_mehlhorn'
+    author: '@n_mehlhorn',
+    baseUrl: 'https://nils-mehlhorn.de'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
