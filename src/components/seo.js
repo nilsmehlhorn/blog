@@ -98,7 +98,7 @@ const detailsQuery = graphql`
         baseUrl
       }
     }
-    img: file(relativePath: { eq: "icon.png" }) {
+    img: file(relativePath: { eq: "twitter_card.png" }) {
       childImageSharp {
         fixed(width: 256, height: 256) {
           ...GatsbyImageSharpFixed
