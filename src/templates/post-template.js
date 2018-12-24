@@ -10,10 +10,10 @@ export default function Template({
                                    data,
                                  }) {
   const {markdownRemark} = data
-  const {frontmatter, html} = markdownRemark
+  const {frontmatter, html, excerpt} = markdownRemark
   return (
     <Layout>
-      <SEO keywords={frontmatter.tags} title={frontmatter.title}/>
+      <SEO keywords={frontmatter.tags} title={frontmatter.title} description={excerpt}/>
       <div className="post-container">
         <div className="post">
           <h1 className={styles.heading}>{frontmatter.title}</h1>
@@ -33,6 +33,7 @@ export const pageQuery = graphql`
   query($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
+      excerpt(pruneLength: 250)
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         path
