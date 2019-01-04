@@ -14,13 +14,13 @@ export default function Template({
   return (
     <Layout>
       <SEO keywords={frontmatter.tags} title={frontmatter.title} description={excerpt}/>
-      <div className="post-container">
+      <div>
         <div className="post">
           <h1 className={styles.heading}>{frontmatter.title}</h1>
           <p className={styles.date}>{frontmatter.date}</p>
           <Tags tags={frontmatter.tags}/>
           <div
-            className="post-content"
+            className={styles.postContent}
             dangerouslySetInnerHTML={{__html: html}}
           />
         </div>
