@@ -10,7 +10,7 @@ const Footer = () => (
             <a href="https://twitter.com/n_mehlhorn"><FaTwitter size={32}/></a>
             <a href="https://github.com/nilsmehlhorn"><FaGithub size={32}/></a>
           </div>
-          <small className={styles.copyright}>Nils Mehlhorn &copy; 2018</small>
+          <small className={styles.copyright}>Nils Mehlhorn &copy; 2019</small>
           <small className={styles.iconCredits}>
             Logo by <a href="https://www.freepik.com/" title="Freepik">Freepik</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"
                               target="_blank" rel="noopener noreferrer">CC 3.0 BY</a></small>
