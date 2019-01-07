@@ -3,7 +3,8 @@ path: "/posts/everything-looks-better-with-an-image"
 date: "2018-12-22"
 title: "Everything looks better with an image"
 published: true
-tags: ["web development", "ui", "frontend"]
+tags: ["web development", "frontend"]
+keywords: ["ui", "framework", "freelance", "assets", "styleguide"]
 ---
 
 Did you ever play around with the latest UI framework's components but nothing you came up with was quite satisfying?

@@ -4,6 +4,7 @@ date: "2019-01-07"
 title: "Refactoring & Implementation"
 published: true
 tags: ["architecture", "oop"]
+keywords: ["coupling", "interface", "refactoring", "typescript"]
 ---
 I saw this inspiring [music video](https://www.youtube.com/watch?v=-SqySU-qJQc) and it gave me
 the idea for a little exercise: refactoring and implementation. 
