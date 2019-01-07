@@ -18,7 +18,7 @@ functionality somewhere between the existing lines? Will you really refactor it 
 refactor afterwards?
 
 Clean coders from all over the web would argue: either implement or refactor - which one goes first would be up to
-style and situation. But in many cases, this seems very counter-intuitive due to the fact that both actions are
+style and situation. But in many cases, this seems very counter-intuitive due to the fact that both actions are often
 inter-dependent. Well, from what I've seen, few pompous maxims every made it freely into any major codebase.
 So let's look at an example and try to find some middleground.
 
