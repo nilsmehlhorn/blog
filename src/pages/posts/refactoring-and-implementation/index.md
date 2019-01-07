@@ -6,12 +6,12 @@ published: true
 tags: ["architecture", "oop"]
 keywords: ["coupling", "interface", "refactoring", "typescript"]
 ---
-I saw this inspiring [music video](https://www.youtube.com/watch?v=-SqySU-qJQc) and it gave me
-the idea for a little exercise: refactoring and implementation. 
 
 ![puddle-piano](puddle-piano.gif)
 
-I often struggle between getting things done and finding the *perfect abstraction*. Some code is already written
+I saw this inspiring [music video](https://www.youtube.com/watch?v=-SqySU-qJQc) and it gave me
+the idea for a little exercise. 
+I often struggle between getting things done and finding the _perfect abstraction_. Some code is already written
 and now you need to add a certain functionality coming in from a different point of view. Parts of your
 code shall do things you didn't envision them to be doing when you first designed them. Do you squeeze that new
 functionality somewhere between the existing lines? Will you really refactor it afterwards? Can you even effectively
@@ -90,7 +90,7 @@ something different as the feedback source for objects that are `Playable` but n
 the puddle with a stereo playing a recording to reconstruct the music video.
 ```typescript
 const piano: Playable & Hearable = new Piano()
-const pianoPlayer: Player = Player(piano, piano)
+const pianoPlayer: Player = new Player(piano, piano)
 
 const stereo: Hearable = new Stereo(new Recording('recording.mp3'))
 const puddle: Playable = new Puddle()
@@ -99,8 +99,8 @@ const puddlePlayer: Player = new Player(puddle, stereo)
 
 ## Bottom line
 As is the curse of examples, your current problem might not be as simple as this one. Still, I think it makes the point
-that it's seldom easy to see the consequences of introducing a new functionality to your code. It's hard to draw
-the line between refactoring and implementation. Sometimes you can't prevent changes to way your code is coupled. 
+that it's seldom easy to see the consequences of introducing new functionality to your code. It's hard to draw
+the line between refactoring and implementation. Sometimes you can't prevent changes to the way your code is coupled. 
 Instead, what you want to do is prevent coupling in ways you don't deem future-proof. Your refactoring will be 
 opinionated towards your implementation. Therefore you'll need a vision which you have to match constantly in congruence 
 to your code. This way the vision is not only in your head and manifested at runtime, but also visible in code.
