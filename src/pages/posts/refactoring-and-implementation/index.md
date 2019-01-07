@@ -2,7 +2,7 @@
 path: "/posts/refactoring-and-implementation"
 date: "2019-01-07"
 title: "Refactoring & Implementation"
-published: false
+published: true
 tags: ["architecture", "oop"]
 keywords: ["coupling", "interface", "refactoring", "typescript"]
 ---
