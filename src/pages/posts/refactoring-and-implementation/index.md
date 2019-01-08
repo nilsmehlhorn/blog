@@ -1,10 +1,10 @@
 ---
 path: "/posts/refactoring-and-implementation"
 date: "2019-01-07"
-title: "Refactoring & Implementation"
+title: "Finding harmony between refactoring and implementation"
 published: true
 tags: ["architecture", "oop"]
-keywords: ["coupling", "interface", "refactoring", "typescript"]
+keywords: ["coupling", "interface", "refactoring", "typescript", "implementation", "pattern"]
 ---
 
 ![puddle-piano](puddle-piano.gif)
@@ -52,7 +52,7 @@ put the problem on hold and come back later with a new perspective. If the solut
 doesn't present itself then, start shuffling things around. Try to find out which solution has the greatest
 return of investment - which way solves the problem with minimal obstruction to your core concepts.
 
-So, the player needs to here what he's playing. This could be some kind of stream (think ReactiveX or similar).
+So, the player needs to hear what he's playing. This could be some kind of stream (think ReactiveX or similar).
 A first intuition could be to work the feedback somehow into the `Playable` interface. It could be the return value of
  `Playable.play(key)` or we could add a second method as some kind of getter. Yet, this would introduce 
 significant unwanted coupling through the `Playable` interface. The player won't be able to play the puddle anymore 
