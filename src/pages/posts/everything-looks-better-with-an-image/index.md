@@ -38,7 +38,7 @@ to a [bunch of too specific boilerplate for a mediocre solution](https://materia
 ## Establish facts
 
 You can do your work as thorough as you might. Curse and saviour of the web is that it's open for any device and 
-user-agent. Therefore you need some ground rules. Under which circumstances is you app supposed to run? You just can't
+user-agent. Therefore you need some ground rules. Under which circumstances is your app supposed to run? You just can't
 stretch a design at will. Desktop and mobile differ in more than just screen size. Nothing is more de-motivating than
 reworking something over and over again because you found yet another place where it looks off (unrelated hint: 
 don't even try to use [grid in IE](https://rachelandrew.co.uk/archives/2016/11/26/should-i-try-to-use-the-ie-implementation-of-css-grid-layout/)).

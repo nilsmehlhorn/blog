@@ -19,7 +19,7 @@ refactor afterwards?
 
 Clean coders from all over the web would argue: either implement or refactor - which one goes first would be up to
 style and situation. But in many cases, this seems very counter-intuitive due to the fact that both actions are often
-inter-dependent. Well, from what I've seen, few good intents every made it freely into any major codebase.
+inter-dependent. Well, from what I've seen, few good intents ever made it freely into any major codebase.
 So let's look at an example and try to find some middleground.
 
 Picture this: We've got to bring these two parts together: `Piano` and `Player`. It's foreseeable that in the 
