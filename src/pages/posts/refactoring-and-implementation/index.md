@@ -19,7 +19,7 @@ refactor afterwards?
 
 Clean coders from all over the web would argue: either implement or refactor - which one goes first would be up to
 style and situation. But in many cases, this seems very counter-intuitive due to the fact that both actions are often
-inter-dependent. Well, from what I've seen, few pompous maxims every made it freely into any major codebase.
+inter-dependent. Well, from what I've seen, few good intents every made it freely into any major codebase.
 So let's look at an example and try to find some middleground.
 
 Picture this: We've got to bring these two parts together: `Piano` and `Player`. It's foreseeable that in the 
@@ -44,7 +44,7 @@ Alright, that's it you might think, after *quickly implementing an algorithm for
 You push the code, it passes review but then it's rejected by QA.
 They're saying that it sounds off when a piece of music goes on for longer. Your player is
 unable to keep a balanced tempo because he's playing without audible feedback - what a bummer.
-The player needs to here what he's playing. Meanwhile, he's supposed to keep the ability to play a puddle - for the 
+The player needs to hear what he's playing. Meanwhile, he's supposed to keep the ability to play a puddle - for the 
 video, you know.
 
 What I like to do in such a situation is write down some ideas that pop into my head, then
