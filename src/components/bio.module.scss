@@ -1,9 +1,37 @@
 @import "../styles/variables";
 
 .bio {
-  color: white;
   margin-top: $gap;
   padding: $gap;
-  border-radius: $gap;
-  background-color: $header-color;
+  border-radius: $half-gap;
+  background-color: white;
+  @include elevation;
+  .greeting {
+    margin: 0 0 $gap 0;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: $half-gap;
+    .mug {
+      min-width: 64px;
+      max-width: 92px;
+      border-radius: 46px;
+      margin-right: $gap;
+      @include inset;
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      h4 {
+        margin-bottom: 0;
+      }
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+  p {
+    margin: $half-gap 0 0 0;
+  }
 }

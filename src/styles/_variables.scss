@@ -5,11 +5,29 @@ $half-gap: 8px;
 $quarter-gap: 4px;
 
 $header-color: #2e4057;
-$background-color: #f7f7f7;
+$background-color: #f6f8fa;
 $dark-gray: #3a3a3a;
+$shadow-color: rgba(57, 63, 72, 0.3);
 
 $break-m: 768px;
 $break-l: 1024px;
+
+@mixin inset {
+  &::after {
+    box-shadow: inset 0 0 $quarter-gap $shadow-color;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+@mixin elevation {
+  box-shadow: 0 $quarter-gap $quarter-gap $shadow-color;
+}
 
 @mixin not-s {
   @media (min-width: #{$break-m}) {

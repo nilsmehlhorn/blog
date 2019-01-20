@@ -24,15 +24,15 @@ const Header = ({siteTitle}) => (
       }
     `}
     render={data => (
-      <header>
+      <header className={styles.header}>
         <div className={styles.content}>
           <Link to="/">
             <Img className={styles.logo} fluid={data.img.childImageSharp.fluid}/>
           </Link>
           <div className={styles.pageHeadingWrapper}>
-            <h1 className={styles.heading}>
+            <h2 className={styles.heading}>
               {data.site.siteMetadata.title}
-            </h1>
+            </h2>
             <p className={styles.claim}>Blog by Nils Mehlhorn</p>
           </div>
         </div>

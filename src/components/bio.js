@@ -1,15 +1,39 @@
-import React from "react"
+import React from 'react'
+import {StaticQuery, graphql} from 'gatsby'
+import Img from 'gatsby-image'
 
-import styles from "./bio.module.scss"
-import {FaHandPeace} from 'react-icons/fa'
+import styles from './bio.module.scss'
 
 const Bio = () => (
-  <section className={styles.bio}>
-    Hey there <FaHandPeace color="yellow"/><br/>
-    This is a space where I'll explore any topic I just can't keep my mouth shut about. I'm mostly doing
-    web development, but here we'll wander off into any direction that seems interesting.<br/>
-    Enjoy the ride!
-  </section>
+  <StaticQuery
+    query={graphql`
+      query BioQuery {
+        mug: file(relativePath: { eq: "mug_sm_w.jpg" }) {
+          childImageSharp {
+            fluid(maxWidth: 92, maxHeight: 92) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    `}
+    render={({mug}) => (
+      <section className={styles.bio}>
+        <header className={styles.header}>
+          <Img className={styles.mug} fluid={mug.childImageSharp.fluid}/>
+          <div className={styles.info}>
+            <h4 className={styles.greeting}>Nils Mehlhorn</h4>
+            <a href="https://twitter.com/n_mehlhorn"><small>@n_mehlhorn</small></a>
+          </div>
+        </header>
+        <p>
+          This is a space where I'll explore any topic I just can't keep my mouth shut about. I'm mostly doing
+          web development, but here we'll wander off into any direction that seems interesting.
+        </p>
+        <p>Enjoy the ride!</p>
+      </section>
+    )}
+  />
 )
 
 export default Bio

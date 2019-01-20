@@ -4,9 +4,10 @@
   display: flex;
   margin-bottom: 1.5rem;
   .tag {
-    padding: 0 $quarter-gap;
+    padding: 0 $half-gap;
     background: $header-color;
     color: white;
     margin-right: $quarter-gap;
+    border-radius: $gap;
   }
 }

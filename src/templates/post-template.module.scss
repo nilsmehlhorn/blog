@@ -6,4 +6,7 @@
 
 .postContent pre {
   background-color: white;
+  border-radius: $half-gap;
+  margin-bottom: 1.5rem;
+  @include elevation;
 }

@@ -1,8 +1,9 @@
 @import '../styles/variables';
 
-header {
+.header {
   background: $header-color;
   width: 100%;
+  @include elevation;
   .content {
     display: flex;
     max-width: $container-width;
@@ -26,8 +27,5 @@ header {
 
   .logo {
     min-width: 64px;
-    @include not-s {
-      min-width: 92px;
-    }
   }
 }
