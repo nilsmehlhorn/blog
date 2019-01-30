@@ -4,9 +4,22 @@
   margin-bottom: $half-gap;
 }
 
-.postContent pre {
-  background-color: white;
-  border-radius: $half-gap;
-  margin-bottom: 1.5rem;
-  @include elevation;
+.postContent {
+
+  pre {
+    background-color: white;
+    border-radius: $half-gap;
+    margin-bottom: 1.5rem;
+    @include elevation;
+  }
+
+  :not(pre) > code {
+    background: white;
+  }
+
+  figcaption {
+    margin-top: $half-gap;
+    text-align: center;
+    font-style: italic;
+  }
 }
