@@ -44,7 +44,7 @@ A corresponding view could look like this:
     {{ user.name }}
   </li>
 </ul>
-<my-indicator *ngIf="loading"></my-indicator>
+<loading-indicator *ngIf="loading"></loading-indicator>
 ```
 Yet, for most calls which provide data to be displayed directly into a view, this setup can be simplified using 
 the [AsyncPipe](https://angular.io/api/common/AsyncPipe). Our component will be shortened to the following:
@@ -64,24 +64,24 @@ export class UserComponent implements OnInit  {
 Now the component directly exposes the stream of users to the view. We'll update the view using the `async as` syntax to 
 bind the stream's value to a separate `users` variable once it emits:
 ``` html
-<ul *ngIf="users$ | async as users; else spinner">
+<ul *ngIf="users$ | async as users; else indicator">
   <li *ngFor="let user of users">
     {{ user.name }}
   </li>
 </ul>
-<ng-template #spinner>
-  <my-indicator></my-indicator>
+<ng-template #indicator>
+  <loading-indicator></loading-indicator>
 </ng-template>
 ```
 By providing a view template for the `else` block of the `*ngIf` we don't have to manage a loading flag explicitly
 anymore. This approach is more declarative as it connects both view states via an if-else connection instead
-of having to use almost the same condition for two separate if-blocks. Also, we don't have to manage the stream's
+of having two separate if-blocks. Also, we don't have to manage the stream's
 subscription ourselves anymore as this is done by the pipe (including un-subscribing when the component is destroyed).
 
 ## Waiting for actions
 
 The AsyncPipe lets us down when we're dealing with actions like creating a new user upon a button click.
-You'll have to subscribe inside your component at some point.
+You'll have to subscribe inside your component at some point when you cannot pipe the observable back into the view.
 
 First of, while some may disagree, I think it's valid to use the flag-approach this time.
 Don't follow false prophets condemning the slightest redundancy. Many times it should be about
@@ -91,7 +91,7 @@ So, it's pretty much fine doing it like this:
 ``` html
 <button (click)="create()">Create User</button>
 <div *ngIf="loading">
-  Creating <my-indicator></my-indicator>
+  Creating, please wait <loading-indicator></loading-indicator>
 </div>
 ```
 ``` typescript
@@ -211,7 +211,7 @@ export class UserComponent  {
 ``` html
 <button (click)="create()">Create User</button>
 <div *ngIf="loading$ | async">
-  Creating, please wait <my-indicator></my-indicator>
+  Creating, please wait <loading-indicator></loading-indicator>
 </div>
 ```
  
@@ -229,7 +229,7 @@ ___
 This is the first article of a series I'm starting called **ngForReal**. As the name indicates
 it's all about [Angular](https://angular.io) - almost everyones favorite application framework. 
 We'll reflect on common patterns and anti-patterns in order to form practical insights for developing sane
-Angular. I won't reiterate the docs or provide a tutorial on using the CLI for you. 
+Angular. I won't reiterate the docs or provide a tutorial on using the CLI. 
 This is not Angular by the book - it's Angular how you should do it for real.
 
 
