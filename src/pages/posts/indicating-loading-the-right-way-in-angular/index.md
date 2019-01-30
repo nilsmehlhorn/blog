@@ -4,7 +4,7 @@ date: "2019-01-30"
 title: "ngForReal: Indicating loading the right way"
 published: true
 tags: ["web development", "frontend", "angular"]
-keywords: ["ui", "framework", "angular", "angularjs", "material", "loading", "spinner"]
+keywords: ["ui", "ux", "indicator", "angularjs", "material", "loading", "spinner", "rxjs", "observable", "interceptor"]
 ---
 
 Its a common desire: having something rotate or fly around to entertain the user while the moderately performing backend
@@ -26,7 +26,7 @@ export class UserComponent implements OnInit  {
 
   ngOnInit(): void {
     this.loading = true
-    this.userService.all().pipe(
+    this.userService.getAll().pipe(
       finalize(() => this.loading = false)
     ).subscribe(users => this.users = users)
   }
@@ -57,7 +57,7 @@ export class UserComponent implements OnInit  {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.users$ = this.userService.all()
+    this.users$ = this.userService.getAll()
   }
 }
 ```
@@ -136,7 +136,7 @@ upon each call whether there are still any open requests and thus manage a **glo
 
 I've also used this approach myself - even back in AngularJS.
 And while I'd deem it a decent approach for giving the user generic indication of when the app's loading, you've really
-got to consider ~~two~~ three things:
+got to consider three things:
 1) **You lose specificity.** As you're not having a loading flag per-request but rather a global one, you just can't
 know for certain which request is still taking its time. While you could inject the service into any of your components
 and that way display local indication - the information you're really having is on a global application level. It'd be
