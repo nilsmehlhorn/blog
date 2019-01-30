@@ -8,7 +8,7 @@ keywords: ["ui", "ux", "indicator", "angularjs", "material", "loading", "spinner
 ---
 
 Its a common desire: having something rotate or fly around to entertain the user while the moderately performing backend
-fishes data from god knows where. Though it seems easy to rip a [spinner from CodePen](https://codepen.io/search/pens?q=spinner)
+fishes data from god knows where. Though it seems easy to borrow a [spinner from CodePen](https://codepen.io/search/pens?q=spinner)
  and display it while you make the server roundtrip, there are some common misconceptions and pitfalls that 
  we'll clear up.
 
