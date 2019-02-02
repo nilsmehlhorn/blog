@@ -31,6 +31,19 @@
       }
     }
   }
+  .twitterButton {
+    margin-top: $half-gap;
+    display: flex;
+    align-items: center;
+    background: #657786;
+    color: #f5f8fa;
+    border-radius: 3px;
+    font-size: 11px;
+    padding: 1px 8px 1px 6px;
+    .twitterIcon {
+      margin-right: 3px;
+    }
+  }
   p {
     margin: $half-gap 0 0 0;
   }

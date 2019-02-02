@@ -1,6 +1,7 @@
 import React from 'react'
 import {StaticQuery, graphql} from 'gatsby'
 import Img from 'gatsby-image'
+import {FaTwitter} from 'react-icons/fa'
 
 import styles from './bio.module.scss'
 
@@ -23,7 +24,9 @@ const Bio = () => (
           <Img className={styles.mug} fluid={mug.childImageSharp.fluid}/>
           <div className={styles.info}>
             <h4 className={styles.greeting}>Nils Mehlhorn</h4>
-            <a href="https://twitter.com/n_mehlhorn"><small>@n_mehlhorn</small></a>
+            <a href="https://twitter.com/n_mehlhorn" className={styles.twitterButton}>
+              <FaTwitter size={14} color={'white'} className={styles.twitterIcon}/>Follow @n_mehlhorn
+            </a>
           </div>
         </header>
         <p>
