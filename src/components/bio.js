@@ -11,7 +11,7 @@ const Bio = () => (
       query BioQuery {
         mug: file(relativePath: { eq: "proud_mug_extended_sqr.jpg" }) {
           childImageSharp {
-            fixed(width: 96) {
+            fixed(width: 96, quality: 100) {
               ...GatsbyImageSharpFixed
             }
           }
