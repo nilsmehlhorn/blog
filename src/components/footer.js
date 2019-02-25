@@ -1,5 +1,5 @@
 import React from 'react'
-import {FaGithub, FaTwitter} from 'react-icons/fa'
+import {FaGithub, FaTwitter, FaInstagram} from 'react-icons/fa'
 
 import styles from './footer.module.scss'
 
@@ -8,6 +8,7 @@ const Footer = () => (
         <div className={styles.content}>
           <div className={styles.links}>
             <a href="https://twitter.com/n_mehlhorn"><FaTwitter size={32}/></a>
+            <a href="https://www.instagram.com/nils_mehlhorn"><FaInstagram size={32}/></a>
             <a href="https://github.com/nilsmehlhorn"><FaGithub size={32}/></a>
           </div>
           <small className={styles.copyright}>Nils Mehlhorn &copy; 2019</small>

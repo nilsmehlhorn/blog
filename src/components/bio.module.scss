@@ -14,8 +14,7 @@
     align-items: center;
     margin-bottom: $half-gap;
     .mug {
-      min-width: 64px;
-      max-width: 92px;
+      width: 96px;
       border-radius: 46px;
       margin-right: $gap;
       @include inset;
@@ -44,7 +43,7 @@
       margin-right: 3px;
     }
   }
-  p {
-    margin: $half-gap 0 0 0;
+  .desc {
+    margin: $gap 0 0 0;
   }
 }
