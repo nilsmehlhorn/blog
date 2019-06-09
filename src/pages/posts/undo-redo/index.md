@@ -16,7 +16,7 @@ growing user expectations can be surprisingly far from ease of their
 implementation. In this post we'll be looking at how you might go about
 pulling it off in your next Angular app.
 
-![undo-redo-illustration]
+![undo-redo-feature-concept](undo-redo.png)
 
 At its core, the general undo-redo feature can be described as the
 ability to go back to previous application states, and once there, in
@@ -90,9 +90,10 @@ sometimes though.
 
 Despite these drawbacks, the
 [endorsed library](https://github.com/omnidan/redux-undo/) for
-implementing undo-redo with the main redux library is using this
-approach. There's nothing as big for NgRx yet some smaller ones are
-using the approach as well.
+implementing undo-redo with the main redux library is [using this
+approach](https://redux.js.org/recipes/implementing-undo-history).
+There's nothing as big for NgRx yet some smaller ones are using the
+approach as well.
 
 ## Repeating history
 
