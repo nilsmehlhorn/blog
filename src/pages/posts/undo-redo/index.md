@@ -41,17 +41,18 @@ through its
 3) **Changes are made with pure functions:** We can easily replace the
   whole state.
 
-Because of this, you'll end up at redux - and it's Angular counterpart
-[NgRx](https://ngrx.io/) - quickly when searching for ways to enable
-undo-redo in your app. It's a good way to plan ahead, yet as we're about
-to see it probably won't fulfill all your needs out-of-the-box.
+You'll quickly end up at
+[redux](https://redux.js.org/) - and it's Angular counterpart
+[NgRx](https://ngrx.io/) - when searching for ways to enable undo-redo
+in your app. It's a good way to plan ahead, yet as we're about to see it
+may not fulfill all your needs out-of-the-box.
 
 ## Switching states
 
 For a working undo-redo feature we want to restore past and futures
 states. With NgRx and redux, the straightforward solution seems to be
 the memorization of what has been in the application's store. The data
-structure for this approach would look like this:
+structure for this approach could look like this:
 
 ```typescript
 interface History {
@@ -66,7 +67,7 @@ We'd continuously save states to the past stack upon user interaction
 and replace the present upon dispatch of a undo action. When this
 happens we save the present state to the future stack in order to apply
 it again upon dispatch of redo action. While this approach definitely
-works and is used by the main libraries out the, it has certain flaws:
+works, it has certain flaws:
 
 **It can get big.** You're basically multiplying you application's
 state. Depending on the scope you'd like to apply undo-redo to, this
@@ -106,8 +107,8 @@ recalculating it by applying A1 to S1.
 Therefore, in order to enable undo, we could also keep track of any
 dispatched action, replay them all except for the last one and we'd be
 one step into the past. A corresponding data structure could look like
-follows, where we'd push applied actions to a list and have saved base
-state we'd us for recalculation.
+follows, where we'd push applied actions to a list and have a saved base
+state we'd use for recalculation.
 
 ```typescript
 interface History {
@@ -127,7 +128,7 @@ respectively. It
 as actions are generally less heavy than your whole application state.
 Yet, depending on your reducer logic, it **may be expensive** to
 recalculate the state recursively from the start just to know where you
-were one second ago. Also, **it's still all or nothing**. Limiting the
+were one second ago. Also, **it's still all or nothing** - limiting the
 state recalculation to certain actions will loose you information.
 
 ## States are changing
@@ -136,7 +137,7 @@ States in redux may supposed to be immutable, yet reducers are
 effectively changing them over time - just not by reusing the same
 object. Although often easily inferred, in my opinion redux won't give
 you fully-fledged undo-redo by itself because information about these
-changes, the state differences introduced through transitions, is lost.
+changes, the state difference introduced through a transition, is lost.
 Take a look at undo-redo implementations before redux
 [using the command pattern](https://www.codeproject.com/Articles/33384/Multilevel-Undo-and-Redo-Implementation-in-Cshar-2).
 You'd have to implement a return path for each transition in order to
