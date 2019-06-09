@@ -197,5 +197,5 @@ changes of actions and track whether you can undo or redo at the moment.
 Here's an example on StackBlitz:
 <iframe 
 style="width: 100%; height: 520px"
-src="https://stackblitz.com/edit/ngrx-wieder-app?ctl=1&embed=1&file=src/app/app.component.ts&hideExplorer=1&view=preview">
+src="https://stackblitz.com/edit/ngrx-wieder-app?ctl=1&embed=1&file=src/app/app.component.ts&view=preview">
 </iframe>
