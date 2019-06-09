@@ -12,7 +12,7 @@ Having the ability to undo your actions has long moved from being an
 [attractive product quality](https://en.wikipedia.org/wiki/Kano_model)
 towards a must-be one. People just expect this type of fault tolerance
 from any reasonably complex tool. Yet, as often in software development,
-growing user expectations can be bafflingly far from ease of their
+growing user expectations can be surprisingly far from ease of their
 implementation. In this post we'll be looking at how you might go about
 pulling it off in your next Angular app.
 
@@ -69,7 +69,7 @@ happens we save the present state to the future stack in order to apply
 it again upon dispatch of redo action. While this approach definitely
 works, it has certain flaws:
 
-**It can get big.** You're basically multiplying you application's
+**It can get big.** You're basically multiplying your application's
 state. Depending on the scope you'd like to apply undo-redo to, this
 will eventually use up far more memory than actually necessary. Most of
 the times one transition will only change a rather small part of your
@@ -88,10 +88,10 @@ sometimes though.
 
 ![all-or-nothing]
 
-Albeit these drawbacks, the
+Despite these drawbacks, the
 [endorsed library](https://github.com/omnidan/redux-undo/) for
 implementing undo-redo with the main redux library is using this
-approach. There's nothing as big for NgRx yet some smaller ones are 
+approach. There's nothing as big for NgRx yet some smaller ones are
 using the approach as well.
 
 ## Repeating history
