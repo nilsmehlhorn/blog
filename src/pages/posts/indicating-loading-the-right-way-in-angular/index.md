@@ -221,7 +221,7 @@ action.
 
 <iframe 
 style="width: 100%; height: 450px"
-src="https://stackblitz.com/edit/ng-loading-indication?ctl=1&embed=1&file=src/app/app.component.ts&view=preview">
+src="https://stackblitz.com/edit/ng-loading-indication?ctl=1&embed=1&file=src/app/app.component.ts&hideExplorer=1&view=preview">
 </iframe>
 
 ___
