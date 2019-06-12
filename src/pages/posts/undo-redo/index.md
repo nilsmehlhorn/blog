@@ -33,8 +33,8 @@ common tool for implementing undo-redo. Redux provides a good foundation
 through its
 [three principles](https://redux.js.org/introduction/three-principles):
 
-1) **Single source of truth:** By having the whole application state in
-   one place - the store - we can get an easy grip on past, present and
+1. **Single source of truth:** By having the whole application state in
+   one place - the store - we can get a good grip on past, present and
    future states.
 2) **State is read-only:** State is mutated in a deterministic way and we
   don't have to worry about states being corrupted.
@@ -64,7 +64,7 @@ interface History {
 
 The feature would be implemented analogous to what we want to achieve.
 We'd continuously save states to the past stack upon user interaction
-and replace the present upon dispatch of a undo action. When this
+and replace the present upon dispatch of an undo action. When this
 happens we save the present state to the future stack in order to apply
 it again upon dispatch of redo action. While this approach definitely
 works, it has certain flaws:
@@ -82,11 +82,10 @@ you don't want to be undoable. If you'd now go back to state S1 upon
 undo you'd lose the changes introduced in the transition from S2 to S3.
 You might overcome this
 [issue](https://github.com/omnidan/redux-undo/issues/106) through
-careful reducer composition which can be really hard to achieve
-sometimes though.
-   
+careful reducer composition which can be bit hard to achieve sometimes
+though.
 
-![all-or-nothing]
+<img src="all-or-nothing.png" alt="all-or-nothing-problem" title="When only A1 is an undoable action, you'll loose the green circle introduced by A2"/>
 
 Despite these drawbacks, the
 [endorsed library](https://github.com/omnidan/redux-undo/) for
@@ -99,11 +98,12 @@ approach as well.
 
 Reducers are just pure functions. Calculating the next state based on a
 dispatched action can be repeated deterministically at any time with the
-same result. If an action A1 changes our state S1 to S2 and another
-action A2 again transitions S2 to S3, we'd be able to return to S2 when
-recalculating it by applying A1 to S1. 
+same result. Have a look at the illustration below. Action A1 changes
+our state S1 to S2. Equally, actions A2 and A3 transition to S3 and S4.
+Having saved the base state S1 and all intermediate actions, we'd be
+able to return to S3 when recalculating it by applying A1 and A2 to S1.
 
-![recalculate-state]
+<img src="state-recalculation.png" alt="state-recalculation-concept" title="Using actions to calculate the last state effectively replays the application's history"/>
 
 Therefore, in order to enable undo, we could also keep track of any
 dispatched action, replay them all except for the last one and we'd be
@@ -113,12 +113,12 @@ state we'd use for recalculation.
 
 ```typescript
 interface History {
-  actions: Array<Action>
-  base: State
+  actions: Array<Action> // actions since base
+  base: State // base state representing the furthest point we can go back
 }
 
 // pseudo-code for calculating last state
-const undo = (state) => history.actions
+const undo = () => history.actions
     .slice(0, -1) // every action except the last one
     .reduce((state, action) => reducer(state, action), history.base)
 ```
