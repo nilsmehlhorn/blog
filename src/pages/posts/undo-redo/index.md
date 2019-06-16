@@ -1,7 +1,7 @@
 ---
 path: "/posts/angular-undo-redo-ngrx-redux"
 date: "2019-06-11"
-title: "ngForReal: Implementing undo-redo with NgRx or Redux"
+title: "Implementing undo-redo with NgRx or Redux"
 published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["ngrx", "redux", "undo", "redo", "ui", "ux", "indicator", "angularjs", "material", "loading", "spinner", 
@@ -26,7 +26,7 @@ when its your turn to put the logic behind `Ctrl+Z` and `Ctrl+Y` you
 might be in for a surprise: there isn't - and there probably can't be -
 a pluggable solution if you didn't plan ahead.
 
-Talking about application state in web applications the redux pattern
+Talking about application state in web applications the Redux pattern
 quickly comes to mind. It can be seen as an extension of the
 [command pattern](https://en.wikipedia.org/wiki/Command_pattern) - a
 common tool for implementing undo-redo. Redux provides a good foundation
@@ -42,15 +42,22 @@ through its
   whole state.
 
 You'll quickly end up at
-[redux](https://redux.js.org/) - and it's Angular counterpart
+[Redux](https://redux.js.org/) - and it's Angular counterpart
 [NgRx](https://ngrx.io/) - when searching for ways to enable undo-redo
-in your app. It's a good way to plan ahead, yet as we're about to see it
-may not fulfill all your needs out-of-the-box.
+in your app. It's a good way to plan ahead, yet, as we're about to see,
+it may not fulfill all your needs out-of-the-box.
+
+In order to have a pluggable solution, undo-redo is probably best
+implemented as a
+[middleware](https://redux.js.org/advanced/middleware) or
+[meta-reducer](https://ngrx.io/guide/store/metareducers) respectively
+for Redux or NgRx. So lets have a look at three different approaches for
+doing just that.
 
 ## Switching states
 
 For a working undo-redo feature we want to restore past and futures
-states. With NgRx and redux, the straightforward solution seems to be
+states. With NgRx and Redux, the straightforward solution seems to be
 the memorization of what has been in the application's store. The data
 structure for this approach could look like this:
 
@@ -66,8 +73,58 @@ The feature would be implemented analogous to what we want to achieve.
 We'd continuously save states to the past stack upon user interaction
 and replace the present upon dispatch of an undo action. When this
 happens we save the present state to the future stack in order to apply
-it again upon dispatch of redo action. While this approach definitely
-works, it has certain flaws:
+it again upon dispatch of a redo action. Our middleware or meta-reducer
+could handle undo and redo actions as follows:
+
+```typescript
+const undoRedo = (reducer) => {
+  let history = {
+    past: [], 
+    present: initialState, 
+    future: []
+  }
+  return (state, action) => {
+      switch (action.type) {
+        case 'UNDO':
+          // use first past state as next present ...
+          const previous = history.past[0]
+          // ... and remove from past
+          const newPast = history.past.slice(1)
+          history = {
+            past: newPast,
+            present: previous,
+            // push present into future for redo
+            future: [history.present, ...history.future]
+          }
+          return previous
+        case 'REDO':
+          // use first future state as next present ...
+          const next = history.future[0]
+          // ... and remove from future
+          const newFuture = history.future.slice(1)
+          history = {
+            // push present into past for undo
+            past: [history.present, ...history.past],
+            present: next,
+            future: newFuture
+          }
+          return next
+        default:
+          // derive next state
+          const newPresent = reducer(state, action)
+          history = {
+              // push previous present into past for undo
+              past: [history.present, ...history.past],
+              present: newPresent,
+              future: [] // clear future
+          }
+          return newPresent
+      }
+  }
+}
+```
+
+While this approach definitely works, it has certain flaws:
 
 **It can get big.** You're basically multiplying your application's
 state. Depending on the scope you'd like to apply undo-redo to, this
@@ -87,9 +144,10 @@ though.
 
 <img src="all-or-nothing.png" alt="all-or-nothing-problem" title="When only A1 is an undoable action, you'll loose the green circle introduced by A2"/>
 
-Despite these drawbacks, the
+Despite these trade-offs, the
 [endorsed library](https://github.com/omnidan/redux-undo/) for
-implementing undo-redo with the main redux library is [using this
+implementing undo-redo with the main Redux library is
+[using this
 approach](https://redux.js.org/recipes/implementing-undo-history).
 There's nothing as big for NgRx yet some smaller ones are using the
 approach as well.
@@ -107,39 +165,52 @@ able to return to S3 when recalculating it by applying A1 and A2 to S1.
 
 Therefore, in order to enable undo, we could also keep track of any
 dispatched action, replay them all except for the last one and we'd be
-one step into the past. A corresponding data structure could look like
-follows, where we'd push applied actions to a list and have a saved base
-state we'd use for recalculation.
+one step into the past. Just looking at the undo part, a corresponding
+data structure could look like follows, where we'd push applied actions
+to a list and have a saved base state we'd use for recalculation.
 
 ```typescript
 interface History {
   actions: Array<Action> // actions since base
   base: State // base state representing the furthest point we can go back
 }
+```
 
-// pseudo-code for calculating last state
+Calculation of the last state could then look like this:
+
+```typescript
 const undo = () => history.actions
     .slice(0, -1) // every action except the last one
     .reduce((state, action) => reducer(state, action), history.base)
 ```
 
-Again, the approach works and there are libraries for redux and NgRx,
-respectively. It
-[can even be more lightweight](https://github.com/JannicBeck/undox#motivation)
-as actions are generally less heavy than your whole application state.
-Yet, depending on your reducer logic, it **may be expensive** to
-recalculate the state recursively from the start just to know where you
-were one second ago. Also, **it's still all or nothing** - limiting the
-state recalculation to certain actions will loose you information.
+Again, the approach works and there are libraries for Redux and NgRx,
+respectively. It can even be more lightweight as actions are generally
+less heavy than your whole application state. Yet, depending on your
+reducer logic, it **may be expensive** to recalculate the state
+recursively from the start just to know where you were one second ago.
+But in contrast to the first approach, we can keep certain actions
+during recalculation to effectively prevent them from being undone -
+**it doesn't have to be all or nothing anymore**. If action A2 from our
+example should be kept from being undone, we'd keep it during
+recalculation and thus only skip A1.
+
+<img src="recalculation-while-keeping-actions.png" alt="state-recalculation-while-keeping-actions-concept" title="Recalculation allows us to alter history and thus keep certain actions from being undone"/>
+
+However, implementing all of this can get messy and we've only just
+covered one direction. While it's definitely possible to use the
+[recalculation approach for implementing both undo and redo](https://github.com/JannicBeck/undox),
+it'll get a bit too complex for my taste. That's also probably one
+reason why there's no library for NgRx doing that.
 
 ## States are changing
 
-States in redux may supposed to be immutable, yet reducers are
-effectively changing them over time - just not by reusing the same
-object. Although often easily inferred, in my opinion redux won't give
+States in Redux or NgRx may be supposed to be immutable, yet reducers
+are effectively changing them over time - just not by reusing the same
+object. Although often easily inferred, in my opinion Redux won't give
 you fully-fledged undo-redo by itself because information about these
 changes, the state difference introduced through a transition, is lost.
-Take a look at undo-redo implementations before redux
+Take a look at undo-redo implementations before Redux
 [using the command pattern](https://www.codeproject.com/Articles/33384/Multilevel-Undo-and-Redo-Implementation-in-Cshar-2).
 You'd have to implement a return path for each transition in order to
 get back. Luckily, there's also an easier way than implementing
@@ -148,38 +219,102 @@ keep track of changes introduced by a transition in a so-called
 [JSON Patch](https://tools.ietf.org/html/rfc6902)
 
 ```typescript
-// your state
+// initial state
 const S1 = { "foo": "bar" }
 
-// JSON Patch representing what your reducer did to change the state
+// JSON Patch representing what reducer did to change the state
 const patch = [
-    { "op": "add", "path": "/baz", "value": "qux" }
+  { "op": "add", "path": "/baz", "value": "qux" }
 ]
 
-// your resulting next state
+// resulting next state
 const S2 = { "foo": "bar", "baz": "qux" }
 ```
 
 It gets even better: there are libraries constructing these patches for
-you and chances are you're already using one of them. The
-[immer](https://github.com/immerjs/immer) library is used widely to
-ensure state immutability while being able to use originally mutating
+you and chances are you're already using one of them - namely
+[immer](https://github.com/immerjs/immer). The library is used widely to
+ensure state immutability while being able to use otherwise mutating
 JavaScript APIs. immer can not just create patches from your
 transitions, it also provides you with the corresponding inverse
 patches. Staying with the example above you'd easily be able to undo an
 action using the inverse patch from the corresponding state transition:
 
 ```typescript
-// your result state from before
+// result state from before
 const S2 = { "foo": "bar", "baz": "qux" }
 
-// JSON Patch representing the reverse of what your reducer did to change the state
+// JSON Patch representing the reverse of what reducer did to change the state
 const inversePatch = [
-     { "op": "remove", "path": "/baz" }
+  { "op": "remove", "path": "/baz" }
 ]
 
-// your resulting initial state
+// resulting initial state
 const S1 = { "foo": "bar" }
+```
+
+We could then construct our history out of these patches:
+
+```typescript
+export interface Patches {
+  patches: Patch[]
+  inversePatches: Patch[]
+}
+
+interface History {
+  undone: Patches[]
+  undoable: Patches[]
+}
+```
+
+The corresponding middleware or meta-reducer could look along the
+following lines - under the assumption that the underlying reducer will
+forward the required patches.
+
+```typescript
+import { applyPatches } from 'immer'
+
+const undoRedo = (reducer) => {
+  let history = {
+    undone: [],
+    undoable: []
+  }
+  return (state, action) => {
+      switch (action.type) {
+        case 'UNDO':
+          // patches from last action
+          const lastPatches = history.undoable[0] 
+          // push patches over so they can be used for redo
+          history = {
+            undone: [lastPatches, ...history.undone],
+            undoable: history.undoable.slice(1),
+          }
+          // derive state before last action by applying inverse patches
+          return applyPatches(state, lastPatches.inversePatches)
+        case 'REDO':
+          // patches from last undone action
+          const nextPatches = history.undone[0] 
+          // push patches over so they can be used for undo
+          history = {
+            undoable: [nextPatches, ...history.undoable],
+            undone: history.undone.slice(1)
+          }
+          // derive state before undo (or after original action) by applying patches
+          return applyPatches(state, nextPatches.patches)
+        default:
+          return reducer(state, action, (patches, inversePatches) => {
+            // record patches through reducer callback
+            history = {
+              undoable: [
+                {patches, inversePatches},
+                ...history.undoable
+              ],
+              undone: [] // clear redo stack
+            }
+          })
+      }
+  }
+}
 ```
 
 Using this approach you're sparred from the memory overhead you'd have
