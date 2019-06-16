@@ -4,8 +4,7 @@ date: "2019-06-17"
 title: "Implementing undo-redo with NgRx or Redux"
 published: true
 tags: ["web development", "frontend", "angular"]
-keywords: ["ngrx", "redux", "undo", "redo", "ui", "ux", "indicator", "angularjs", "material", "loading", "spinner", 
-"rxjs", "observable", "interceptor"]
+keywords: ["ngrx", "redux", "undo", "redo", "ui", "ux", "angularjs", "rxjs", "typescript", "pattern", "immer"]
 ---
 
 Having the ability to undo your actions has long moved from being an
