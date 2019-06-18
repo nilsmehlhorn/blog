@@ -15,7 +15,7 @@ growing user expectations can be surprisingly far from ease of their
 fulfillment. In this post we'll be looking at how you might go about
 pulling off undo-redo in your next Angular app.
 
-![undo-redo-feature-concept](undo-redo.png)
+<img src="undo-redo.png" alt="undo-redo-feature-concept" title="Undo & redo allow you to traverse an application's state history parallel from the main application flow"/>
 
 At its core, the general undo-redo feature can be described as the
 ability to go back to previous application states, and once there, in
