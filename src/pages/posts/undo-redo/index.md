@@ -124,8 +124,8 @@ const undoRedo = (reducer) => {
 
 The approach resembles the
 [memento pattern](https://en.wikipedia.org/wiki/Memento_pattern) - a
-common tool for implementing undo-redo. While this approach definitely
-works, it has certain flaws:
+common tool for implementing undo-redo. While it definitely works, it
+has certain flaws:
 
 **It can get big.** You're basically multiplying your application's
 state. Depending on the scope you'd like to apply undo-redo to, this
@@ -180,7 +180,7 @@ interface History {
 Calculation of the last state could then look something like this:
 
 ```typescript
-const undo = () => history.actions
+const lastState = () => history.actions
     .slice(0, -1) // every action except the last one
     .reduce((state, action) => reducer(state, action), history.base)
 ```
