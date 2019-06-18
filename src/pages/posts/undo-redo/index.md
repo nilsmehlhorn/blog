@@ -325,10 +325,10 @@ Using this approach you're sparred from the memory overhead you'd have
 when remembering whole application states and also from the
 computational overhead you'd have when recalculating the last state. By
 using just the essential information your implementation can be
-**maximally lightweight**. You're also more flexible as it **doesn't
-have to be all or nothing anymore**. If you want to omit an action from
-the undo-redo feature you can just ignore its patches when undoing or
-redoing.
+**maximally lightweight**. And just like with the approach before, it
+**doesn't have to be all or nothing**. If you want to omit an action
+from the undo-redo feature you can just ignore its patches when undoing
+or redoing.
 
 I've created the library
 [ngrx-wieder](https://github.com/nilsmehlhorn/ngrx-wieder) for using
