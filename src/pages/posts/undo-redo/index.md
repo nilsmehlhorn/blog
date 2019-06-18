@@ -12,8 +12,8 @@ Having the ability to undo your actions has long moved from being an
 towards a must-be one. People just expect this type of fault tolerance
 from any reasonably complex tool. Yet, as often in software development,
 growing user expectations can be surprisingly far from ease of their
-implementation. In this post we'll be looking at how you might go about
-pulling it off in your next Angular app.
+fulfillment. In this post we'll be looking at how you might go about
+pulling off undo-redo in your next Angular app.
 
 ![undo-redo-feature-concept](undo-redo.png)
 
@@ -26,19 +26,18 @@ might be in for a surprise: there isn't - and there probably can't be -
 a pluggable solution if you didn't plan ahead.
 
 Talking about application state in web applications the Redux pattern
-quickly comes to mind. It can be seen as an extension of the
-[command pattern](https://en.wikipedia.org/wiki/Command_pattern) - a
-common tool for implementing undo-redo. Redux provides a good foundation
-through its
+quickly comes to mind. Redux provides a good foundation through its
 [three principles](https://redux.js.org/introduction/three-principles):
 
-1. **Single source of truth:** By having the whole application state in
-   one place - the store - we can get a good grip on past, present and
-   future states.
-2) **State is read-only:** State is mutated in a deterministic way and we
-  don't have to worry about states being corrupted.
-3) **Changes are made with pure functions:** We can easily replace the
-  whole state.
+**1. Single source of truth:** By having the whole application state in
+one place - the store - we can get a good grip on past, present and
+future states.
+
+**2. State is read-only:** We don't have to worry about states being
+corrupted.
+
+**3. Changes are made with pure functions:** State is mutated
+in a deterministic way and we can easily replace the whole state.
 
 You'll quickly end up at
 [Redux](https://redux.js.org/) - and it's Angular counterpart
@@ -123,7 +122,10 @@ const undoRedo = (reducer) => {
 }
 ```
 
-While this approach definitely works, it has certain flaws:
+The approach resembles the
+[memento pattern](https://en.wikipedia.org/wiki/Memento_pattern) - a
+common tool for implementing undo-redo. While this approach definitely
+works, it has certain flaws:
 
 **It can get big.** You're basically multiplying your application's
 state. Depending on the scope you'd like to apply undo-redo to, this
@@ -175,13 +177,18 @@ interface History {
 }
 ```
 
-Calculation of the last state could then look like this:
+Calculation of the last state could then look something like this:
 
 ```typescript
 const undo = () => history.actions
     .slice(0, -1) // every action except the last one
     .reduce((state, action) => reducer(state, action), history.base)
 ```
+
+Redux resembles the
+[command pattern](https://en.wikipedia.org/wiki/Command_pattern) with
+it's actions serving as the commands. As a result, this approach to
+undo-redo acts as some kind of _replay command pattern_.
 
 Again, the approach works and there are libraries for Redux and NgRx,
 respectively. It can even be more lightweight as actions are generally
@@ -204,17 +211,15 @@ reason why there's no library for NgRx doing that.
 
 ## States are changing
 
-States in Redux or NgRx may be supposed to be immutable, yet reducers
-are effectively changing them over time - just not by reusing the same
-object. Although often easily inferred, in my opinion Redux won't give
-you fully-fledged undo-redo by itself because information about these
-changes, the state difference introduced through a transition, is lost.
-Take a look at undo-redo implementations before Redux
-[using the command pattern](https://www.codeproject.com/Articles/33384/Multilevel-Undo-and-Redo-Implementation-in-Cshar-2).
-You'd have to implement a return path for each transition in order to
-get back. Luckily, there's also an easier way than implementing
-something like reverse reducers to get the best of both worlds. You can
-keep track of changes introduced by a transition in a so-called
+Although actions in redux may resemble commands, for a
+[common undo-redo implementation using the command
+pattern](https://www.codeproject.com/Articles/33384/Multilevel-Undo-and-Redo-Implementation-in-Cshar-2)
+we'd also need their inverse: a way back, a return path for each state
+transition. Luckily, there's an easier way than implementing something
+like reverse reducers to improve our approach. States in Redux or NgRx
+may be supposed to be immutable, yet reducers are effectively changing
+them over time - just not by reusing the same object. You can keep track
+of these changes in a so-called
 [JSON Patch](https://tools.ietf.org/html/rfc6902)
 
 ```typescript
@@ -226,7 +231,7 @@ const patch = [
   { "op": "add", "path": "/baz", "value": "qux" }
 ]
 
-// resulting next state
+// result state when applying patch to S1
 const S2 = { "foo": "bar", "baz": "qux" }
 ```
 
@@ -234,8 +239,8 @@ It gets even better: there are libraries constructing these patches for
 you and chances are you're already using one of them - namely
 [immer](https://github.com/immerjs/immer). The library is used widely to
 ensure state immutability while being able to use otherwise mutating
-JavaScript APIs. immer can not just create patches from your
-transitions, it also provides you with the corresponding inverse
+JavaScript APIs. Not only will immer create patches from your
+transitions, it'll also provide you with the corresponding inverse
 patches. Staying with the example above you'd easily be able to undo an
 action using the inverse patch from the corresponding state transition:
 
@@ -248,14 +253,14 @@ const inversePatch = [
   { "op": "remove", "path": "/baz" }
 ]
 
-// resulting initial state
+// resulting initial state when applying inversePatch to S2
 const S1 = { "foo": "bar" }
 ```
 
-We could then construct our history out of these patches:
+Based on that we could then construct our history out of these patches:
 
 ```typescript
-export interface Patches {
+interface Patches {
   patches: Patch[]
   inversePatches: Patch[]
 }
@@ -268,7 +273,7 @@ interface History {
 
 The corresponding middleware or meta-reducer could look along the
 following lines - under the assumption that the underlying reducer will
-forward the required patches.
+forward the required patches produced by immer.
 
 ```typescript
 import { applyPatches } from 'immer'
