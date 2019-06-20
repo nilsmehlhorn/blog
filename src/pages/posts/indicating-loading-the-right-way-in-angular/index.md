@@ -1,7 +1,7 @@
 ---
 path: "/posts/indicating-loading-the-right-way-in-angular"
 date: "2019-01-30"
-title: "ngForReal: Indicating loading the right way"
+title: "Loading indication in Angular"
 published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["ui", "ux", "indicator", "angularjs", "material", "loading", "spinner", "rxjs", "observable", "interceptor"]
@@ -223,13 +223,5 @@ action.
 style="width: 100%; height: 450px"
 src="https://stackblitz.com/edit/ng-loading-indication?ctl=1&embed=1&file=src/app/app.component.ts&view=preview">
 </iframe>
-
-___
-
-This is the first article of a series I'm starting called **ngForReal**. As the name indicates
-it's all about [Angular](https://angular.io) - almost everyones favorite application framework. 
-We'll reflect on common patterns and anti-patterns in order to form practical insights for developing sane
-Angular. I won't reiterate the docs or provide a tutorial on using the CLI. 
-This is not Angular by the book - it's Angular how you should do it for real.
 
 
