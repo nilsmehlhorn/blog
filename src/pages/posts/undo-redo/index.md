@@ -323,18 +323,27 @@ const undoRedo = (reducer) => {
 
 Using this approach you're sparred from the memory overhead you'd have
 when remembering whole application states and also from the
-computational overhead you'd have when recalculating the last state. By
-using just the essential information your implementation can be
-**maximally lightweight**. And just like with the approach before, it
-**doesn't have to be all or nothing**. If you want to omit an action
-from the undo-redo feature you can just ignore its patches when undoing
-or redoing.
+computational one you'd have when recalculating the last state. By using
+just the essential information your implementation can be **maximally
+lightweight**. And just like with the approach before, it **doesn't have
+to be all or nothing**. If you want to omit an action from the undo-redo
+feature you can just ignore its patches when undoing or redoing.
 
-I've created the library
-[ngrx-wieder](https://github.com/nilsmehlhorn/ngrx-wieder) for using
-this approach with NgRx. It'll also allow you to merge consecutive
-changes of actions and track whether you can undo or redo at the moment.
-Here's an example on StackBlitz:
+## Bottom line
+
+I hope I was able to give you some understanding of how undo-redo can
+work in applications using NgRx or Redux. As mentioned, any approach
+will basically get you there - just with different implications. Try
+them out by using a library or prototyping them yourself and see what
+works best for you.
+
+In a
+[recent use-case](https://scenelab.io/) I found the patch-based approach
+to be working best for me, causing me to create the library
+[ngrx-wieder](https://github.com/nilsmehlhorn/ngrx-wieder) for using it
+with NgRx. It'll also allow you to merge consecutive changes of actions
+and track whether you can undo or redo at the moment. Here's an example
+on StackBlitz:
 <iframe 
 style="width: 100%; height: 520px"
 src="https://stackblitz.com/edit/ngrx-wieder-app?ctl=1&embed=1&file=src/app/app.component.ts&view=preview">
