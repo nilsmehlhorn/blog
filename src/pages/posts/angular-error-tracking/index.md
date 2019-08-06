@@ -64,7 +64,6 @@ Then you'll implement Angular's
 follows. You'll need the data source name (DSN) of your project for
 this, which will tell Sentry where to forward the errors.
 
-###### error-handler.ts
 ```typescript
 import { Injectable, ErrorHandler} from '@angular/core'
 import * as Sentry from '@sentry/browser'
@@ -92,7 +91,6 @@ errors thrown. Now we just have to tell Angular to use our error handler
 instead of the default one - which would just log to the console. We do
 this by providing our error handler in the `app.module.ts`:
 
-###### app.module.ts
 ```typescript
 import { ErrorHandler } from '@angular/core'
 import { SentryErrorHandler} from './error-handler'
@@ -110,7 +108,6 @@ Now any error thrown during runtime will show up inside Sentry. You
 might want to test this by just throwing an error somewhere in your
 code, e.g. in `ngOnInit` of your `app.component.ts`:
 
-###### app.component.ts
 ```typescript
 @Component({...})
 export class AppComponent implements OnInit {
@@ -131,13 +128,12 @@ It should show up in your Sentry dashboard like this:
 
 There are some easy steps we can complete which will make our handling a
 bit more sophisticated. One thing you might have noticed is, that once
-you'll replace the default error handler, errors won't show up in the
-console anymore. We probably won't those back for development purposes.
+you replace the default error handler, errors won't show up in the
+console anymore. We probably want those back for development purposes.
 Therefore we'll only provide our error handler in production
 [environments](https://angular.io/guide/build) by leveraging a provider
 factory:
 
-###### error-handler.ts
 ```typescript
 import { ErrorHandler } from '@angular/core'
 import * as Sentry from '@sentry/browser'
@@ -156,7 +152,6 @@ export function getErrorHandler(): ErrorHandler {
 We can now use the factory to encapsulate the handler provision like
 this:
 
-###### app.module.ts
 ```typescript
 import { ErrorHandler } from '@angular/core'
 import { getErrorHandler} from './error-handler'
@@ -178,7 +173,6 @@ it's running in during initialization. For that purpose we can maintain
 a property for the environment's name inside our `environment.<name>.ts`
 and pass it along:
 
-###### error-handler.ts
 ```typescript
 class SentryErrorHandler implements ErrorHandler { 
   
@@ -235,12 +229,11 @@ in the `handleError` method. Yet, it might be cleaner to instead move
 the scope configuration out of our handler completely. Thus we'd
 configure the scope directly in response to a successful login. Not only
 would this resolve the cyclic dependency, it'd also minimize code in our
-error handler. This way it's less likely that we'd cause additional
+error handler. This way it's less likely that we'll cause additional
 errors _while_ reporting errors - possibly causing an endless loop. We
 can create a monitoring service for this purpose, which could look like
 this:
 
-###### monitoring.service.ts
 ```typescript
 import { Injectable} from '@angular/core'
 import * as Sentry from '@sentry/browser'
@@ -272,7 +265,7 @@ into the scope or set a
 It's also possible to provide arbitrary
 [extra content](https://docs.sentry.io/enriching-error-data/context/?platform=browser#extra-context)
 which might help you to reproduce a user's workflow. But watch out
-before dumping the whole application state, because this field will
+before dumping the whole application state because this field will
 only hold up to 200kB.
 
 ## Bottom line
