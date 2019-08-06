@@ -35,7 +35,8 @@ you deploy your application it won't run in just _your_ browser anymore.
 You don't have access to people's browser console and therefore lose
 those precious stack traces which might've helped to fix a nasty bug.
 
-Mindlessly shoving stuff in the console won't benefit but rather just
+Besides, mindlessly shoving stuff in the console won't benefit but
+rather just
 [slow your app down](https://jsperf.com/console-log1337/14). Also - like
 any JavaScript API - the console isn't exempted from
 [compatibility issues](https://developer.mozilla.org/en-US/docs/Web/API/Console#Browser_compatibility).
