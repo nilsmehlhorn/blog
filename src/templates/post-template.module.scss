@@ -22,4 +22,11 @@
     text-align: center;
     font-style: italic;
   }
+
+  strong {
+    font-weight: normal;
+    span {
+      @include elevation;
+    }
+  }
 }
