@@ -281,7 +281,7 @@ It's usually common sense to have some kind of monitoring for your
 applications. Yet, for browser applications this has been somewhat
 dismissed - probably because there weren't any sophisticated solutions
 like there have been for native mobile apps (e.g.
-[Crashlytics](https://firebase.google.com/docs/crashlytics)).
+[Crashlytics](https://firebase.google.com/products/crashlytics)).
  
 Sentry and alike let you gain insight into what's going on in your
 Angular app and therefore develop with more confidence. And, with the
