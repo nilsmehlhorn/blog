@@ -3,7 +3,6 @@
 .bio {
   margin-top: $gap;
   padding: $gap;
-  border-radius: $half-gap;
   background-color: white;
   @include elevation;
   .greeting {
