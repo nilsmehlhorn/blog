@@ -269,7 +269,7 @@ which might help you to reproduce a user's workflow. But watch out
 before dumping the whole application state because this field will
 only hold up to 200kB.
 
-## Bottom line
+## Wrapping up
 
 It's usually common sense to have some kind of monitoring for your
 applications. Yet, for browser applications this has been somewhat
