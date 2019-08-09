@@ -8,7 +8,6 @@
 
   pre {
     background-color: white;
-    border-radius: $half-gap;
     margin-bottom: 1.5rem;
     @include elevation;
   }
@@ -21,5 +20,12 @@
     margin-top: $half-gap;
     text-align: center;
     font-style: italic;
+  }
+
+  strong {
+    font-weight: normal;
+    span {
+      @include elevation;
+    }
   }
 }
