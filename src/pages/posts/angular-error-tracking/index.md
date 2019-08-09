@@ -35,14 +35,6 @@ you deploy your application it won't run in just _your_ browser anymore.
 You don't have access to people's browser console and therefore lose
 those precious stack traces which might've helped to fix a nasty bug.
 
-Besides, mindlessly shoving stuff in the console won't benefit but
-rather just
-[slow your app down](https://jsperf.com/console-log1337/14). Also - like
-any JavaScript API - the console isn't exempted from
-[compatibility issues](https://developer.mozilla.org/en-US/docs/Web/API/Console#Browser_compatibility).
-So some feature's might not work everywhere - though you could probably
-polyfill them, but don't do that. Instead, deploy a proper solution.
-
 ## Using Sentry in your Angular app
 
 [Sentry](https://sentry.io) is an
@@ -122,7 +114,7 @@ export class AppComponent implements OnInit {
 It should show up in your Sentry dashboard like this:
 
 <strong>
-<img src="sentry_issues.png" alt="Sentry Issue Dashboard" title="Test error in Sentry Dashboard"/>
+<img src="sentry_issues.png" alt="Sentry Issue Dashboard" title="Test error in Sentry dashboard"/>
 </strong>
 
 ## Dealing with environments
@@ -269,6 +261,24 @@ which might help you to reproduce a user's workflow. But watch out
 before dumping the whole application state because this field will
 only hold up to 200kB.
 
+## Collecting feedback
+
+Sentry also has the ability to collect user feedback upon error. Even
+though it might be dismissed most of the times, it could serve as a
+helpful source of information at some point. You can initiate it in your
+error handler like follows:
+
+```typescript
+const eventId = Sentry.captureException(error.originalError || error);
+Sentry.showReportDialog({ eventId });
+```
+
+It'll open a modal dialog that looks like this:
+
+<strong>
+<img src="sentry_report.png" alt="Sentry Error Report Dialog" title="Sentry reporting dialog"/>
+</strong>
+
 ## Wrapping up
 
 It's usually common sense to have some kind of monitoring for your
@@ -282,6 +292,7 @@ Angular app and therefore develop with more confidence. And, with the
 presented considerations we were able to integrate it the Angular
 way.
 
-There's also a bunch of other stuff you can do with Sentry such as
-[collecting user feedback upon error](https://docs.sentry.io/enriching-error-data/user-feedback/?platform=browser)
-or tracking errors against releases and automatically filing bugs.
+There's also a
+[bunch of other stuff](https://docs.sentry.io/workflow/integrations/)
+you can do with Sentry such as tracking errors against releases and
+automatically filing bugs.
