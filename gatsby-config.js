@@ -63,7 +63,8 @@ module.exports = {
       options: {
         trackingId: 'UA-131311054-1',
         anonymize: true,
-        respectDNT: true
+        respectDNT: true,
+        head: true
       }
     }
   ]
