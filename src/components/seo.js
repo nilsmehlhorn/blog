@@ -75,6 +75,10 @@ function SEO({description, lang, meta, keywords, title}) {
 
           var ml_account = ml('accounts', '1661492', 'z6v6l1q6j9', 'load');
         `}</script>
+            <script>{`
+              var ml_webform_1483080 = ml_account('webforms', '1483080', 'd1c0b1', 'load');
+              ml_webform_1483080('animation', 'slideboxRight');
+            `}</script>
           </Helmet>
         )
       }}
