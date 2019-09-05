@@ -3,7 +3,7 @@ import {FaGithub, FaTwitter, FaInstagram, FaDev} from 'react-icons/fa'
 import {GoMailRead} from 'react-icons/go'
 
 import styles from './footer.module.scss'
-
+/* eslint-disable */
 const Footer = () => (
       <footer className={styles.footer}>
         <div className={styles.content}>
@@ -23,5 +23,6 @@ const Footer = () => (
         </div>
       </footer>
 )
+/* eslint-enable */
 
 export default Footer
