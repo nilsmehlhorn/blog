@@ -13,6 +13,7 @@ exports.createPages = ({actions, graphql}) => {
       ) {
         edges {
           node {
+            id
             excerpt(pruneLength: 250)
             frontmatter {
               path
