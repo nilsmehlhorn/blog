@@ -5,9 +5,10 @@ import Tags from "../components/tags"
 import SEO from '../components/seo'
 
 import styles from './post-template.module.scss'
+import RelatedPosts from '../components/related-posts'
 
 export default function Template({
-                                   data,
+                                   data, pageContext
                                  }) {
   const {markdownRemark} = data
   const {frontmatter, html, excerpt} = markdownRemark
@@ -25,6 +26,7 @@ export default function Template({
           />
         </div>
       </div>
+      <RelatedPosts posts={pageContext.relatedPosts}/>
     </Layout>
   )
 }

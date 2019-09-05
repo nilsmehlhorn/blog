@@ -13,9 +13,13 @@ exports.createPages = ({actions, graphql}) => {
       ) {
         edges {
           node {
+            excerpt(pruneLength: 250)
             frontmatter {
               path
+              date(formatString: "MMMM DD, YYYY")
               published
+              tags
+              title
             }
           }
         }
@@ -26,13 +30,20 @@ exports.createPages = ({actions, graphql}) => {
       return Promise.reject(result.errors)
     }
 
-    result.data.allMarkdownRemark.edges
+    const published = result.data.allMarkdownRemark.edges
       .filter(({node}) => node.frontmatter.published)
+
+    published
       .forEach(({node}) => {
+        const relatedPosts = published
+          .filter(other => other.node.frontmatter.path !== node.frontmatter.path
+            && node.frontmatter.tags.some(t => other.node.frontmatter.tags.includes(t))
+          )
+          .map(other => other.node)
         createPage({
           path: node.frontmatter.path,
           component: postTemplate,
-          context: {}
+          context: {relatedPosts}
         })
       })
   })
