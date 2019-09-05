@@ -16,12 +16,12 @@ const IndexPage = ({
     .filter(edge => edge.node.frontmatter.published)
     .map((edge, i) => {
       const post = <PostLink key={edge.node.id} post={edge.node}/>
-      return i > 0 ? [<hr/>, post] : post
+      return i > 0 ? [<hr key={i + '-hr'}/>, post] : post
     })
 
   return <Layout>
-    <SEO title={site.siteMetadata.title} keywords={['blog', 'software', 'angular']}/>
-    <Bio/>
+    <SEO key={'seo'} title={site.siteMetadata.title} keywords={['blog', 'software', 'angular']}/>
+    <Bio key={'bio'}/>
     {Posts}
   </Layout>
 }
