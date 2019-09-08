@@ -6,6 +6,7 @@ import SEO from '../components/seo'
 
 import styles from './post-template.module.scss'
 import RelatedPosts from '../components/related-posts'
+import Comments from '../components/comments'
 
 export default function Template({
                                    data, pageContext
@@ -26,6 +27,7 @@ export default function Template({
           />
         </div>
       </div>
+      <Comments id={frontmatter.path}/>
       <RelatedPosts posts={pageContext.relatedPosts}/>
     </Layout>
   )
