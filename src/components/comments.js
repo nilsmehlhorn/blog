@@ -5,6 +5,7 @@ const insertScript = (src, id, parentElement) => {
   script.async = true
   script.src = src
   script.id = id
+  script.setAttribute('data-css-override', '/commento.css')
   parentElement.appendChild(script)
   return script
 }
