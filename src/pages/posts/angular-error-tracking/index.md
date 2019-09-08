@@ -1,7 +1,7 @@
 ---
 path: "/posts/angular-error-tracking-with-sentry"
 date: "2019-08-06"
-title: "Tracking errors in Angular with Sentry"
+title: "Tracking Errors in Angular with Sentry"
 published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["error", "tracking", "sentry", "monitoring", "logging", "angularjs", "rxjs", "typescript", "ngrx"]

@@ -1,7 +1,7 @@
 ---
 path: "/posts/indicating-loading-the-right-way-in-angular"
 date: "2019-01-30"
-title: "Loading indication in Angular"
+title: "Loading Indication in Angular"
 published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["ui", "ux", "indicator", "angularjs", "material", "loading", "spinner", "rxjs", "observable", "interceptor"]

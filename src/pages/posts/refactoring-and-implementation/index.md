@@ -1,7 +1,7 @@
 ---
 path: "/posts/refactoring-and-implementation"
 date: "2019-01-07"
-title: "Finding harmony between refactoring and implementation"
+title: "Finding Harmony Between Refactoring and Implementation"
 published: true
 tags: ["architecture", "oop"]
 keywords: ["coupling", "interface", "refactoring", "typescript", "implementation", "pattern"]

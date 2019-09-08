@@ -1,7 +1,7 @@
 ---
 path: "/posts/angular-undo-redo-ngrx-redux"
 date: "2019-06-20"
-title: "Implementing undo-redo with NgRx or Redux"
+title: "Implementing Undo-Redo with NgRx or Redux"
 published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["ngrx", "redux", "undo", "redo", "ui", "ux", "angularjs", "rxjs", "typescript", "pattern", "immer"]
