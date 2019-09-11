@@ -23,7 +23,7 @@ const Comments = ({id}) => {
       return
     }
     const document = window.document
-    if (document.getElementById('commento')) {
+    if (document.getElementById('commento') && !document.getElementById('commento-script')) {
       insertScript(`https://cdn.commento.io/js/commento.js`, `commento-script`, document.body)
     }
     return () => removeScript(`commento-script`, document.body)

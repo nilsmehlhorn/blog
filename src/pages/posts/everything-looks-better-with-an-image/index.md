@@ -1,7 +1,7 @@
 ---
 path: "/posts/everything-looks-better-with-an-image"
 date: "2018-12-22"
-title: "Everything Looks better with an Image"
+title: "Everything Looks Better with an Image"
 published: true
 tags: ["web development", "frontend"]
 keywords: ["ui", "framework", "freelance", "assets", "styleguide"]
