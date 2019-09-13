@@ -33,8 +33,7 @@ const Bio = () => (
           </div>
         </header>
         <p className={styles.desc}>
-          This is a space where I'll explore any topic I just can't keep my mouth shut about. I'm mostly doing
-          web development, but here we'll wander off into any direction that seems interesting. Enjoy the ride!
+          developer consultant and product developer writing about just that and everything in between
         </p>
       </section>
     )}

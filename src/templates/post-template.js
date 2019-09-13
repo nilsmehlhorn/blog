@@ -3,6 +3,7 @@ import {graphql} from "gatsby"
 import Layout from "../components/layout"
 import Tags from "../components/tags"
 import SEO from '../components/seo'
+import Bio from '../components/bio'
 
 import styles from './post-template.module.scss'
 import RelatedPosts from '../components/related-posts'
@@ -27,6 +28,7 @@ export default function Template({
           />
         </div>
       </div>
+      <Bio/>
       <Comments id={frontmatter.path}/>
       <RelatedPosts posts={pageContext.relatedPosts}/>
     </Layout>
