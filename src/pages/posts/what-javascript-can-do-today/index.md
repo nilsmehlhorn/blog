@@ -154,13 +154,14 @@ Wanting to make 3D games? You're in luck! Browsers have their very own
 3D graphics interface called
 [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API).
 Using it yourself can be bit overwhelming though. Instead you might be
-better of using a framework to be more effective.
+better of using a framework to be more productive.
 [Babylon.js](https://www.babylonjs.com/) and
 [Three.js](https://threejs.org/) are household names for doing anything
 3D-related on the web. If you'd like something more focused on games you
 might like
-[PlayCanvas](https://playcanvas.com) which also comes with a browser
-based editor. Otherwise can also use established game engines such as
+[PlayCanvas](https://playcanvas.com) which also comes with a
+browser-based editor. Otherwise can also use established game engines
+such as
 [Cocos2d.x](https://cocos2d-x.org/cocos2dx) with JavaScript bindings to
 develop cross-platform games.
 
