@@ -1,10 +1,10 @@
 ---
 path: "/posts/what-you-can-do-with-javascript-today"
-date: "2019-09-07"
+date: "2019-09-16"
 title: "What You Can Do with JavaScript Today"
 published: true
 tags: ["web development", "mobile development", "iot"]
-keywords: ["angular", "react", "vue", "nodejs", "node", "nativescript", "ionic"]
+keywords: ["javascript", "angular", "react", "vue", "nodejs", "nativescript", "react native", "what is javascript used for", "html", "css"]
 ---
 
 The famous scripting language has come a long way since it's
@@ -137,7 +137,7 @@ collaboration tool, chat room or streaming service.
 
 The language is already very UI-oriented due to its origin. So you can
 make simple browser games just with JavaScript, HTML and CSS. When
-things get more complex, you might decided to
+things get more complex, you might decide to
 [use the HTML Canvas for
 2D rendering](https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript).
 There are also some designated game development frameworks for making
@@ -174,7 +174,58 @@ one of the mentioned 3D framworks or have a look at
 [A-Frame](https://aframe.io/).
 
 ## Machine Learning
+
+That's right, you don't need to learn Python in order to get into
+machine learning - JavaScript will do! With
+[TensorFlow.js](https://www.tensorflow.org/js) you can develop machine
+learning models for image classification, audio recognition or
+predictive analytics. The best thing: you can either do that on Node.js
+or right in browsers! Machine learning is a very GPU-intensive task,
+however, it can run hardware-accelerated in the browser through WebGL.
+This way you might create a recommendation system that runs completely
+client-side without the need for expensive servers all while mitigating
+privacy concerns.
+
 ![Machine Learning Illustration](predictive_analytics_sm.png)
 
+If you're not too fond of TensorFlow, you might like
+[brain.js](https://github.com/BrainJS/brain.js) for training neural
+networks or
+[ml.js](https://github.com/mljs/ml) which comes with a multitude of
+different machine learning algorithms. Both also allow you to train and
+run your algorithms inside the browser.
+
 ## Internet of Things
+
+Affordable hardware is getting evermore available giving you an easy way
+into the world of microcontrollers. While you're usually required to
+learn languages like C or C++ to build smart systems you could also just
+stick with JavaScript!
+
+The
+[Johnny-Five](http://johnny-five.io/) platform provides an approachable
+API for a variety of Arduino boards. If you're more into robots you
+could have a look at
+[Cylon,js](https://cylonjs.com/). Both work by translating your
+JavaScript to something the device can understand. Inevitably this
+restricts you from deploying your controller without an instance of
+Node.js running somewhere next to it.
+
 ![Internet of Things Illustration](connected_world_sm.png)
+
+This is not necessary with
+[JerryScript](https://jerryscript.net/) which is a designated JavaScript
+runtime for microcontrollers - it merely needs 64KB of RAM. Be warned
+though as you might still need to get into the weeds with different
+tools depending on your use-case. Eventually IoT might be a rather
+experimental application area for JavaScript nonetheless.
+
+## Wrapping Up
+
+As we've seen there's a huge variety of use-cases you can cover with
+JavaScript while building upon a huge community and solid projects. This
+is a great thing because it empowers you to be creative in many
+different ways using a language you might already know.
+
+Are there any interesting use-cases I didn't cover? Leave a comment to
+let me know!
