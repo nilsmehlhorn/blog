@@ -1,7 +1,7 @@
 @import "../styles/variables";
 
 .bio {
-  margin-top: $gap;
+  margin: $gap 0;
   padding: $gap;
   background-color: white;
   @include elevation;
@@ -44,5 +44,6 @@
   }
   .desc {
     margin: $gap 0 0 0;
+    font-style: italic;
   }
 }
