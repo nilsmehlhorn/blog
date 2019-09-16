@@ -150,7 +150,7 @@ graphics-intense tool you might like
 
 ![Game Development Illustration](ninja_sm.png)
 
-Wanting to make 3D games? You're in luck! Browsers have their very own
+Want to make 3D games? You're in luck! Browsers have their very own
 3D graphics interface called
 [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API).
 Using it yourself can be bit overwhelming though. Instead you might be
