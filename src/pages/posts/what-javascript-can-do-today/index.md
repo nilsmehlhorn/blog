@@ -222,7 +222,7 @@ experimental application area for JavaScript - though it's often leveraged for c
 
 ## Wrapping Up
 
-As we've seen there's a huge variety of use-cases you can cover with
+As we've seen there's a wide variety of use-cases you can cover with
 JavaScript while building upon a huge community and solid projects. This
 is a great thing because it empowers you to be creative in many
 different ways using a language you might already know.
