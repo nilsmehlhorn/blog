@@ -31,7 +31,7 @@ replacing server-side rendered websites which might have used
 ![Web Development Illustration](frameworks_sm.png)
 
 The web development environment is often
-[criticized for it's
+[criticized for its
 high speed of change](https://dayssincelastjavascriptframework.com/)
 where frameworks have tiny life spans. While there might have been some
 eventful times, this is actually kind of unfounded when looking at the
@@ -47,7 +47,7 @@ modern JavaScript and advanced build tools you could build your apps
 framework-less - have a look at the
 [Polymer Project](https://www.polymer-project.org/).
  
-Not only can you built full-fledged webapps with JavaScript but also
+Not only can you built full-fledged web apps with JavaScript but also
 quite nicely use it to generate static sites. You might leverage a
 pragmatic solution such as
 [Eleventy](https://www.11ty.io/) or bring frameworks back into the game.
@@ -79,7 +79,7 @@ to!
 The web is getting increasingly powerful forming a new era of
 [progressive web apps](https://developers.google.com/web/progressive-web-apps).
 They can be launched from a users desktop or home screen and obtain a
-similar feel as native applications. Through modern Web APIs you can
+similar feel as native applications. Through modern web APIs you can
 [send push
 notifications](https://developer.mozilla.org/en-US/docs/Web/API/Push_API),
 [connect Bluetooth devices](https://developer.mozilla.org/en-US/docs/Web/API/Web_Bluetooth_API)
