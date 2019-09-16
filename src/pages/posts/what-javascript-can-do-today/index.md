@@ -25,7 +25,7 @@ years single-page applications built with
 [React](https://reactjs.org/),
 [Angular](https://angular.io/) or
 [Vue.js](https://vuejs.org/) became the somewhat of a norm - gradually
-replacing server-side rendered websites which might've used
+replacing server-side rendered websites which might have used
 [jQuery](https://jquery.com/) for interactive components.
 
 ![Web Development Illustration](frameworks_sm.png)
@@ -58,7 +58,7 @@ With
 [Nuxt.js](https://nuxtjs.org/) you get the benefits of using React or
 Vue.js respectively whilst generating lightweight static pages - like
 this blog which is
-[made with Gatsby](https://github.com/nilsmehlhorn/).
+[made with Gatsby](https://github.com/nilsmehlhorn/blog).
 
 ## Desktop Apps
 
@@ -208,7 +208,7 @@ API for a variety of Arduino boards. If you're more into robots you
 could have a look at
 [Cylon,js](https://cylonjs.com/). Both work by translating your
 JavaScript to something the device can understand. Inevitably this
-restricts you from deploying your controller without an instance of
+restricts you from deploying your controller without having another machine with
 Node.js running somewhere next to it.
 
 ![Internet of Things Illustration](connected_world_sm.png)
@@ -217,8 +217,8 @@ This is not necessary with
 [JerryScript](https://jerryscript.net/) which is a designated JavaScript
 runtime for microcontrollers - it merely needs 64KB of RAM. Be warned
 though as you might still need to get into the weeds with different
-tools depending on your use-case. Eventually IoT might be a rather
-experimental application area for JavaScript nonetheless.
+tools depending on your use-case. Eventually the Internet of Things might be a rather
+experimental application area for JavaScript - though it's often leveraged for corresponding backend services using [MQTT](https://github.com/mqttjs/MQTT.js).
 
 ## Wrapping Up
 
@@ -229,3 +229,4 @@ different ways using a language you might already know.
 
 Are there any interesting use-cases I didn't cover? Leave a comment to
 let me know!
+
