@@ -3,7 +3,8 @@ module.exports = {
     title: 'Lessons Unlearned',
     description: 'Blog by Nils Mehlhorn',
     author: '@n_mehlhorn',
-    baseUrl: 'https://nils-mehlhorn.de'
+    baseUrl: 'https://nils-mehlhorn.de',
+    siteUrl: 'https://nils-mehlhorn.de'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -66,6 +67,7 @@ module.exports = {
         respectDNT: true,
         head: true
       }
-    }
+    },
+    `gatsby-plugin-feed`
   ]
 }
