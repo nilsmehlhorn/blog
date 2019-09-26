@@ -150,18 +150,18 @@ graphics-intense tool you might like
 
 ![Game Development Illustration](ninja_sm.png)
 
-Want to make 3D games? You're in luck! Browsers have their very own
-3D graphics interface called
+Want to make 3D games? You're in luck! Browsers have their very own 3D
+graphics interface called
 [WebGL](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API).
 Using it yourself can be bit overwhelming though. Instead you might be
-better of using a framework to be more productive.
+better off using a framework to be more productive.
 [Babylon.js](https://www.babylonjs.com/) and
 [Three.js](https://threejs.org/) are household names for doing anything
 3D-related on the web. If you'd like something more focused on games you
 might like
 [PlayCanvas](https://playcanvas.com) which also comes with a
-browser-based editor. Otherwise can also use established game engines
-such as
+browser-based editor. Otherwise you can also use established game
+engines such as
 [Cocos2d.x](https://cocos2d-x.org/cocos2dx) with JavaScript bindings to
 develop cross-platform games.
 
@@ -206,10 +206,10 @@ The
 [Johnny-Five](http://johnny-five.io/) platform provides an approachable
 API for a variety of Arduino boards. If you're more into robots you
 could have a look at
-[Cylon,js](https://cylonjs.com/). Both work by translating your
+[Cylon.js](https://cylonjs.com/). Both work by translating your
 JavaScript to something the device can understand. Inevitably this
-restricts you from deploying your controller without having another machine with
-Node.js running somewhere next to it.
+restricts you from deploying your controller without having another
+machine with Node.js running somewhere next to it.
 
 ![Internet of Things Illustration](connected_world_sm.png)
 
