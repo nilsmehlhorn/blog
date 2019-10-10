@@ -5,6 +5,7 @@ title: "Tracking Errors in Angular with Sentry"
 published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["error", "tracking", "sentry", "monitoring", "logging", "angularjs", "rxjs", "typescript", "ngrx"]
+banner: "./banner.png"
 ---
 
 Do you know what's going on in your Angular app when it's live? While

@@ -5,6 +5,7 @@ title: "What You Can Do with JavaScript Today"
 published: true
 tags: ["web development", "mobile development", "iot"]
 keywords: ["javascript", "angular", "react", "vue", "nodejs", "nativescript", "react native", "what is javascript used for", "html", "css"]
+banner: "./banner.png"
 ---
 
 The famous scripting language has come a long way since it's

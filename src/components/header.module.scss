@@ -1,6 +1,7 @@
 @import '../styles/variables';
 
 .header {
+  z-index: 1;
   background: $header-color;
   width: 100%;
   @include elevation;
@@ -27,5 +28,11 @@
 
   .logo {
     min-width: 64px;
+  }
+
+  @media all and (max-width: $break-m) {
+    .content {
+      padding: $half-gap;
+    }
   }
 }

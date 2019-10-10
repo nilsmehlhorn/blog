@@ -1,5 +1,6 @@
 import React from "react"
 import {graphql} from "gatsby"
+import Img from "gatsby-image"
 import Layout from "../components/layout"
 import Tags from "../components/tags"
 import SEO from '../components/seo'
@@ -14,11 +15,16 @@ export default function Template({
                                  }) {
   const {markdownRemark} = data
   const {frontmatter, html, excerpt} = markdownRemark
+  let banner = ''
+  if (frontmatter.banner) {
+    banner = <Img fluid={frontmatter.banner.childImageSharp.fluid}/>
+  }
   return (
     <Layout>
       <SEO keywords={[...frontmatter.tags, ...frontmatter.keywords]} title={frontmatter.title} description={excerpt}/>
       <div>
-        <div className="post">
+        {banner}
+        <div className={styles.content}>
           <h1 className={styles.heading}>{frontmatter.title}</h1>
           <p className={styles.date}>{frontmatter.date}</p>
           <Tags tags={frontmatter.tags}/>
@@ -46,6 +52,13 @@ export const pageQuery = graphql`
         title
         tags
         keywords
+        banner {
+          childImageSharp {
+            fluid(maxWidth: 960, maxHeight: 400) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }
