@@ -11,3 +11,21 @@ body, html {
 body {
   background: $background-color;
 }
+
+.content-padding {
+  padding: $content-padding;
+}
+
+.site {
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+}
+
+.content {
+  max-width: $container-width;
+  width: 100%;
+  margin: 0 auto;
+  flex: 1 0 auto;
+}
+

@@ -24,7 +24,7 @@ export default function Template({
       <SEO keywords={[...frontmatter.tags, ...frontmatter.keywords]} title={frontmatter.title} description={excerpt}/>
       <div>
         {banner}
-        <div className={styles.content}>
+        <div className="content-padding">
           <h1 className={styles.heading}>{frontmatter.title}</h1>
           <p className={styles.date}>{frontmatter.date}</p>
           <Tags tags={frontmatter.tags}/>

@@ -21,8 +21,10 @@ const IndexPage = ({
 
   return <Layout>
     <SEO key={'seo'} title={site.siteMetadata.title} keywords={['blog', 'software', 'angular']}/>
-    <Bio key={'bio'}/>
-    {Posts}
+    <div className="content-padding">
+      <Bio key={'bio'}/>
+      {Posts}
+    </div>
   </Layout>
 }
 
