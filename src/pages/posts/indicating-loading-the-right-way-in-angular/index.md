@@ -5,6 +5,7 @@ title: "Loading Indication in Angular"
 published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["ui", "ux", "indicator", "angularjs", "material", "loading", "spinner", "rxjs", "observable", "interceptor"]
+banner: "./banner.png"
 ---
 
 Its a common desire: having something rotate or fly around to entertain the user while the moderately performing backend
