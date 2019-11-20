@@ -32,4 +32,8 @@
       @include elevation;
     }
   }
+
+  p > strong {
+    font-weight: bolder;
+  }
 }
