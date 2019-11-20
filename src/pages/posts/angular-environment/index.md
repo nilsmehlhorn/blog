@@ -14,7 +14,7 @@ kept to a minimum, your webapp is probably supposed to behave a little
 bit different on a developer's machine compared to when it's deployed
 to production.
 
-Angular already has a basic solution for this called
+Angular already has a solution for this called
 [environments](https://angular.io/guide/build#configuring-application-environments).
 To recap how they work: you place an arbitrary number of environment
 files in a directory such as `src/environments` like so: 
