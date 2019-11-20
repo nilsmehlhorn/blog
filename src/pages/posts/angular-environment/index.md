@@ -110,10 +110,10 @@ always get the environment-specific properties during runtime:
 ```typescript
 import { environment } from '../environments/environment';
 
-// ng build             --> false
-// ng build -c stage    --> false
-// ng build --prod      --> true
-console.log(environment.production)
+// ng build             --> 'dev'
+// ng build -c stage    --> 'stage'
+// ng build --prod      --> 'prod'
+console.log(environment.name)
 ```
 
 But we can do better. There's two problems I encountered with this
@@ -180,7 +180,7 @@ Angular uses the class name to identify a dependency, but since our
 environment only has a TypeScript interface (which will be gone at
 runtime) we need to provide such a token instead. Additionally, since
 Angular cannot call an interface's constructor, we provide a factory
-method to get an environment instance. Eventually, our provider code
+method to get the environment instance. Eventually, our provider code
 looks like this: 
 ```typescript
 import {InjectionToken} from '@angular/core'
@@ -210,7 +210,7 @@ export class AppModule { }
 
 Now, instead of importing from `environment.ts` directly we'll inject
 the environment into any class that needs access to it by using the
-[Inject decorator](https://angular.io/api/core/Inject).
+[Inject](https://angular.io/api/core/Inject) decorator.
 
 ```typescript
 import { Injectable, Inject } from '@angular/core';
@@ -257,8 +257,8 @@ describe('UserService', () => {
 });
 ```
 
-Also, if you'd like to enforce dependency injection for the environment,
-you might even create a
+Also, if you'd like to enforce that the environment is used through
+dependency injection, you might even create a
 [tslint rule blocking direct imports](https://stackoverflow.com/questions/51742983/how-blacklist-imports-in-a-specific-file-with-tslint)
 preventing unintended usage.
 
