@@ -5,7 +5,6 @@ title: "Angular Environment Setup"
 published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["test", "testing", "tdd", "ci", "deploy", "angularjs", "rxjs", "typescript", "ngrx"]
-banner: "./banner.png"
 ---
 
 Most real-world Angular applications live in different environments
