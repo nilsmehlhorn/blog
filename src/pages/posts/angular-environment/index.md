@@ -10,9 +10,9 @@ banner: "./banner.png"
 
 Most real-world Angular applications live in different environments
 throughout their development cycle. While difference generally should be
-kept to a minimum, your webapp probably should behave a little bit
-different in on a developer's machine compared to when it's deployed to
-production.
+kept to a minimum, your webapp is probably supposed to behave a little
+bit different on a developer's machine compared to when it's deployed
+to production.
 
 Angular already has a basic solution for this called
 [environments](https://angular.io/guide/build#configuring-application-environments).
