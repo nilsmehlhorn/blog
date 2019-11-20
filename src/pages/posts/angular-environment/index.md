@@ -8,10 +8,10 @@ keywords: ["test", "testing", "tdd", "ci", "deploy", "angularjs", "rxjs", "types
 ---
 
 Most real-world Angular applications live in different environments
-throughout their development cycle. While difference generally should be
-kept to a minimum, your webapp is probably supposed to behave a little
-bit different on a developer's machine compared to when it's deployed
-to production.
+throughout their development cycle. While differences generally should
+be kept to a minimum, your webapp is probably supposed to behave a
+little bit different on a developer's machine compared to when it's
+deployed to production.
 
 Angular already has a solution for this called
 [environments](https://angular.io/guide/build#configuring-application-environments).
@@ -268,4 +268,5 @@ environments safer and more comfortable. We've already got typing and
 dependency injection at our disposal, so it's advisable to leverage
 these tools for a better development experience. Especially in bigger
 applications with multiple environments we can greatly benefit from
-properly defined interfaces and good test coverage.
+properly defined interfaces, good test coverage and test-driven
+development.
