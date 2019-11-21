@@ -1,6 +1,6 @@
 ---
 path: "/posts/angular-environment-setup-testing"
-date: "2019-11-22"
+date: "2019-11-21"
 title: "Angular Environment Setup for Solid Deploys and Testing"
 published: true
 tags: ["web development", "frontend", "angular"]
