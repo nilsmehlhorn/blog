@@ -1,10 +1,10 @@
 ---
 path: "/posts/angular-environment-setup-testing"
 date: "2019-11-22"
-title: "Angular Environment Setup"
+title: "Angular Environment Setup for Solid Deploys and Testing"
 published: true
 tags: ["web development", "frontend", "angular"]
-keywords: ["test", "testing", "tdd", "ci", "deploy", "angularjs", "rxjs", "typescript", "ngrx"]
+keywords: ["test", "testing", "deploy", "angularjs", "typescript"]
 banner: "./banner.png"
 ---
 
