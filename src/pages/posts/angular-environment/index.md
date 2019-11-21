@@ -158,12 +158,12 @@ new environment-related feature.
 
 ## Testing with Environments
 
-Sometimes I found myself in situation where I'd wanted to perform
+Sometimes I found myself in situations where I'd wanted to perform
 environment-specific tests. Maybe you'd have an error handler that
 should only log to the console in a development environment but
 [forward errors to a server](/posts/angular-error-tracking-with-sentry)
-during production. As environments are simply imported it is cumbersome
-to mock them during test execution - let's fix that.
+during production. As environments are simply imported it is
+inconvenient to mock them during test execution - let's fix that.
 
 The Angular architecture is based on the principle of
 [dependency injection](https://angular.io/guide/dependency-injection)
@@ -235,7 +235,10 @@ export class UserService {
 ```
 
 In order to mock our environment during test we can now easily pass a
-counterpart into the class constructor or provide it through the TestBed
+counterpart
+[directly into the class constructor](https://angular.io/guide/testing#services-with-dependencies)
+or provide it through Angular's
+[dependency injection using the TestBed](https://angular.io/guide/testing#testing-services-with-the-testbed)
 like this:
 ```typescript
 import { ENV } from '../environments/environment.provider'
