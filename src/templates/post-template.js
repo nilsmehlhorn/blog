@@ -16,12 +16,14 @@ export default function Template({
   const {markdownRemark} = data
   const {frontmatter, html, excerpt} = markdownRemark
   let banner = ''
+  let previewImage;
   if (frontmatter.banner) {
-    banner = <Img fluid={frontmatter.banner.childImageSharp.fluid}/>
+    banner = <Img fluid={frontmatter.banner.full.fluid}/>
+    previewImage = frontmatter.banner.preview.fluid.src
   }
   return (
     <Layout>
-      <SEO keywords={[...frontmatter.tags, ...frontmatter.keywords]} title={frontmatter.title} description={excerpt}/>
+      <SEO previewImage={previewImage} keywords={[...frontmatter.tags, ...frontmatter.keywords]} title={frontmatter.title} description={excerpt}/>
       <div>
         {banner}
         <div className="content-padding">
@@ -53,8 +55,13 @@ export const pageQuery = graphql`
         tags
         keywords
         banner {
-          childImageSharp {
+          full: childImageSharp {
             fluid(maxWidth: 960, maxHeight: 400) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+          preview: childImageSharp {
+            fluid(maxWidth: 630) {
               ...GatsbyImageSharpFluid
             }
           }

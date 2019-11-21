@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import {StaticQuery, graphql} from 'gatsby'
 
-function SEO({description, lang, meta, keywords, title}) {
+function SEO({description, lang, meta, keywords, title, previewImage}) {
   return (
     <StaticQuery
       query={detailsQuery}
@@ -11,6 +11,15 @@ function SEO({description, lang, meta, keywords, title}) {
         const titleTemplate = title === data.site.siteMetadata.title ? `%s` : `%s | ${data.site.siteMetadata.title}`
         const metaDescription =
           description || data.site.siteMetadata.description
+        const imgSrc = previewImage || data.img.childImageSharp.fixed.src
+        const twitterMeta = [
+          {name: 'twitter:creator', content: data.site.siteMetadata.author},
+          {name: 'twitter:title', content: title},
+          {name: 'twitter:description', content: metaDescription},
+          {name: 'twitter:image', content: data.site.siteMetadata.baseUrl + imgSrc},
+          {name: 'twitter:card', content: previewImage ? 'summary_large_image' : 'summary'}
+        ]
+        const keywordsMeta = keywords.length ? {name: 'keywords', content: keywords.join(', ')} : []
         return (
           <Helmet
             htmlAttributes={{
@@ -19,52 +28,14 @@ function SEO({description, lang, meta, keywords, title}) {
             title={title}
             titleTemplate={titleTemplate}
             meta={[
-              {
-                name: 'description',
-                content: metaDescription
-              },
-              {
-                property: 'og:title',
-                content: title
-              },
-              {
-                property: 'og:description',
-                content: metaDescription
-              },
-              {
-                property: 'og:type',
-                content: 'website'
-              },
-              {
-                name: 'twitter:card',
-                content: 'summary'
-              },
-              {
-                name: 'twitter:creator',
-                content: data.site.siteMetadata.author
-              },
-              {
-                name: 'twitter:title',
-                content: title
-              },
-              {
-                name: 'twitter:description',
-                content: metaDescription
-              },
-              {
-                name: 'twitter:image',
-                content: data.site.siteMetadata.baseUrl + data.img.childImageSharp.fixed.src
-              }
-            ]
-              .concat(
-                keywords.length > 0
-                  ? {
-                    name: 'keywords',
-                    content: keywords.join(', ')
-                  }
-                  : []
-              )
-              .concat(meta)}
+              {name: 'description', content: metaDescription},
+              {property: 'og:title', content: title},
+              {property: 'og:description', content: metaDescription},
+              {property: 'og:type', content: 'website'},
+              keywordsMeta,
+              ...twitterMeta,
+              ...meta
+            ]}
           >
             <script>{`
           (function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
