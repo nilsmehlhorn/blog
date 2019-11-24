@@ -6,6 +6,7 @@ published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["test", "testing", "deploy", "angularjs", "typescript"]
 banner: "./banner.png"
+description: "Here's how you setup and access Angular environments with a proper type for multiple builds and tests with a mock - production-ready and with examples."
 ---
 
 Most real-world Angular applications live in different environments
