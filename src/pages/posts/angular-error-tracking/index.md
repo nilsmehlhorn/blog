@@ -6,6 +6,7 @@ published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["error", "tracking", "sentry", "monitoring", "logging", "angularjs", "rxjs", "typescript", "ngrx"]
 banner: "./banner.png"
+description: "With Sentry it's easy to log Angular errors server-side. In this example we create a designated service to track errors better than the browser console."
 ---
 
 Do you know what's going on in your Angular app when it's live? While
