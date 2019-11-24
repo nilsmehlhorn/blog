@@ -6,6 +6,7 @@ published: true
 tags: ["web development", "mobile development", "iot"]
 keywords: ["javascript", "angular", "react", "vue", "nodejs", "nativescript", "react native", "what is javascript used for", "html", "css"]
 banner: "./banner.png"
+description: "JavaScript can do more than ever before. Built web applications and server APIs, develop mobile apps and games or start with IoT and machine learning."
 ---
 
 The famous scripting language has come a long way since it's
