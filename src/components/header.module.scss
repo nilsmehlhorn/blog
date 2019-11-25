@@ -2,9 +2,8 @@
 
 .header {
   z-index: 1;
-  background: $header-color;
+  background: $background-color;
   width: 100%;
-  @include elevation;
   .content {
     display: flex;
     max-width: $container-width;
@@ -16,18 +15,23 @@
     display: flex;
     flex-direction: column;
     padding-left: $gap;
-    color: white;
     .heading {
-      color: white;
       margin: 0;
-    }
-    .claim {
-      margin: $half-gap 0 0 0;
+      color: $gray;
     }
   }
 
   .logo {
     min-width: 64px;
+  }
+
+  .nav {
+    display: flex;
+    flex: 1;
+    justify-content: space-evenly;
+    a {
+      text-decoration: none;
+    }
   }
 
   @media all and (max-width: $break-m) {

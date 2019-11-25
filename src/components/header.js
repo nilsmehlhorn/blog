@@ -9,7 +9,7 @@ const Header = ({siteTitle}) => (
   <StaticQuery
     query={graphql`
       query HeadingQuery {
-        img: file(relativePath: { eq: "icon.png" }) {
+        img: file(relativePath: { eq: "logo.png" }) {
           childImageSharp {
             fluid(maxWidth: 92) {
               ...GatsbyImageSharpFluid
@@ -30,11 +30,14 @@ const Header = ({siteTitle}) => (
             <Img className={styles.logo} fluid={data.img.childImageSharp.fluid}/>
           </Link>
           <div className={styles.pageHeadingWrapper}>
-            <h2 className={styles.heading}>
-              {data.site.siteMetadata.title}
-            </h2>
-            <p className={styles.claim}>Blog by Nils Mehlhorn</p>
+            <h2 className={styles.heading}>{data.site.siteMetadata.title}</h2>
           </div>
+          <nav className={styles.nav}>
+            <Link to={'posts'}>Blog</Link>
+            <Link to={'posts'}>Talks</Link>
+            <Link to={'posts'}>Workshops</Link>
+            <Link to={'posts'}>Consulting</Link>
+          </nav>
         </div>
       </header>
     )}

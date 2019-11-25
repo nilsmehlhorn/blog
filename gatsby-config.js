@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
-    title: 'Lessons Unlearned',
-    description: 'Blog by Nils Mehlhorn',
+    title: 'Nils Mehlhorn',
+    description: 'Product Developer, Software Consultant, Blogger',
     author: '@n_mehlhorn',
     baseUrl: 'https://nils-mehlhorn.de',
     siteUrl: 'https://nils-mehlhorn.de'

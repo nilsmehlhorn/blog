@@ -1,49 +1,14 @@
 @import "../styles/variables";
 
+$mug-size: 196px;
+
 .bio {
-  margin: $gap 0;
   padding: $gap;
-  background-color: white;
-  @include elevation;
-  .greeting {
-    margin: 0 0 $gap 0;
-  }
-  .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: $half-gap;
-    .mug {
-      width: 96px;
-      border-radius: 46px;
-      margin-right: $gap;
-      @include inset;
-    }
-    .info {
-      display: flex;
-      flex-direction: column;
-      h4 {
-        margin-bottom: 0;
-      }
-      a {
-        text-decoration: none;
-      }
-    }
-  }
-  .twitterButton {
-    margin-top: $half-gap;
-    display: flex;
-    align-items: center;
-    background: $light-gray;
-    color: #f5f8fa;
-    border-radius: 3px;
-    font-size: 11px;
-    padding: 1px 8px 1px 6px;
-    .twitterIcon {
-      margin-right: 3px;
-    }
-  }
-  .desc {
-    margin: $gap 0 0 0;
-    font-style: italic;
+
+  .mug {
+    width: $mug-size;
+    border-radius: 50%;
+    margin-right: $gap;
+    @include inset;
   }
 }

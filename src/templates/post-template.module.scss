@@ -1,11 +1,13 @@
 @import "../styles/variables";
 
-.heading, .date {
+.heading {
+  margin-top: $gap;
   margin-bottom: $half-gap;
 }
 
-.heading {
-  margin-top: $gap;
+.date {
+  display: inline;
+  margin-right: $gap;
 }
 
 .postContent {

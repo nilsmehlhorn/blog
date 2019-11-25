@@ -12,6 +12,10 @@ body {
   background: $background-color;
 }
 
+a {
+  color: inherit;
+}
+
 .content-padding {
   padding: $content-padding;
 }

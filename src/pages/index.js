@@ -14,10 +14,7 @@ const IndexPage = ({
                    }) => {
   const Posts = edges
     .filter(edge => edge.node.frontmatter.published)
-    .map((edge, i) => {
-      const post = <PostLink key={edge.node.id} post={edge.node}/>
-      return i > 0 ? [<hr key={i + '-hr'}/>, post] : post
-    })
+    .map(edge => <PostLink key={edge.node.id} post={edge.node}/>)
 
   return <Layout>
     <SEO key={'seo'} title={site.siteMetadata.title} keywords={['blog', 'software', 'angular']}/>
@@ -47,6 +44,13 @@ export const pageQuery = graphql`
             title
             published
             tags
+            banner {
+              previewImg: childImageSharp {
+                fluid(maxHeight: 300, maxWidth: 960) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }

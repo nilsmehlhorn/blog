@@ -1,12 +1,12 @@
 @import "../styles/variables";
 
 .tags {
-  display: flex;
+  display: inline-flex;
   margin-bottom: 1.5rem;
   .tag {
     padding: 0 $half-gap;
-    background: $header-color;
-    color: white;
+    color: $header-color;
+    font-weight: bold;
     margin-right: $quarter-gap;
     border-radius: $gap;
   }

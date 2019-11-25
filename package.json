@@ -30,7 +30,7 @@
     "react-icons": "^3.2.2",
     "react-typography": "^0.16.18",
     "typography": "^0.16.18",
-    "typography-theme-elk-glen": "^0.16.18"
+    "typography-theme-bootstrap": "^0.16.19"
   },
   "keywords": [
     "gatsby"

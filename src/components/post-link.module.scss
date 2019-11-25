@@ -1,9 +1,27 @@
 @import "../styles/variables";
 
+.wrapper {
+  @include elevation;
+}
+
+.innerWrapper {
+  padding: $gap;
+  background: white;
+}
+
 .headlineLink {
   text-decoration: none;
 }
 
-.thumbTitle, .thumbSub {
-  margin-bottom: $half-gap;
+.title {
+  margin: $half-gap 0;
+}
+
+.subtitle {
+  margin: $half-gap 0;
+  color: $light-gray
+}
+
+.excerpt a {
+  text-decoration: none;
 }
