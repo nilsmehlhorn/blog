@@ -2,8 +2,8 @@
 
 .header {
   z-index: 1;
-  background: $background-color;
   width: 100%;
+
   .content {
     display: flex;
     max-width: $container-width;
@@ -11,10 +11,12 @@
     align-items: center;
     padding: $gap $half-gap;
   }
+
   .pageHeadingWrapper {
     display: flex;
     flex-direction: column;
     padding-left: $gap;
+
     .heading {
       margin: 0;
       color: $gray;
@@ -28,15 +30,30 @@
   .nav {
     display: flex;
     flex: 1;
-    justify-content: space-evenly;
+    padding: $gap 64px;
+
     a {
       text-decoration: none;
+      color: $gray;
+      font-weight: bold;
+      margin-right: $gap * 2;
+      text-transform: uppercase;
+      &:hover {
+        color: $accent-color;
+      }
     }
   }
 
   @media all and (max-width: $break-m) {
     .content {
       padding: $half-gap;
+    }
+
+    .nav a:hover {
+      color: $gray;
+    }
+    .pageHeadingWrapper .heading .firstname {
+      display: none;
     }
   }
 }

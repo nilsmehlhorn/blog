@@ -8,19 +8,23 @@ import Img from 'gatsby-image'
 const PostLink = ({post}) => {
   let banner = ''
   if (post.frontmatter.banner) {
-    banner = <Img fluid={post.frontmatter.banner.previewImg.fluid}/>
+    banner = <Link to={post.frontmatter.path}>
+      <Img className={styles.banner} fluid={post.frontmatter.banner.previewImg.fluid}/>
+    </Link>
   }
-  return <div><div className={styles.wrapper}>
-    {banner}
-    <div className={styles.innerWrapper}>
-      <h2 className={styles.title}>
-        <Link className={styles.headlineLink} to={post.frontmatter.path}>{post.frontmatter.title}</Link>
-      </h2>
-      <p className={styles.subtitle}>{post.frontmatter.date}</p>
-      <p className={styles.excerpt}><Link to={post.frontmatter.path}>{post.excerpt}</Link></p>
-      <Tags tags={post.frontmatter.tags}/>
+  return <div>
+    <div className={styles.wrapper}>
+      {banner}
+      <div className={styles.innerWrapper}>
+        <h2 className={styles.title}>
+          <Link className={styles.headlineLink} to={post.frontmatter.path}>{post.frontmatter.title}</Link>
+        </h2>
+        <p className={styles.subtitle}>{post.frontmatter.date}</p>
+        <p className={styles.excerpt}><Link to={post.frontmatter.path}>{post.excerpt}</Link></p>
+        <Tags tags={post.frontmatter.tags}/>
+      </div>
     </div>
-  </div></div>
+  </div>
 }
 
 export default PostLink

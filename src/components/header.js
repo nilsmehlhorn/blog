@@ -30,7 +30,10 @@ const Header = ({siteTitle}) => (
             <Img className={styles.logo} fluid={data.img.childImageSharp.fluid}/>
           </Link>
           <div className={styles.pageHeadingWrapper}>
-            <h2 className={styles.heading}>{data.site.siteMetadata.title}</h2>
+            <h2 className={styles.heading}>
+              <span className={styles.firstname}>Nils&nbsp;</span>
+              <span>Mehlhorn</span>
+            </h2>
           </div>
           <nav className={styles.nav}>
             <Link to={'posts'}>Blog</Link>

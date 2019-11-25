@@ -4,11 +4,53 @@ $mug-size: 196px;
 
 .bio {
   padding: $gap;
+  display: flex;
+  flex-direction: column;
+
+  .hero {
+    display: flex;
+    align-items: center;
+    margin-bottom: $gap;
+  }
 
   .mug {
     width: $mug-size;
     border-radius: 50%;
     margin-right: $gap;
-    @include inset;
+    flex-shrink: 0;
+  }
+
+  .greeting {
+    margin: 0 $gap;
+
+    h2 {
+      color: $accent-color-dark;
+    }
+  }
+
+  .introduction {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: $break-m) {
+  .bio {
+    text-align: center;
+    .hero {
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .mug {
+      margin-right: 0;
+    }
+
+    .greeting {
+      margin: 0;
+    }
+
+    .introduction {
+      font-size: 1.2rem;
+    }
   }
 }

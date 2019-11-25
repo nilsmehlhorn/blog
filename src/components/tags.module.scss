@@ -2,12 +2,11 @@
 
 .tags {
   display: inline-flex;
-  margin-bottom: 1.5rem;
   .tag {
-    padding: 0 $half-gap;
-    color: $header-color;
+    color: $accent-color;
     font-weight: bold;
     margin-right: $quarter-gap;
     border-radius: $gap;
+    padding-right: $gap;
   }
 }
