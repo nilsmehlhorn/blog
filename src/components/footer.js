@@ -18,9 +18,6 @@ const Footer = () => (
             </button>
           </div>
           <small className={styles.copyright}>Nils Mehlhorn &copy; 2019</small>
-          <small className={styles.iconCredits}>
-            Logo by <a href="https://www.freepik.com/" title="Freepik">Freepik</a>, licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0"
-                              target="_blank" rel="noopener noreferrer">CC 3.0 BY</a></small>
         </div>
       </footer>
 )
