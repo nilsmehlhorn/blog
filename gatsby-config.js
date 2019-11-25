@@ -18,7 +18,7 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/pages/posts`,
+        path: `${__dirname}/posts`,
         name: 'posts'
       }
     },
@@ -51,7 +51,7 @@ module.exports = {
         background_color: '#db0404',
         theme_color: '#db0404',
         display: 'minimal-ui',
-        icon: 'src/images/icon.png' // This path is relative to the root of the site.
+        icon: 'src/images/logo.png'
       }
     },
     'gatsby-plugin-sass',

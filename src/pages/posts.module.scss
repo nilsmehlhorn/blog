@@ -1,0 +1,17 @@
+@import "../styles/variables";
+
+.posts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  grid-column-gap: $gap;
+  grid-row-gap: $half-gap;
+  grid-auto-columns: min-content;
+  margin-bottom: $gap;
+}
+
+@media screen and (max-width: $break-m) {
+  .posts {
+    grid-template-columns: 1fr;
+  }
+}

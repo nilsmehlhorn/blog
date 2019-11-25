@@ -4,9 +4,10 @@ import {graphql} from 'gatsby'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import PostLink from '../components/post-link'
-import Bio from '../components/bio'
 
-const IndexPage = ({
+import styles from './posts.module.scss'
+
+const PostsPage = ({
                      data: {
                        site,
                        allMarkdownRemark: {edges}
@@ -14,20 +15,19 @@ const IndexPage = ({
                    }) => {
   const Posts = edges
     .filter(edge => edge.node.frontmatter.published)
-    .map((edge, i) => {
-      const post = <PostLink key={edge.node.id} post={edge.node}/>
-      return i > 0 ? [<hr key={i + '-hr'}/>, post] : post
-    })
-
+    .map(edge => <PostLink key={edge.node.id} post={edge.node}/>)
   return <Layout>
-    <SEO key={'seo'} title={site.siteMetadata.title} keywords={['blog', 'software', 'angular']}/>
+    <SEO key={'seo'} title={'Blog'} keywords={['blog', 'software', 'angular']}/>
     <div className="content-padding">
-      <Bio key={'bio'}/>
+      <h1>Lessons Unlearned</h1>
+      <div className={styles.posts}>
+        {Posts}
+      </div>
     </div>
   </Layout>
 }
 
-export default IndexPage
+export default PostsPage
 
 export const pageQuery = graphql`
   query {
@@ -47,6 +47,13 @@ export const pageQuery = graphql`
             title
             published
             tags
+            banner {
+              previewImg: childImageSharp {
+                fluid(maxHeight: 300, maxWidth: 960) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }
