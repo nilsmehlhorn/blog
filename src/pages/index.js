@@ -38,7 +38,10 @@ const IndexPage = ({
       <h1>Speaking</h1>
       <p className={styles.text}>
         Public speaking allows me to engage directly with ambitious people from the community and grow both my knowledge
-        and myself at the same time. I like when concepts are conveyed visually and you're able to see benefits right away, that's
+        and myself at the same time.
+      </p>
+      <p className={styles.text}>
+        I like when concepts are conveyed visually and you're able to see benefits right away, that's
         why I often include interactivity and live coding.
       </p>
       <div className={styles.talkCta}>
