@@ -15,7 +15,7 @@ const PostsPage = ({
                    }) => {
   const Posts = edges
     .filter(edge => edge.node.frontmatter.published)
-    .map(edge => <PostLink key={edge.node.id} post={edge.node}/>)
+    .map(edge => <PostLink className={styles.post} key={edge.node.id} post={edge.node}/>)
   return <Layout>
     <SEO key={'seo'} title={'Blog'} keywords={['blog', 'software', 'angular']}/>
     <div className="content-padding">

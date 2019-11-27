@@ -31,11 +31,58 @@ $mug-size: 196px;
   .introduction {
     font-size: 1.5rem;
   }
+
+  .icons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    .location {
+      display: inline-flex;
+      align-items: center;
+      color: $gray;
+      margin-right: 32px;
+
+      .locationIcon {
+        margin-right: $half-gap;
+      }
+    }
+
+    a, .link {
+      color: $accent-color-dark;
+      display: inline-flex;
+    }
+
+    .link {
+      background: none;
+      border: none;
+      color: $accent-color-dark;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    & > a, .link:not(:last-child) {
+      margin-right: $half-gap;
+    }
+  }
 }
 
 @media screen and (max-width: $break-m) {
   .bio {
     text-align: center;
+
+
+    .icons {
+      justify-content: center;
+
+      .location {
+        flex-basis: 100%;
+        justify-content: center;
+        margin-bottom: $gap;
+        margin-right: 0;
+      }
+    }
+
     .hero {
       justify-content: center;
       flex-direction: column;

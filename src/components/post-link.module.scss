@@ -1,27 +1,42 @@
 @import "../styles/variables";
 
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  background: white;
   @include elevation;
 }
 
 .innerWrapper {
   padding: $gap;
-  background: white;
-}
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 
-.headlineLink {
-  text-decoration: none;
-}
+  .headlineLink {
+    text-decoration: none;
+  }
 
-.title {
-  margin: $half-gap 0;
-}
+  .title {
+    margin: $half-gap 0;
+  }
 
-.subtitle {
-  margin: $half-gap 0;
-  color: $light-gray
-}
+  .subtitle {
+    margin: 0 0 8px -16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    background: $accent-color-dark;
+    padding: $half-gap $gap;
+    display: block;
+    width: 190px;
+  }
 
-.excerpt a {
-  text-decoration: none;
+  .excerpt a {
+    text-decoration: none;
+  }
+
+  .tags {
+    margin-top: auto;
+  }
 }

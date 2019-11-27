@@ -38,7 +38,6 @@ const Header = ({siteTitle}) => (
           <nav className={styles.nav}>
             <Link to={'posts'}>Blog</Link>
             <Link to={'posts'}>Talks</Link>
-            <Link to={'posts'}>Workshops</Link>
             <Link to={'posts'}>Consulting</Link>
           </nav>
         </div>

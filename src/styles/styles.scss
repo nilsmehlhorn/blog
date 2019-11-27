@@ -16,6 +16,25 @@ a {
   color: inherit;
 }
 
+button {
+  all: unset;
+}
+
+.btn {
+  background: $accent-color;
+  padding: 12px $gap;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  @include elevation;
+  &:hover {
+    background: $accent-color-dark;
+  }
+}
+
 .content-padding {
   padding: $content-padding;
 }
