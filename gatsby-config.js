@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: 'Nils Mehlhorn',
-    description: 'Product Developer. Freelance Software Consultant. Blogger',
+    description: 'Product Developer. Freelance Software Consultant. Blogger.',
     author: '@n_mehlhorn',
     baseUrl: 'https://nils-mehlhorn.de',
     siteUrl: 'https://nils-mehlhorn.de'
