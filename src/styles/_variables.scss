@@ -46,6 +46,10 @@ $break-l: 1024px;
   box-shadow: 0 $quarter-gap $half-gap $shadow-color;
 }
 
+@mixin no-elevation {
+  box-shadow: unset;
+}
+
 @mixin not-s {
   @media (min-width: #{$break-m}) {
     @content;

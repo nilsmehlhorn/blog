@@ -1,15 +1,18 @@
 @import '../styles/variables';
 
+$animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+
 .header {
   z-index: 1;
   width: 100%;
+  height: 64px;
 
   .content {
     display: flex;
     max-width: $container-width;
     margin: 0 auto;
     align-items: center;
-    padding: $gap $half-gap;
+    padding: $half-gap;
   }
 
   .pageHeadingWrapper {
@@ -20,40 +23,87 @@
     .heading {
       margin: 0;
       color: $gray;
-    }
-  }
 
-  .logo {
-    min-width: 64px;
-  }
-
-  .nav {
-    display: flex;
-    flex: 1;
-    padding: $gap 64px;
-
-    a {
-      text-decoration: none;
-      color: $gray;
-      font-weight: bold;
-      margin-right: $gap * 2;
-      text-transform: uppercase;
-      &:hover {
-        color: $accent-color;
+      .firstname {
+        display: none;
       }
     }
   }
 
-  @media all and (max-width: $break-m) {
-    .content {
-      padding: $half-gap;
+  .logo {
+    min-width: 48px;
+  }
+
+  .menu {
+    display: block;
+    color: $gray;
+    margin-left: auto;
+    z-index: 1;
+    padding: $half-gap;
+    transform: color $animation;
+
+    &.open {
+      color: $accent-color;
+    }
+  }
+
+  .nav {
+    display: flex;
+    user-select: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: white;
+    width: 100vw;
+    flex-direction: column;
+    flex: 1;
+    padding: $gap;
+    margin-top: 64px;
+    transition: transform $animation;
+    transform: translate(100%, 0);
+
+    &.open {
+      @include elevation;
+      transform: translate(0, 0);
     }
 
-    .nav a:hover {
+    .link {
+      text-decoration: none;
       color: $gray;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: $gap 0;
+      text-align: center;
+    }
+  }
+
+  @media all and (min-width: $break-m) {
+    .content {
+      padding: $gap $half-gap;
+    }
+
+    .menu {
+      display: none;
+    }
+
+    .nav {
+      background: none;
+      margin: 0;
+      padding: 0 64px;
+      flex-direction: row;
+      position: relative;
+      @include no-elevation;
+      transform: translate(0, 0);
+
+      .link {
+        &:hover {
+          color: $accent-color;
+        }
+        margin-right: $gap * 2;
+      }
     }
     .pageHeadingWrapper .heading .firstname {
-      display: none;
+      display: inline;
     }
   }
 }

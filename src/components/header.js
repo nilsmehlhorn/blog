@@ -1,11 +1,54 @@
 import {Link, graphql, StaticQuery} from 'gatsby'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Img from 'gatsby-image'
+import {FaBars} from 'react-icons/fa'
 
 import styles from './header.module.scss'
+import {classes} from '../util/classes'
 
-const Header = ({siteTitle}) => (
+class Header extends React.Component {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      nav: false
+    }
+  }
+
+  toggleNav() {
+    this.setState({nav: !this.state.nav})
+  }
+
+  render() {
+    const {img} = this.props.data
+    const navClasses = this.state.nav ? classes(styles.nav, styles.open) : styles.nav
+    const menuClasses = this.state.nav ? classes(styles.menu, styles.open) : styles.menu
+    return (
+      <header className={styles.header}>
+        <div className={styles.content}>
+          <Link to="/">
+            <Img className={styles.logo} fluid={img.childImageSharp.fluid}/>
+          </Link>
+          <div className={styles.pageHeadingWrapper}>
+            <h2 className={styles.heading}>
+              <span className={styles.firstname}>Nils&nbsp;</span>
+              <span>Mehlhorn</span>
+            </h2>
+          </div>
+          <button className={menuClasses}>
+            <FaBars className={styles.menuIcon} size={32} onClick={() => this.toggleNav()}/>
+          </button>
+          <nav className={navClasses}>
+            <Link className={styles.link} to={'posts'}>Blog</Link>
+            <Link className={styles.link} to={'posts'}>Talks</Link>
+            <Link className={styles.link} to={'posts'}>Consulting</Link>
+          </nav>
+        </div>
+      </header>
+    )
+  }
+}
+
+export default (props) => (
   <StaticQuery
     query={graphql`
       query HeadingQuery {
@@ -24,34 +67,7 @@ const Header = ({siteTitle}) => (
       }
     `}
     render={data => (
-      <header className={styles.header}>
-        <div className={styles.content}>
-          <Link to="/">
-            <Img className={styles.logo} fluid={data.img.childImageSharp.fluid}/>
-          </Link>
-          <div className={styles.pageHeadingWrapper}>
-            <h2 className={styles.heading}>
-              <span className={styles.firstname}>Nils&nbsp;</span>
-              <span>Mehlhorn</span>
-            </h2>
-          </div>
-          <nav className={styles.nav}>
-            <Link to={'posts'}>Blog</Link>
-            <Link to={'posts'}>Talks</Link>
-            <Link to={'posts'}>Consulting</Link>
-          </nav>
-        </div>
-      </header>
+      <Header data={data} {...props}/>
     )}
   />
 )
-
-Header.propTypes = {
-  siteTitle: PropTypes.string
-}
-
-Header.defaultProps = {
-  siteTitle: ''
-}
-
-export default Header

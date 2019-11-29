@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body, html {
   height: 100%;
 }
@@ -30,6 +34,7 @@ button {
   text-decoration: none;
   user-select: none;
   @include elevation;
+
   &:hover {
     background: $accent-color-dark;
   }
@@ -40,9 +45,9 @@ button {
 }
 
 .site {
-   display: flex;
-   min-height: 100vh;
-   flex-direction: column;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .content {
