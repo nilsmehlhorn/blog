@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-html {
+body {
   overflow-x: hidden;
 }
 
@@ -27,6 +27,7 @@ button {
 .btn {
   background: $accent-color;
   padding: 12px $gap;
+  border-radius: 4px;
   color: white;
   text-transform: uppercase;
   font-weight: bold;
