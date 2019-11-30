@@ -54,7 +54,14 @@ button {
 .content {
   max-width: $container-width;
   width: 100%;
-  margin: 0 auto;
   flex: 1 0 auto;
+  margin: 64px + $gap auto 0;
+}
+
+
+@media all and (min-width: $break-m) {
+  .content {
+    margin: 0 auto;
+  }
 }
 
