@@ -5,6 +5,7 @@ title: "Everything Looks Better with an Image"
 published: true
 tags: ["web development", "frontend"]
 keywords: ["ui", "framework", "freelance", "assets", "styleguide"]
+banner: "./banner.jpg"
 ---
 
 Did you ever play around with the latest UI framework's components but nothing you came up with was quite satisfying?

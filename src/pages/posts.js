@@ -19,7 +19,6 @@ const PostsPage = ({
   return <Layout>
     <SEO key={'seo'} title={'Blog'} keywords={['blog', 'software', 'angular']}/>
     <div className="content-padding">
-      <h1>Lessons Unlearned</h1>
       <div className={styles.posts}>
         {Posts}
       </div>
@@ -48,7 +47,7 @@ export const pageQuery = graphql`
             published
             tags
             banner {
-              previewImg: childImageSharp {
+              preview: childImageSharp {
                 fluid(maxHeight: 300, maxWidth: 960) {
                   ...GatsbyImageSharpFluid
                 }

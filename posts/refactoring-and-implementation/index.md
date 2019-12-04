@@ -5,9 +5,8 @@ title: "Finding Harmony Between Refactoring and Implementation"
 published: true
 tags: ["architecture", "oop"]
 keywords: ["coupling", "interface", "refactoring", "typescript", "implementation", "pattern"]
+banner: "./banner.jpg"
 ---
-
-![puddle-piano](puddle-piano.gif)
 
 I saw this inspiring [music video](https://www.youtube.com/watch?v=-SqySU-qJQc) and it gave me
 the idea for a little exercise. 
@@ -16,6 +15,8 @@ and now you need to add a certain functionality coming in from a different point
 code shall do things you didn't envision them to be doing when you first designed them. Do you squeeze that new
 functionality somewhere between the existing lines? Will you really refactor it afterwards? Can you even effectively
 refactor afterwards?
+
+![puddle-piano](puddle-piano.gif)
 
 Clean coders from all over the web would argue: either implement or refactor - which one goes first would be up to
 style and situation. But in many cases, this seems very counter-intuitive due to the fact that both actions are often
