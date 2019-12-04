@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {StaticQuery, graphql} from 'gatsby'
+import {graphql, StaticQuery} from 'gatsby'
 
 import Header from './header'
 import Footer from './footer'

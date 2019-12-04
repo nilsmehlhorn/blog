@@ -1,16 +1,44 @@
 @import "../styles/variables";
 
+.content {
+  max-width: $container-width-m;
+  margin: 0 auto;
+}
+
 .heading {
   margin-top: $gap;
   margin-bottom: $half-gap;
 }
 
-.date {
-  display: inline;
-  margin-right: $gap;
+.sub {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  margin-bottom: $gap;
+
+  .date {
+    display: inline;
+    margin: 0 0 0 -16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    padding: $half-gap $gap;
+    background: $accent-color-dark;
+  }
+  .tags {
+    display: none;
+  }
 }
 
 .postContent {
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  code {
+    font-size: 1rem;
+  }
 
   pre {
     background-color: white;
@@ -30,6 +58,7 @@
 
   strong {
     font-weight: normal;
+
     span {
       @include elevation;
     }
@@ -37,5 +66,17 @@
 
   p > strong {
     font-weight: bolder;
+  }
+}
+
+
+@media screen and (min-width: $break-m) {
+  .sub {
+    .date {
+      margin: 0 $gap 0 0;
+    }
+    .tags {
+      display: inline-flex;
+    }
   }
 }

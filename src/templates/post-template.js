@@ -24,21 +24,23 @@ export default function Template({data}) {
     <Layout>
       <SEO previewImage={previewImage} keywords={[...frontmatter.tags, ...frontmatter.keywords]}
            title={frontmatter.title} description={description}/>
-      <div>
+      <div className={styles.content}>
         {banner}
         <div className="content-padding">
           <h1 className={styles.heading}>{frontmatter.title}</h1>
-          <p className={styles.date}>{frontmatter.date}</p>
-          <Tags tags={frontmatter.tags}/>
+          <div className={styles.sub}>
+            <p className={styles.date}>{frontmatter.date}</p>
+            <Tags className={styles.tags} tags={frontmatter.tags}/>
+          </div>
           <div
             className={styles.postContent}
             dangerouslySetInnerHTML={{__html: html}}
           />
         </div>
+        <Bio short={true}/>
+        <Comments id={frontmatter.path}/>
+        <RelatedPosts posts={relatedPosts.nodes}/>
       </div>
-      <Bio/>
-      <Comments id={frontmatter.path}/>
-      <RelatedPosts posts={relatedPosts.nodes}/>
     </Layout>
   )
 }
