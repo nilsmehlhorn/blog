@@ -24,7 +24,7 @@ const IndexPage = ({
   return <Layout>
     <SEO key={'seo'} title={site.siteMetadata.title} keywords={['blog', 'software', 'angular']}/>
     <div className="content-padding">
-      <Bio key={'bio'}/>
+      <Bio className={styles.bio} key={'bio'}/>
       <h1>Writing</h1>
       <p className={styles.text}>
         Learning & sharing - two great things combined allowing me to reflect on the way I work. I'll be writing about

@@ -6,8 +6,9 @@ import {MdLocationOn} from 'react-icons/md'
 
 import styles from './bio.module.scss'
 import {GoMailRead} from 'react-icons/all'
+import {classes} from '../util/classes'
 
-const Bio = ({short}) => (
+const Bio = ({short, className}) => (
   <StaticQuery
     query={graphql`
       query BioQuery {
@@ -32,7 +33,7 @@ const Bio = ({short}) => (
         Angular and Spring
       </p>
       return (
-        <section className={styles.bio}>
+        <section className={classes(styles.bio, className)}>
           <div className={styles.hero}>
             <Img className={styles.mug} fixed={mug.childImageSharp.fixed}/>
             <section className={styles.greeting}>

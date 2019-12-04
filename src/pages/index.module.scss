@@ -24,6 +24,10 @@
   }
 }
 
+.bio {
+  margin-top: $gap;
+}
+
 .text {
   font-size: 1.2rem;
   max-width: $container-width-m;
@@ -63,6 +67,10 @@
     .post {
       display: block;
     }
+  }
+
+  .bio {
+    margin: unset;
   }
 
   .text {
