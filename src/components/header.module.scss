@@ -5,23 +5,22 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1.0);
 .header {
   z-index: 1;
   width: 100%;
-  height: 64px;
   position: fixed;
   background: white;
   @include elevation;
 
   .content {
     display: flex;
+    height: 100%;
     max-width: $container-width;
     margin: 0 auto;
     align-items: center;
-    padding: $half-gap;
-  }
+    padding: $half-gap $gap;
 
-  .pageHeadingWrapper {
-    display: flex;
-    flex-direction: column;
-    padding-left: $gap;
+    .logo {
+      min-width: 48px;
+      margin-right: $gap;
+    }
 
     .heading {
       margin: 0;
@@ -31,53 +30,50 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1.0);
         display: none;
       }
     }
-  }
 
-  .logo {
-    min-width: 48px;
-  }
-
-  .menu {
-    display: block;
-    color: $gray;
-    margin-left: auto;
-    z-index: 1;
-    padding: $half-gap;
-    transform: color $animation;
-
-    &.open {
-      color: $accent-color;
-    }
-  }
-
-  .nav {
-    display: flex;
-    user-select: none;
-    position: absolute;
-    top: 0;
-    right: -100vw;
-    background: white;
-    width: 100vw;
-    flex-direction: column;
-    flex: 1;
-    padding: $gap;
-    margin-top: 64px;
-    transition: right $animation;
-
-    &.open {
-      @include elevation;
-      right: 0;
-    }
-
-    .link {
-      text-decoration: none;
+    .menu {
+      display: flex;
       color: $gray;
-      font-weight: bold;
-      text-transform: uppercase;
-      margin: $gap 0;
-      text-align: center;
+      margin-left: auto;
+      z-index: 1;
+      padding: $half-gap;
+      transition: color $animation;
+
+      &.open {
+        color: $accent-color;
+      }
+    }
+
+    .nav {
+      display: flex;
+      user-select: none;
+      position: absolute;
+      top: 0;
+      right: -100vw;
+      background: white;
+      width: 100vw;
+      flex-direction: column;
+      flex: 1;
+      padding: $gap;
+      margin-top: 64px;
+      transition: right $animation;
+
+      &.open {
+        @include elevation;
+        right: 0;
+      }
+
+      .link {
+        text-decoration: none;
+        color: $gray;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: $gap 0;
+        text-align: center;
+      }
     }
   }
+
 
   @media all and (min-width: $break-m) {
     position: relative;
@@ -85,31 +81,35 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1.0);
     @include no-elevation;
     .content {
       padding: $gap $half-gap;
-    }
 
-    .menu {
-      display: none;
-    }
+      .menu {
+        display: none;
+        transition: unset;
+      }
 
-    .nav {
-      background: none;
-      margin: 0;
-      padding: 0 64px;
-      flex-direction: row;
-      position: relative;
-      @include no-elevation;
-      right: 0;
-
-      .link {
-        &:hover {
-          color: $accent-color;
+      .nav {
+        background: none;
+        margin: 0;
+        padding: 0 64px;
+        flex-direction: row;
+        position: relative;
+        right: 0;
+        transition: unset;
+        &.open {
+          @include no-elevation;
         }
 
-        margin-right: $gap * 2;
+        .link {
+          &:hover {
+            color: $accent-color;
+          }
+
+          margin-right: $gap * 2;
+        }
       }
-    }
-    .pageHeadingWrapper .heading .firstname {
-      display: inline;
+      .heading .firstname {
+        display: inline;
+      }
     }
   }
 }

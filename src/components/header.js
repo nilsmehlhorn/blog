@@ -28,12 +28,10 @@ class Header extends React.Component {
           <Link to="/">
             <Img className={styles.logo} fluid={img.childImageSharp.fluid}/>
           </Link>
-          <div className={styles.pageHeadingWrapper}>
-            <h2 className={styles.heading}>
-              <span className={styles.firstname}>Nils&nbsp;</span>
-              <span>Mehlhorn</span>
-            </h2>
-          </div>
+          <h2 className={styles.heading}>
+            <span className={styles.firstname}>Nils&nbsp;</span>
+            <span>Mehlhorn</span>
+          </h2>
           <button className={menuClasses}>
             <FaBars className={styles.menuIcon} size={32} onClick={() => this.toggleNav()}/>
           </button>
