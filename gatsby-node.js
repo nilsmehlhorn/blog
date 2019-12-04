@@ -41,7 +41,7 @@ exports.createPages = ({actions, graphql}) => {
           .filter(other => other.node.frontmatter.path !== node.frontmatter.path
             && node.frontmatter.tags.some(t => other.node.frontmatter.tags.includes(t))
           )
-          .map(other => other.node)
+          .map(other => other.node.frontmatter.path)
         createPage({
           path: node.frontmatter.path,
           component: postTemplate,

@@ -84,8 +84,8 @@ export const pageQuery = graphql`
             published
             tags
             banner {
-              previewImg: childImageSharp {
-                fluid(maxHeight: 300, maxWidth: 960) {
+              preview: childImageSharp {
+                fluid(maxWidth: 630) {
                   ...GatsbyImageSharpFluid
                 }
               }

@@ -9,7 +9,7 @@ const PostLink = ({post, className}) => {
   let banner = ''
   if (post.frontmatter.banner) {
     banner = <Link to={post.frontmatter.path}>
-      <Img className={styles.banner} fluid={post.frontmatter.banner.previewImg.fluid}/>
+      <Img className={styles.banner} fluid={post.frontmatter.banner.preview.fluid}/>
     </Link>
   }
   return <div className={classes(styles.wrapper, className)}>
