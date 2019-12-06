@@ -27,6 +27,9 @@
 
       .name {
         margin: 0 0 $half-gap;
+        a {
+          text-decoration: none;
+        }
       }
       .description {
         font-size: 1.2rem;
@@ -35,12 +38,14 @@
   }
 }
 
-@media screen and (min-width: $break-m) {
+@media screen and (min-width: $break-l) {
   .talks {
     .talk {
       flex-direction: row;
       .banner {
-        width: 30vw;
+        width: unset;
+        min-width: 30vw;
+        height: 100%;
       }
     }
   }
