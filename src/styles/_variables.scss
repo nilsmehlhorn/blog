@@ -5,7 +5,7 @@ $gap: 16px;
 $half-gap: 8px;
 $quarter-gap: 4px;
 
-$content-padding: 0 $half-gap;
+$content-padding: $half-gap;
 
 $accent-color: #77a354;
 $accent-color-dark: darken($accent-color, 5%);

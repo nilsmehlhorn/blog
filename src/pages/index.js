@@ -17,7 +17,6 @@ const IndexPage = ({data}) => {
     allMarkdownRemark: {edges: posts},
     projects: {edges: projects}
   } = data
-  console.log(projects)
   const Posts = posts
     .filter(edge => edge.node.frontmatter.published)
     .slice(0, 3)

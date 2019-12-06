@@ -6,7 +6,6 @@
   grid-template-rows: auto 1fr;
   grid-gap: $gap;
   grid-auto-columns: min-content;
-  margin: $half-gap 0;
 }
 
 @media screen and (min-width: $break-m) {

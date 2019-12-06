@@ -9,7 +9,7 @@ const Footer = () => (
         <div className={styles.content}>
           <div className={styles.links}>
             <a title='Nils Mehlhorn on Twitter' href="https://twitter.com/n_mehlhorn"><FaTwitter size={32}/></a>
-            <a title='Nils Mehlhorn on Instagram' href="https://www.instagram.com/nils_mehlhorn"><FaInstagram size={32}/></a>
+            <a title='Nils Mehlhorn on Instagram' href="https://www.instagram.com/n_mehlhorn"><FaInstagram size={32}/></a>
             <a title='Nils Mehlhorn on GitHub' href="https://github.com/nilsmehlhorn"><FaGithub size={32}/></a>
             <a title='Nils Mehlhorn on DEV' href="https://dev.to/n_mehlhorn"><FaDev size={32}/></a>
             <a title='Nils Mehlhorn via RSS' href="https://nils-mehlhorn.de/rss.xml"><FaRss size={32}/></a>
