@@ -58,6 +58,17 @@ button {
   margin: 64px auto 0;
 }
 
+.date {
+  margin: 0 0 8px -16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  background: $accent-color-dark;
+  padding: $half-gap $gap;
+  display: block;
+  width: fit-content;
+}
+
 
 @media all and (min-width: $break-m) {
   .content {

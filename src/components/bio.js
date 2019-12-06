@@ -1,8 +1,8 @@
 import React from 'react'
 import {graphql, StaticQuery} from 'gatsby'
 import Img from 'gatsby-image'
+import Location from './location'
 import {FaGithub, FaInstagram, FaTwitter} from 'react-icons/fa'
-import {MdLocationOn} from 'react-icons/md'
 
 import styles from './bio.module.scss'
 import {GoMailRead} from 'react-icons/all'
@@ -41,10 +41,7 @@ const Bio = ({short, className}) => (
               <h2>{site.siteMetadata.description}</h2>
               {intro}
               <div className={styles.icons}>
-              <span className={styles.location}>
-                <MdLocationOn className={styles.locationIcon} size={32}/>
-                Essen, Germany
-              </span>
+                <Location>Essen, Germany</Location>
                 <a title='Nils Mehlhorn on Twitter' href="https://twitter.com/n_mehlhorn"><FaTwitter size={32}/></a>
                 <a title='Nils Mehlhorn on Instagram' href="https://www.instagram.com/n_mehlhorn"><FaInstagram
                   size={32}/></a>

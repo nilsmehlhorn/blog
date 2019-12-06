@@ -55,7 +55,6 @@ const IndexPage = ({data}) => {
       </div>
       <h1>Projects</h1>
       <div className={styles.projects}>{Projects}</div>
-      <h1>Consulting</h1>
     </div>
   </Layout>
 }

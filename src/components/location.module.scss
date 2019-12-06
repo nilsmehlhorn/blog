@@ -1,0 +1,12 @@
+@import "../styles/variables";
+
+.location {
+  display: inline-flex;
+  align-items: center;
+  color: $gray;
+  margin-right: 32px;
+
+  .locationIcon {
+    margin-right: $half-gap;
+  }
+}

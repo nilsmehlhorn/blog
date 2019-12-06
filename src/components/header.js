@@ -37,8 +37,7 @@ class Header extends React.Component {
           </button>
           <nav className={navClasses}>
             <Link className={styles.link} to={'posts'}>Blog</Link>
-            <Link className={styles.link} to={'posts'}>Talks</Link>
-            <Link className={styles.link} to={'posts'}>Consulting</Link>
+            <Link className={styles.link} to={'talks'}>Talks</Link>
           </nav>
         </div>
       </header>

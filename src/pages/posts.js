@@ -9,7 +9,6 @@ import styles from './posts.module.scss'
 
 const PostsPage = ({
                      data: {
-                       site,
                        allMarkdownRemark: {edges}
                      }
                    }) => {
@@ -30,11 +29,6 @@ export default PostsPage
 
 export const pageQuery = graphql`
   query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {

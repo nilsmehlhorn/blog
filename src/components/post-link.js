@@ -18,7 +18,7 @@ const PostLink = ({post, className}) => {
       <h2 className={styles.title}>
         <Link className={styles.headlineLink} to={post.frontmatter.path}>{post.frontmatter.title}</Link>
       </h2>
-      <p className={styles.subtitle}>{post.frontmatter.date}</p>
+      <p className="date">{post.frontmatter.date}</p>
       <p className={styles.excerpt}><Link to={post.frontmatter.path}>{post.excerpt}</Link></p>
       <Tags className={styles.tags} tags={post.frontmatter.tags}/>
     </div>

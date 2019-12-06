@@ -59,7 +59,7 @@ export const pageQuery = graphql`
         description
         banner {
           full: childImageSharp {
-            fluid(maxWidth: 960, maxHeight: 400) {
+            fluid(maxWidth: 960, maxHeight: 400, quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
