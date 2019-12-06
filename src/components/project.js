@@ -1,4 +1,3 @@
-import {Link} from 'gatsby'
 import Img from 'gatsby-image'
 import React from 'react'
 import styles from './project.module.scss'
