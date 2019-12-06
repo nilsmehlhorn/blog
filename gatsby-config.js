@@ -53,11 +53,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Lessons Unlearned',
-        short_name: 'lessons-unlearned',
+        name: 'Nils Mehlhorn',
+        short_name: 'nils-mehlhorn',
         start_url: '/',
-        background_color: '#db0404',
-        theme_color: '#db0404',
+        background_color: '#f0f1f3',
+        theme_color: '#77a354',
         display: 'minimal-ui',
         icon: 'src/images/logo.png'
       }
