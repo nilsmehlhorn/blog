@@ -28,9 +28,9 @@ const Bio = ({short, className}) => (
     `}
     render={({mug, site}) => {
       const intro = short ? null : <p className={styles.introduction}>
-        I consult companies in developing sophisticated but also maintainable software solutions. One of my major
-        focuses in technology is developing web applications using TypeScript and Java – specifically I’m skilled with
-        Angular and Spring
+        I help companies develop sophisticated and maintainable software solutions. A major technological focus
+        for me are web technologies with languages such JavaScript, TypeScript and Java used with frameworks like
+        Angular and Spring.
       </p>
       return (
         <section className={classes(styles.bio, className)}>
