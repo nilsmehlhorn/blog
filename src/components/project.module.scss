@@ -1,0 +1,31 @@
+@import "../styles/variables";
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  @include elevation;
+}
+
+.innerWrapper {
+  padding: 0 $gap;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.banner {
+  max-height: 400px;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: $half-gap 0;
+
+  .name {
+    margin: 0;
+  }
+}

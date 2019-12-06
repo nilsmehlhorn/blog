@@ -8,18 +8,21 @@ import Bio from '../components/bio'
 
 import styles from './index.module.scss'
 import {classes} from '../util/classes'
+import Project from '../components/project'
 
-const IndexPage = ({
-                     data: {
-                       site,
-                       talk,
-                       allMarkdownRemark: {edges}
-                     }
-                   }) => {
-  const Posts = edges
+const IndexPage = ({data}) => {
+  const {
+    site,
+    talk,
+    allMarkdownRemark: {edges: posts},
+    projects: {edges: projects}
+  } = data
+  console.log(projects)
+  const Posts = posts
     .filter(edge => edge.node.frontmatter.published)
     .slice(0, 3)
     .map(edge => <PostLink className={styles.post} key={edge.node.id} post={edge.node}/>)
+  const Projects = projects.map(edge => <Project className={styles.project} project={edge.node} key={edge.node.id}/>)
 
   return <Layout>
     <SEO key={'seo'} title={site.siteMetadata.title} keywords={['blog', 'software', 'angular']}/>
@@ -51,6 +54,7 @@ const IndexPage = ({
         <Link to={'talks'} className={classes(styles.talkBtn, 'btn')}>Explore Talks</Link>
       </div>
       <h1>Projects</h1>
+      <div className={styles.projects}>{Projects}</div>
       <h1>Consulting</h1>
     </div>
   </Layout>
@@ -86,6 +90,25 @@ export const pageQuery = graphql`
             banner {
               preview: childImageSharp {
                 fluid(maxWidth: 630) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    projects: allProjectsYaml {
+      edges {
+        node {
+          id
+          project {
+            name
+            link
+            description
+            img {
+              preview: childImageSharp {
+                fluid(maxWidth: 624, quality: 100) {
                   ...GatsbyImageSharpFluid
                 }
               }

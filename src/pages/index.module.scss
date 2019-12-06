@@ -24,6 +24,13 @@
   }
 }
 
+.projects {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-gap: $gap;
+}
+
 .bio {
   margin-top: $gap;
 }
@@ -67,6 +74,10 @@
     .post {
       display: block;
     }
+  }
+
+  .projects {
+    grid-template-columns: 1fr 1fr;
   }
 
   .bio {

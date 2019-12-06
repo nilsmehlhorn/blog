@@ -8,6 +8,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-yaml',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -20,6 +21,13 @@ module.exports = {
       options: {
         path: `${__dirname}/posts`,
         name: 'posts'
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content`,
+        name: 'content'
       }
     },
     {
