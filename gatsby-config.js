@@ -1,13 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: 'Lessons Unlearned',
-    description: 'Blog by Nils Mehlhorn',
+    title: 'Nils Mehlhorn',
+    description: 'Product Developer. Freelance Software Consultant. Blogger.',
     author: '@n_mehlhorn',
     baseUrl: 'https://nils-mehlhorn.de',
     siteUrl: 'https://nils-mehlhorn.de'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    'gatsby-transformer-yaml',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -18,8 +19,15 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/src/pages/posts`,
+        path: `${__dirname}/posts`,
         name: 'posts'
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content`,
+        name: 'content'
       }
     },
     {
@@ -45,13 +53,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Lessons Unlearned',
-        short_name: 'lessons-unlearned',
+        name: 'Nils Mehlhorn',
+        short_name: 'nils-mehlhorn',
         start_url: '/',
-        background_color: '#db0404',
-        theme_color: '#db0404',
+        background_color: '#f0f1f3',
+        theme_color: '#77a354',
         display: 'minimal-ui',
-        icon: 'src/images/icon.png' // This path is relative to the root of the site.
+        icon: 'src/images/logo.png'
       }
     },
     'gatsby-plugin-sass',

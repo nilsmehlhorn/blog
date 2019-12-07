@@ -2,7 +2,7 @@
 
 .footer {
   display: flex;
-  background: $header-color;
+  background: $accent-color-dark;
   flex-shrink: 0;
   width: 100%;
 
@@ -39,6 +39,10 @@
 
     .iconCredits > a {
       color: white;
+    }
+
+    .smallLink:not(:last-of-type) {
+      margin-right: $half-gap;
     }
   }
 }

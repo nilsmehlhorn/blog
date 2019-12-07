@@ -1,0 +1,10 @@
+- project:
+    name: 'SceneLab'
+    link: 'https://scenelab.io'
+    img: './scenelab.png'
+    description: 'Web application for creating beautiful flatlay and branding graphics'
+- project:
+    name: 'ngrx-wieder'
+    link: 'https://github.com/nilsmehlhorn/ngrx-wieder'
+    img: './ngrx-wieder.jpg'
+    description: 'Open source library for implementing undo-redo in Angular apps on top of NgRx'

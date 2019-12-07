@@ -1,18 +1,28 @@
-import React from "react"
-import {Link} from "gatsby"
-import Tags from "./tags"
+import React from 'react'
+import {Link} from 'gatsby'
+import Tags from './tags'
+import styles from './post-link.module.scss'
+import Img from 'gatsby-image'
+import {classes} from '../util/classes'
 
-import styles from "./post-link.module.scss"
-
-const PostLink = ({post}) => (
-  <div>
-    <Link className={styles.headlineLink} to={post.frontmatter.path}>
-      <h2 className={styles.thumbTitle}>{post.frontmatter.title}</h2>
+const PostLink = ({post, className}) => {
+  let banner = ''
+  if (post.frontmatter.banner) {
+    banner = <Link to={post.frontmatter.path}>
+      <Img fluid={post.frontmatter.banner.preview.fluid}/>
     </Link>
-    <p className={styles.thumbSub}>{post.frontmatter.date}</p>
-    <Tags tags={post.frontmatter.tags}/>
-    <p>{post.excerpt} <Link to={post.frontmatter.path}>more</Link></p>
+  }
+  return <div className={classes(styles.wrapper, className)}>
+    {banner}
+    <div className={styles.innerWrapper}>
+      <h2 className={styles.title}>
+        <Link className={styles.headlineLink} to={post.frontmatter.path}>{post.frontmatter.title}</Link>
+      </h2>
+      <p className="date">{post.frontmatter.date}</p>
+      <p className={styles.excerpt}><Link to={post.frontmatter.path}>{post.excerpt}</Link></p>
+      <Tags className={styles.tags} tags={post.frontmatter.tags}/>
+    </div>
   </div>
-)
+}
 
 export default PostLink

@@ -1,42 +1,61 @@
 import React from 'react'
-import {StaticQuery, graphql} from 'gatsby'
+import {graphql, StaticQuery} from 'gatsby'
 import Img from 'gatsby-image'
-import {FaTwitter, FaInstagram} from 'react-icons/fa'
+import {FaGithub, FaInstagram, FaTwitter} from 'react-icons/fa'
+import {GoMailRead} from 'react-icons/all'
 
 import styles from './bio.module.scss'
+import {classes} from '../util/classes'
+import Location from './location'
 
-const Bio = () => (
+const Bio = ({short, className}) => (
   <StaticQuery
     query={graphql`
       query BioQuery {
+        site {
+          siteMetadata {
+            description
+          }
+        }
         mug: file(relativePath: { eq: "proud_mug_extended_sqr.jpg" }) {
           childImageSharp {
-            fixed(width: 96, quality: 100) {
+            fixed(width: 196, quality: 100) {
               ...GatsbyImageSharpFixed
             }
           }
         }
       }
     `}
-    render={({mug}) => (
-      <section className={styles.bio}>
-        <header className={styles.header}>
-          <Img className={styles.mug} fixed={mug.childImageSharp.fixed}/>
-          <div className={styles.info}>
-            <h4 className={styles.greeting}>Nils Mehlhorn</h4>
-            <a href="https://twitter.com/n_mehlhorn" className={styles.twitterButton}>
-              <FaTwitter size={14} color={'white'} className={styles.twitterIcon}/>Follow on Twitter
-            </a>
-            <a href="https://www.instagram.com/nils_mehlhorn" className={styles.twitterButton}>
-              <FaInstagram size={14} color={'white'} className={styles.twitterIcon}/>Follow on Instagram
-            </a>
+    render={({mug, site}) => {
+      const intro = short ? null : <p className={styles.introduction}>
+        I help companies develop sophisticated and maintainable software solutions. A major focus
+        of mine are web technologies with languages such JavaScript, TypeScript and Java used with frameworks like
+        Angular and Spring.
+      </p>
+      return (
+        <section className={classes(styles.bio, className)}>
+          <div className={styles.hero}>
+            <Img className={styles.mug} fixed={mug.childImageSharp.fixed}/>
+            <section className={styles.greeting}>
+              <h1>Hi, I'm Nils</h1>
+              <h2>{site.siteMetadata.description}</h2>
+              {intro}
+              <div className={styles.icons}>
+                <Location>Essen, Germany</Location>
+                <a title='Nils Mehlhorn on Twitter' href="https://twitter.com/n_mehlhorn"><FaTwitter size={32}/></a>
+                <a title='Nils Mehlhorn on Instagram' href="https://www.instagram.com/n_mehlhorn"><FaInstagram
+                  size={32}/></a>
+                <a title='Nils Mehlhorn on GitHub' href="https://github.com/nilsmehlhorn"><FaGithub size={32}/></a>
+                <button className={styles.link} title='Nils Mehlhorn Newsletter'
+                        onClick={() => window.ml_webform_1483080('show')}>
+                  <GoMailRead size={32}/>
+                </button>
+              </div>
+            </section>
           </div>
-        </header>
-        <p className={styles.desc}>
-          developer consultant and product developer writing about just that and everything in between
-        </p>
-      </section>
-    )}
+        </section>
+      )
+    }}
   />
 )
 

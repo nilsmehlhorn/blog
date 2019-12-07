@@ -1,0 +1,73 @@
+- topic:
+    name: 'Angular'
+    description: 'The Angular framework comes with sophisticated tools enabling you to build modern web and
+    mobile applications.'
+    points:
+      - 'TypeScript, HTML & (S)CSS'
+      - 'Build & Architecture'
+      - 'Forms'
+      - 'Routing'
+      - 'State Management with or without NgRx'
+      - 'Reactive Programming with RxJs'
+      - 'Authentication & Authorization'
+      - 'Unit, Integration and E2E Testing'
+      - 'Mobile Applications with NativeScript'
+    logos:
+      - logo:
+          img: './angular.png'
+          link: 'https://angular.io'
+      - logo:
+          img: './rxjs.png'
+          link: 'https://rxjs-dev.firebaseapp.com'
+      - logo:
+          img: './nativescript.png'
+          link: 'https://www.nativescript.org'
+- topic:
+    name: 'Spring'
+    description: 'Spring is the modern Java framework for building cloud-ready servers-side solutions.'
+    points:
+      - 'Java'
+      - 'Build with Maven'
+      - 'REST APIs'
+      - 'Bean Validation'
+      - 'SQL Database Access with Spring Data JPA'
+      - 'Authentication & Authorization'
+      - 'Connecting Web Services'
+      - 'Unit and Integration Testing'
+    logos:
+      - logo:
+          img: './spring.png'
+          link: 'https://spring.io'
+- topic:
+    name: 'Node.js'
+    description: "With the JavaScript runtime Node.js you can run your whole stack on one language. It's especially
+    well-suited for handling many connections simultaneously. In combination with NestJS we'll be able to use these
+    advantages without cutbacks in maintainability."
+    points:
+      - 'JavaScript & TypeScript'
+      - 'Build & Architecture'
+      - 'REST APIs'
+      - 'Validation'
+      - 'SQL Database Access with TypeORM'
+      - 'Authentication & Authorization'
+      - 'Connecting Web Services'
+      - 'Unit and Integration Testing'
+    logos:
+      - logo:
+          img: './nodejs.png'
+          link: 'https://nodejs.org'
+      - logo:
+          img: './nestjs.png'
+          link: 'https://nestjs.com'
+- topic:
+    name: 'Development Process'
+    description: "Building maintainable software is not about technologies alone. Your process has a major influence
+    on how you're able to create value and adapt to changes."
+    points:
+      - 'Agile Development'
+      - 'Test-Driven Development'
+      - 'Code Review'
+      - 'Pair Coding'
+      - 'Version Control'
+      - 'Continuous Integration & Deployment'
+

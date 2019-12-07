@@ -1,0 +1,52 @@
+@import "../styles/variables";
+
+.talks {
+  display: flex;
+  flex-direction: column;
+
+  .talk {
+    display: flex;
+    background: white;
+    margin-bottom: $gap;
+    flex-direction: column;
+    @include elevation();
+
+    .banner {
+      width: 100%;
+    }
+
+    .content {
+      flex: 1;
+      padding: $gap;
+
+      .sub {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: $half-gap;
+      }
+
+      .name {
+        margin: 0 0 $half-gap;
+        a {
+          text-decoration: none;
+        }
+      }
+      .description {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $break-l) {
+  .talks {
+    .talk {
+      flex-direction: row;
+      .banner {
+        width: unset;
+        min-width: 30vw;
+        height: 100%;
+      }
+    }
+  }
+}

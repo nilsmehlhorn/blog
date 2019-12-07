@@ -1,49 +1,90 @@
 @import "../styles/variables";
 
+$mug-size: 196px;
+
 .bio {
-  margin: $gap 0;
-  padding: $gap;
-  background-color: white;
-  @include elevation;
+  display: flex;
+  flex-direction: column;
+
+  .hero {
+    display: flex;
+    align-items: center;
+    margin-bottom: $gap;
+  }
+
+  .mug {
+    width: $mug-size;
+    border-radius: 50%;
+    margin-right: $gap;
+    flex-shrink: 0;
+  }
+
   .greeting {
-    margin: 0 0 $gap 0;
-  }
-  .header {
-    display: flex;
-    align-items: center;
-    margin-bottom: $half-gap;
-    .mug {
-      width: 96px;
-      border-radius: 46px;
-      margin-right: $gap;
-      @include inset;
+    margin: 0 $gap;
+
+    h2 {
+      color: $accent-color-dark;
     }
-    .info {
-      display: flex;
+  }
+
+  .introduction {
+    font-size: 1.5rem;
+  }
+
+  .icons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    a, .link {
+      color: $accent-color-dark;
+      display: inline-flex;
+    }
+
+    .link {
+      background: none;
+      border: none;
+      color: $accent-color-dark;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    & > a, .link:not(:last-child) {
+      margin-right: $half-gap;
+    }
+  }
+}
+
+@media screen and (max-width: $break-m) {
+  .bio {
+    text-align: center;
+
+    .icons {
+      justify-content: center;
+
+      .location {
+        flex-basis: 100%;
+        justify-content: center;
+        margin-bottom: $gap;
+        margin-right: 0;
+      }
+    }
+
+    .hero {
+      justify-content: center;
       flex-direction: column;
-      h4 {
-        margin-bottom: 0;
-      }
-      a {
-        text-decoration: none;
-      }
     }
-  }
-  .twitterButton {
-    margin-top: $half-gap;
-    display: flex;
-    align-items: center;
-    background: $light-gray;
-    color: #f5f8fa;
-    border-radius: 3px;
-    font-size: 11px;
-    padding: 1px 8px 1px 6px;
-    .twitterIcon {
-      margin-right: 3px;
+
+    .mug {
+      margin-right: 0;
     }
-  }
-  .desc {
-    margin: $gap 0 0 0;
-    font-style: italic;
+
+    .greeting {
+      margin: 0;
+    }
+
+    .introduction {
+      font-size: 1.2rem;
+    }
   }
 }

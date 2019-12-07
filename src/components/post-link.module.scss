@@ -1,9 +1,31 @@
 @import "../styles/variables";
 
-.headlineLink {
-  text-decoration: none;
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  @include elevation;
 }
 
-.thumbTitle, .thumbSub {
-  margin-bottom: $half-gap;
+.innerWrapper {
+  padding: $gap;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .headlineLink {
+    text-decoration: none;
+  }
+
+  .title {
+    margin: $half-gap 0;
+  }
+
+  .excerpt a {
+    text-decoration: none;
+  }
+
+  .tags {
+    margin-top: auto;
+  }
 }

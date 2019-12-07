@@ -1,35 +1,53 @@
-$container-width: 960px;
+$container-width-m: 964px;
+$container-width: 1280px;
 
 $gap: 16px;
 $half-gap: 8px;
 $quarter-gap: 4px;
 
-$content-padding: 0 $half-gap;
+$content-padding: $half-gap;
 
-$header-color: #2e4057;
-$background-color: #fff;
+$accent-color: #77a354;
+$accent-color-dark: darken($accent-color, 5%);
+$background-color: #f0f1f3;
+$background-color-dark: #e2e3e5;
 $light-gray: #657786;
+$gray: #515153;
 $dark-gray: #3a3a3a;
 $shadow-color: rgba(57, 63, 72, 0.3);
 
 $break-m: 768px;
 $break-l: 1024px;
 
+@mixin _inset {
+  box-shadow: inset 0 0 $quarter-gap $shadow-color;
+  content: "";
+  display: block;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
 @mixin inset {
   &::after {
-    box-shadow: inset 0 0 $quarter-gap $shadow-color;
+    @include _inset()
+  }
+}
+
+@mixin inset-round {
+  &::after {
+    @include _inset();
     border-radius: 50%;
-    content: "";
-    display: block;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    width: 100%;
   }
 }
 
 @mixin elevation {
   box-shadow: 0 $quarter-gap $half-gap $shadow-color;
+}
+
+@mixin no-elevation {
+  box-shadow: unset;
 }
 
 @mixin not-s {

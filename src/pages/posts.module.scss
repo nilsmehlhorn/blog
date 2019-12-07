@@ -1,0 +1,19 @@
+@import "../styles/variables";
+
+.posts {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-gap: $gap;
+  grid-auto-columns: min-content;
+}
+
+@media screen and (min-width: $break-m) {
+  .posts {
+    grid-template-columns: 1fr 1fr 1fr;
+    .post:first-of-type {
+      grid-column: 1 / 3;
+    }
+    margin: 0 0 $gap 0;
+  }
+}

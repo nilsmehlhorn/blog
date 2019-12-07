@@ -1,0 +1,35 @@
+- talk:
+    name: "Let's talk about Node.js"
+    date: '2019-10-21'
+    location: 'International JavaScript Conference'
+    link: 'https://javascript-conference.com/javascript-practices-tools/javascript-fullstack-day-from-zero-to-hero/'
+    slides: '/slides/nodejs_mehlhorn_ijs.pdf'
+    img: './ijs19_node.png'
+    description: 'Talk about building APIs and server-side rendered web applications using Node.js'
+- talk:
+    name: 'Next Level Cross-Platform - iOS, Android, web and beyond'
+    date: '2018-10-10'
+    location: 'Angular Ruhr Meetup'
+    link: 'https://www.meetup.com/de-DE/Angular-Ruhr/events/254653567/'
+    slides: './slides/next_level_cross_platform_mehlhorn_angular_ruhr.pdf'
+    img: './angular_ruhr_next_level_cross_platform.png'
+    description: 'Talk with live coding session about full-stack cross-platform development of mobile and web apps using
+     NativeScript, Angular and NestJS'
+- talk:
+    name: 'NativeScript On Fire'
+    date: '2017-12-06'
+    location: 'PottJS Meetup'
+    link: 'https://www.meetup.com/de-DE/PottJS/events/244860969'
+    slides: '/slides/nativescript_on_fire_mehlhorn_pottjs.pdf'
+    img: './pottjs_2017-12-06.png'
+    description: 'Hands-on talk + live coding session about development of native cross-platform mobile apps with
+    NativeScript'
+- talk:
+    name: 'Mobile Cross-Platform Development from a Progressive Perspective'
+    date: '2017-09-13'
+    location: 'PottJS Meetup'
+    link: 'https://www.meetup.com/de-DE/PottJS/events/242558745/'
+    slides: '/slides/mobile_cp_progessive_mehlhorn_pottjs.pdf'
+    img: './mobile_cp_progressive_pottjs.png'
+    description: 'Hands-on talk + live coding session about development of native cross-platform mobile apps with
+    NativeScript'

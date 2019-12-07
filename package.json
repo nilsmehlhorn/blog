@@ -20,6 +20,7 @@
     "gatsby-source-filesystem": "^2.1.8",
     "gatsby-transformer-remark": "^2.1.19",
     "gatsby-transformer-sharp": "^2.1.8",
+    "gatsby-transformer-yaml": "^2.2.18",
     "node-sass": "^4.11.0",
     "npm": "^6.10.2",
     "prismjs": "^1.15.0",
@@ -28,9 +29,10 @@
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.2.2",
+    "react-obfuscate": "^3.6.2",
     "react-typography": "^0.16.18",
     "typography": "^0.16.18",
-    "typography-theme-elk-glen": "^0.16.18"
+    "typography-theme-bootstrap": "^0.16.19"
   },
   "keywords": [
     "gatsby"

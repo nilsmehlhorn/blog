@@ -2,6 +2,8 @@ import React from 'react'
 
 import PostLink from './post-link'
 
+import styles from './related-posts.module.scss'
+
 const RelatedPosts = ({posts}) => {
   if (!posts.length) {
     return null
@@ -14,14 +16,10 @@ const RelatedPosts = ({posts}) => {
     }
   }
   const related = selected
-    .map((node, i) => {
-      const post = <PostLink key={node.id + '-related'} post={node}/>
-      return i > 0 ? [<hr key={i + '-hr-related'}/>, post] : post
-    })
+    .map(node => <PostLink key={node.id + '-related'} post={node}/>)
 
   return (
-    <section key={'related-posts'}>
-      <hr/>
+    <section className={styles.posts} key={'related-posts'}>
       {related}
     </section>
   )

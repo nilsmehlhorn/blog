@@ -1,7 +1,7 @@
 import Typography from 'typography'
-import elkGlenTheme from 'typography-theme-elk-glen'
+import bootstrap from 'typography-theme-bootstrap'
 
-elkGlenTheme.overrideThemeStyles = ({rhythm}) => ({
+bootstrap.overrideThemeStyles = ({rhythm}) => ({
   'h1,h2,h3,h4,h5,h6': {
     marginTop: rhythm(1)
   },
@@ -18,6 +18,6 @@ elkGlenTheme.overrideThemeStyles = ({rhythm}) => ({
   }
 })
 
-const typography = new Typography(elkGlenTheme)
+const typography = new Typography(bootstrap)
 
 export default typography
