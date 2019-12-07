@@ -40,5 +40,9 @@
     .iconCredits > a {
       color: white;
     }
+
+    .smallLink:not(:last-of-type) {
+      margin-right: $half-gap;
+    }
   }
 }
