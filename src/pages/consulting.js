@@ -10,9 +10,15 @@ import styles from './consulting.module.scss'
 
 const ConsultingPage = ({data: {topics: {edges: topics}}}) => {
   const Topics = topics.map(({node: {id, topic}}) => {
-    const Logos = topic.logos.map(({logo: {img, link}}) => <a href={link}><Img className={styles.logo}
-                                                                               fixed={img.img.fixed}/></a>)
-    const Points = topic.points.map(point => <li>{point}</li>)
+    let Logos = ''
+    if (topic.logos) {
+      Logos = topic.logos.map(({logo: {img, link}}) => <a href={link}><Img className={styles.logo}
+                                                                           fixed={img.img.fixed}/></a>)
+    }
+    let Points = ''
+    if (topic.points) {
+      Points = topic.points.map(point => <li>{point}</li>)
+    }
     return <div key={id} className={styles.topic}>
       <header className={styles.header}>
         <h2 className={styles.name}>{topic.name}</h2>
@@ -22,8 +28,10 @@ const ConsultingPage = ({data: {topics: {edges: topics}}}) => {
       <ul>{Points}</ul>
     </div>
   })
+  const desc = 'Freelance software consulting with a focus on web technologies like Angular, Spring, Node.js in an' +
+    ' agile development process for maintainable software.'
   return <Layout>
-    <SEO key={'seo'} title={'Consulting'} keywords={['consulting', 'angular', 'javascript', 'nodejs', 'nativescript']}/>
+    <SEO description={desc} key={'seo'} title={'Consulting'} keywords={['consulting', 'angular', 'javascript', 'nodejs', 'nativescript']}/>
     <div className="content-padding">
       <h1>Consulting & Workshops</h1>
       <p className="text">
