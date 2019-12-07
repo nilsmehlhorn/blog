@@ -29,6 +29,7 @@
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.2.2",
+    "react-obfuscate": "^3.6.2",
     "react-typography": "^0.16.18",
     "typography": "^0.16.18",
     "typography-theme-bootstrap": "^0.16.19"

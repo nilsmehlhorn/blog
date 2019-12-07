@@ -69,6 +69,16 @@ button {
   width: fit-content;
 }
 
+.link {
+  color: $accent-color;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.text {
+  font-size: 1.2rem;
+  max-width: $container-width-m;
+}
 
 @media all and (min-width: $break-m) {
   .content {

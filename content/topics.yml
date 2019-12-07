@@ -1,0 +1,56 @@
+- topic:
+    name: 'Angular'
+    description: 'The Angular framework comes with sophisticated tools enabling you to build modern web and
+    mobile applications.'
+    points:
+      - 'TypeScript, HTML & (S)CSS'
+      - 'Build & Architecture'
+      - 'Forms'
+      - 'Routing'
+      - 'State Management'
+      - 'Reactive Programming with RxJs'
+      - 'Unit, Integration and E2E Testing'
+      - 'Mobile Applications with NativeScript'
+    logos:
+      - logo:
+          img: './angular.png'
+          link: 'https://angular.io'
+      - logo:
+          img: './rxjs.png'
+          link: 'https://rxjs-dev.firebaseapp.com'
+      - logo:
+          img: './nativescript.png'
+          link: 'https://www.nativescript.org'
+- topic:
+    name: 'Spring'
+    description: 'Spring is the modern Java framework for building cloud-ready servers-side solutions.'
+    points:
+      - 'REST APIs'
+      - 'Bean Validation'
+      - 'SQL Database Access with Spring Data JPA'
+      - 'Authentication & Authorization'
+      - 'Connecting Web Services'
+      - 'Unit and Integration Testing'
+    logos:
+      - logo:
+          img: './spring.png'
+          link: 'https://spring.io'
+- topic:
+    name: 'Node.js'
+    description: "With the JavaScript runtime Node.js you can run your whole stack on one language. It's especially
+    well-suited for handling many connections simultaneously. In combination with NestJS we'll be able to use these
+    advantages without cutbacks in maintainability."
+    points:
+      - 'REST APIs'
+      - 'Validation'
+      - 'SQL Database Access with TypeORM'
+      - 'Authentication & Authorization'
+      - 'Connecting Web Services'
+      - 'Unit and Integration Testing'
+    logos:
+      - logo:
+          img: './nodejs.png'
+          link: 'https://nodejs.org'
+      - logo:
+          img: './nestjs.png'
+          link: 'https://nestjs.com'
