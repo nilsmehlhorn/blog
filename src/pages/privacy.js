@@ -5,7 +5,7 @@ import {graphql} from 'gatsby'
 
 const PrivacyPage = ({data: {markdownRemark: {html}}}) => {
   return <Layout>
-    <SEO key={'seo'} title={'Consulting'}/>
+    <SEO key={'seo'} title={'Privacy'}/>
     <div className="content-padding" dangerouslySetInnerHTML={{__html: html}}/>
   </Layout>
 }
