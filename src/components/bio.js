@@ -1,7 +1,7 @@
 import React from 'react'
 import {graphql, StaticQuery} from 'gatsby'
 import Img from 'gatsby-image'
-import {FaGithub, FaInstagram, FaTwitter} from 'react-icons/fa'
+import {FaGithub, FaLinkedin, FaTwitter} from 'react-icons/fa'
 import {GoMailRead} from 'react-icons/all'
 
 import styles from './bio.module.scss'
@@ -43,7 +43,7 @@ const Bio = ({short, className}) => (
               <div className={styles.icons}>
                 <Location>Essen, Germany</Location>
                 <a title='Nils Mehlhorn on Twitter' href="https://twitter.com/n_mehlhorn"><FaTwitter size={32}/></a>
-                <a title='Nils Mehlhorn on Instagram' href="https://www.instagram.com/n_mehlhorn"><FaInstagram
+                <a title='Nils Mehlhorn on LinkedIn' href="https://www.linkedin.com/in/nils-mehlhorn/"><FaLinkedin
                   size={32}/></a>
                 <a title='Nils Mehlhorn on GitHub' href="https://github.com/nilsmehlhorn"><FaGithub size={32}/></a>
                 <button className={styles.link} title='Nils Mehlhorn Newsletter'

@@ -1,5 +1,5 @@
 import React from 'react'
-import {FaDev, FaGithub, FaInstagram, FaRss, FaTwitter} from 'react-icons/fa'
+import {FaDev, FaGithub, FaLinkedin, FaRss, FaTwitter} from 'react-icons/fa'
 import {GoMailRead} from 'react-icons/go'
 import {Link} from 'gatsby'
 
@@ -10,7 +10,8 @@ const Footer = () => (
     <div className={styles.content}>
       <div className={styles.links}>
         <a title='Nils Mehlhorn on Twitter' href="https://twitter.com/n_mehlhorn"><FaTwitter size={32}/></a>
-        <a title='Nils Mehlhorn on Instagram' href="https://www.instagram.com/n_mehlhorn"><FaInstagram size={32}/></a>
+        <a title='Nils Mehlhorn on LinkedIn' href="https://www.linkedin.com/in/nils-mehlhorn/"><FaLinkedin
+          size={32}/></a>
         <a title='Nils Mehlhorn on GitHub' href="https://github.com/nilsmehlhorn"><FaGithub size={32}/></a>
         <a title='Nils Mehlhorn on DEV' href="https://dev.to/n_mehlhorn"><FaDev size={32}/></a>
         <a title='Nils Mehlhorn via RSS' href="https://nils-mehlhorn.de/rss.xml"><FaRss size={32}/></a>
