@@ -41,7 +41,7 @@ const ConsultingPage = ({data: {topics: {edges: topics}}}) => {
         user-focused solutions while keeping your pace through maintainability.
       </p>
       <p><Obfuscate className={classes('link', 'text')} email={process.env.GATSBY_CONTACT_MAIL}/></p>
-      <Obfuscate element='p' className='text' tel={process.env.GATSBY_CONTACT_TEL}/>
+      <p className='text'><Obfuscate className={classes('link', 'text')} tel={process.env.GATSBY_CONTACT_TEL}/></p>
       <p className="text">
         Let's do a workshop or have me join your
         team. I can help you with the following topics:
