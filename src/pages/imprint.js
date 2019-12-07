@@ -15,7 +15,6 @@ const ImprintPage = () => {
           45128 Essen<br/>
           Germany<br/>
           E-Mail: <Obfuscate className='link' email={process.env.GATSBY_CONTACT_MAIL}/><br/>
-          Phone: <Obfuscate className='link' tel={process.env.GATSBY_CONTACT_TEL}/><br/>
         </address>
       </p>
     </div>
