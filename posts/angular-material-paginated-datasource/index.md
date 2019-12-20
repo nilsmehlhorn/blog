@@ -385,11 +385,11 @@ You can then display a loading indicator like this:
 
 ## Wrapping up
 
-Through clever behaviour parametrization we're cane reuse a bunch of
-logic and thus are able to write powerful yet configurable
-components for displaying any kind of data. Our extension of the
-Material datasource allows us to perform pagination, sorting and
-querying of remote data in just a couple of lines.
+Through clever behaviour parametrization we can reuse a bunch of logic
+and thus are able to write powerful yet configurable components for
+displaying any kind of data. Our extension of the Material datasource
+allows us to perform pagination, sorting and querying of remote data in
+just a couple of lines.
 
 Here's the full example on StackBlitz. I've also included a functional
 version of the datasource omitting the need for classes.
