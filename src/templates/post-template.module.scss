@@ -67,6 +67,11 @@
   p > strong {
     font-weight: bolder;
   }
+
+  blockquote {
+    border-left-color: $accent-color;
+    font-style: italic;
+  }
 }
 
 
