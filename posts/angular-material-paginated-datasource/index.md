@@ -111,7 +111,7 @@ Now we can put these types to use by implementing our paginated
 datasource as follows:
 
 ```typescript
-import { Observable, Subject, BehaviorSubject, combineLatest } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { switchMap, startWith, pluck, share } from 'rxjs/operators';
 import { Page, Sort, PaginatedEndpoint } from './page';
 
@@ -122,14 +122,14 @@ export class PaginatedDataSource<T> implements SimpleDataSource<T> {
   public page$: Observable<Page<T>>;
 
   constructor(
-    private endpoint: PaginatedEndpoint<T>,
+    endpoint: PaginatedEndpoint<T>,
     initialSort: Sort<T>,
-    public pageSize = 20) {
+    pageSize = 20) {
       this.page$ = this.sort.pipe(
         startWith(initialSort),
         switchMap(sort => this.pageNumber.pipe(
           startWith(0),
-          switchMap(page => this.endpoint({page, sort, size: this.pageSize}))
+          switchMap(page => endpoint({page, sort, size: pageSize}))
         )),
         share()
       )
@@ -245,9 +245,9 @@ query parameters will differ based on the data you're querying. To
 compensate for this we'll adapt our datasource to work with a generic
 set of query parameters.
 
-First we'll add a generic parameter to the datasource's type
+First we'll add a generic parameter `Q` to the datasource's type
 representing a query model for some data, ending up with the type
-`PaginatedDataSource<T, Q>`. 
+`PaginatedDataSource<T, Q>`.
 
 We'll then add a constructor parameter for an initial query and create a
 subject property with `this.query = new
@@ -286,7 +286,7 @@ const param$ = combineLatest([
 this.page$ = param$.pipe(
     switchMap(([query, sort]) => this.pageNumber.pipe(
       startWith(0),
-      switchMap(page => this.endpoint({page, sort, size: this.pageSize}, query))
+      switchMap(page => endpoint({page, sort, size: pageSize}, query))
     )),
     share()
 )
@@ -349,7 +349,8 @@ your servers and handle them there correctly.
 ## Loading Indication
 
 If you like to indicate to the user that you're fetching a page, you can
-extend the `PaginatedDataSource<T, Q>` with a corresponding property:
+extend the `PaginatedDataSource<T, Q>` with a corresponding observable
+property based on a private subject:
 
 ```typescript
 private loading = new Subject<boolean>();
@@ -357,8 +358,8 @@ private loading = new Subject<boolean>();
 public loading$ = this.loading.asObservable();
 ```
 
-Then you can either manually update its value before and after calling
-the `PaginatedEndpoint<T, Q>` or rather use the operator
+Then you can either manually update the subject's value before and after
+calling the `PaginatedEndpoint<T, Q>` or rather use the operator
 `indicate(indicator: Subject<boolean>)` I've introduced in my article
 about
 [loading indication in Angular](https://nils-mehlhorn.de/posts/indicating-loading-the-right-way-in-angular).
@@ -369,7 +370,7 @@ you're good:
 this.page$ = param$.pipe(
     switchMap(([query, sort]) => this.pageNumber.pipe(
       startWith(0),
-      switchMap(page => this.endpoint({page, sort, size: this.pageSize}, query)
+      switchMap(page => this.endpoint({page, sort, size: pageSize}, query)
         .pipe(indicate(this.loading))
       )
     )),
