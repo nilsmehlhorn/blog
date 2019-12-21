@@ -36,7 +36,7 @@ data display and are therefore providing us with the concept of a
 
 Often times the amount of data we'd like to display is too big to be
 fetched in one batch. You can get around this by slicing your data and
-delivering it through pagination. Users will then be able to navigated
+delivering it through pagination. Users will then be able to navigate
 from page to page smoothly. This is something we'll probably need for
 many different views that display data - it makes sense to encapsulate
 this behaviour so we don't have to write it over and over again.
@@ -59,8 +59,8 @@ export interface SimpleDataSource<T> extends DataSource<T> {
 
 Usually, the methods `connect()` and `disconnect()` would accept a
 [CollectionViewer](https://github.com/angular/components/blob/396154413538857811cb0c6bb71e4b4e26ecb320/src/cdk/collections/collection-viewer.ts),
-however, it seems to be ill-advised to have the component displaying the
-data also decide which part of the data it's displaying. The official
+however, it seems ill-advised to have the component displaying the data
+also decide which part of the data it's displaying. The official
 [datasource for the Material table](https://github.com/angular/components/blob/396154413538857811cb0c6bb71e4b4e26ecb320/src/material/table/table-data-source.ts)
 is ignoring the parameter as well.
 
@@ -95,7 +95,7 @@ dealing with - later on in our example it's `User`.
 
 The `Sort<T>` type defines a sorting to be applied (aka. send to the
 server) to the data. This sorting could be created
-[through the headers of a material table](https://material.angular.io/components/table/overview#sorting)
+[through the headers of a Material table](https://material.angular.io/components/table/overview#sorting)
 or via
 [selection](https://material.angular.io/components/select/overview).
 
@@ -124,12 +124,12 @@ export class PaginatedDataSource<T> implements SimpleDataSource<T> {
   constructor(
     endpoint: PaginatedEndpoint<T>,
     initialSort: Sort<T>,
-    pageSize = 20) {
+    size = 20) {
       this.page$ = this.sort.pipe(
         startWith(initialSort),
         switchMap(sort => this.pageNumber.pipe(
           startWith(0),
-          switchMap(page => endpoint({page, sort, size: pageSize}))
+          switchMap(page => endpoint({page, sort, size}))
         )),
         share()
       )
@@ -158,17 +158,17 @@ accepts three parameters:
 * an optional size for the pages to fetch, defaulting to 20 items per
   page
 
-We initialize the instance property `sort` with a subject. By using a
-RxJS subject we can have the sorting change over time based on calls to
-the class method `sortBy(sort: Sort<T>)` which just provides our subject
+We initialize the instance property `sort` with a RxJS subject. By using
+a subject we can have the sorting change over time based on calls to the
+class method `sortBy(sort: Sort<T>)` which just provides our subject
 with the next value. Another subject `pageNumber` is also initialized
-during construction allowing us to tell our page to fetch different
-pages through the method `fetch(page: number)`.
+during construction allowing us to tell our datasource to fetch
+different pages through the method `fetch(page: number)`.
 
 Our datasource will expose a stream of pages through the property
 `page$`. We construct this observable stream based on changes to the
-data sorting. The RxJS operator `startWith()` allows as to easily
-provide a starting value for the sorting.
+sorting. The RxJS operator `startWith()` allows us to easily provide a
+starting value for the sorting.
 
 Then, anytime the sorting changes we'll _switch_ over to the stream of
 page numbers by leveraging the `switchMap()` operator. Now, as long as
@@ -182,9 +182,17 @@ data pages to possibly multiple consuming components. Therefore you
 might use `share()` to synchronize those subscriptions.
 
 Finally, inside `connect()` we just provide a stream of lists of items
-by mapping any page to its contents using the `pluck()` operator. The
-`disconnect()` method won't have to do anything here - our datasource
-will close automatically when all consuming components unsubscribe.
+by mapping any page to its contents using the `pluck()` operator. This
+method will eventually be called by the Material table or any other
+component compatible with the DataSource interface. You might be
+wondering why we don't map our pages directly to just their contents -
+that's because we need other page properties like size or number which
+can then be used by a
+[MatPaginator](https://material.angular.io/components/paginator/overview).
+
+The `disconnect()` method won't have to do anything here - our
+datasource will close automatically when all consuming components
+unsubscribe.
 
 ## Using the Datasource in a Component
 
@@ -216,8 +224,8 @@ Again, in order to now change the sorting you can call
 In your template you'll pass the datasource to the Material table or any
 other component that can work with this concept. You'll also define a
 [MatPaginator](https://material.angular.io/components/paginator/overview)
-allowing the user to switch pages. For the paginator you can now easily
-consume the stream of pages from our datasource through the
+allowing the user to switch pages. The paginator can also easily consume
+the stream of pages from our datasource through the
 [AsyncPipe](https://angular.io/api/common/NgIf#storing-a-conditional-result-in-a-variable)
 and call upon `data.fetch(page: number)` to get a different page.
 
@@ -240,7 +248,7 @@ and call upon `data.fetch(page: number)` to get a different page.
 
 When there's a lot of data you probably want to assist your users in
 finding what they're looking for. You might provide a text-based search
-or structured inputs for querying the data by a certain property. These
+or structured inputs for filtering the data by a certain property. These
 query parameters will differ based on the data you're querying. To
 compensate for this we'll adapt our datasource to work with a generic
 set of query parameters.
@@ -266,7 +274,7 @@ queryBy(query: Partial<Q>): void {
 This method is accepting a
 [partial representation](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialt)
 of our query model. We combine this new query with the last one by
-accessing the `BehaviorSubject` and merging both queries via the
+accessing the `BehaviorSubject<Q>` and merging both queries via the
 [spread
 operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax).
 This way old query properties won't be overridden when only one
@@ -286,7 +294,7 @@ const param$ = combineLatest([
 this.page$ = param$.pipe(
     switchMap(([query, sort]) => this.pageNumber.pipe(
       startWith(0),
-      switchMap(page => endpoint({page, sort, size: pageSize}, query))
+      switchMap(page => endpoint({page, sort, size}, query))
     )),
     share()
 )
@@ -370,7 +378,7 @@ you're good:
 this.page$ = param$.pipe(
     switchMap(([query, sort]) => this.pageNumber.pipe(
       startWith(0),
-      switchMap(page => this.endpoint({page, sort, size: pageSize}, query)
+      switchMap(page => this.endpoint({page, sort, size}, query)
         .pipe(indicate(this.loading))
       )
     )),
@@ -386,10 +394,10 @@ You can then display a loading indicator like this:
 
 ## Wrapping up
 
-Through clever behaviour parametrization we can reuse a bunch of logic
+Through clever behaviour parameterization we can reuse a bunch of logic
 and thus are able to write powerful yet configurable components for
 displaying any kind of data. Our extension of the Material datasource
-allows us to perform pagination, sorting and querying of remote data in
+allows us to perform pagination, sorting and filtering of remote data in
 just a couple of lines.
 
 Here's the full example on StackBlitz. I've also included a functional
