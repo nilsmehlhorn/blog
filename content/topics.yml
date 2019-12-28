@@ -8,7 +8,7 @@
       - 'Forms'
       - 'Routing'
       - 'State Management with or without NgRx'
-      - 'Reactive Programming with RxJs'
+      - 'Reactive Programming with RxJS'
       - 'Authentication & Authorization'
       - 'Unit, Integration and E2E Testing'
       - 'Mobile Applications with NativeScript'

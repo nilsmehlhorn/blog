@@ -35,7 +35,7 @@ const ConsultingPage = ({data: {topics: {edges: topics}}}) => {
     <div className="content-padding">
       <h1>Consulting & Workshops</h1>
       <p className="text">
-        I've got years of experience in developing enterprise projects and a strong focus on delivering value from
+        I've got several years of experience in developing enterprise projects and a strong focus on delivering value from
         co-founding a <a className="link" href="https://scenelab.io">SaaS startup</a>. Knowing both large projects as
         well as how to build products that sell, I'll help you develop
         user-focused solutions while keeping your pace through maintainability.
