@@ -46,10 +46,6 @@ const Bio = ({short, className}) => (
                 <a title='Nils Mehlhorn on LinkedIn' href="https://www.linkedin.com/in/nils-mehlhorn/"><FaLinkedin
                   size={32}/></a>
                 <a title='Nils Mehlhorn on GitHub' href="https://github.com/nilsmehlhorn"><FaGithub size={32}/></a>
-                <button className={styles.link} title='Nils Mehlhorn Newsletter'
-                        onClick={() => window.ml_webform_1483080('show')}>
-                  <GoMailRead size={32}/>
-                </button>
               </div>
             </section>
           </div>
