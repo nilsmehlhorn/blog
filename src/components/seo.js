@@ -3,7 +3,14 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import {StaticQuery, graphql} from 'gatsby'
 
-function SEO({description, lang, meta, keywords, title, previewImage}) {
+function SEO({description, lang, meta, keywords, title, previewImage, noMailSignup}) {
+  let form
+  if (!noMailSignup) {
+    form = <script>{`
+              var ml_webform_1483080 = ml_account('webforms', '1483080', 'd1c0b1', 'load');
+              ml_webform_1483080('animation', 'slideboxRight');
+            `}</script>
+  }
   return (
     <StaticQuery
       query={detailsQuery}
@@ -46,10 +53,7 @@ function SEO({description, lang, meta, keywords, title, previewImage}) {
 
           var ml_account = ml('accounts', '1661492', 'z6v6l1q6j9', 'load');
         `}</script>
-            <script>{`
-              var ml_webform_1483080 = ml_account('webforms', '1483080', 'd1c0b1', 'load');
-              ml_webform_1483080('animation', 'slideboxRight');
-            `}</script>
+            {form}
           </Helmet>
         )
       }}

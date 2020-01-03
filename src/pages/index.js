@@ -35,7 +35,7 @@ const IndexPage = ({data}) => {
       </p>
       <div className={styles.posts}>{Posts}</div>
       <div className={styles.cta}>
-        <Link to={'posts'} className="btn">Explore Posts</Link>
+        <Link to={'/posts'} className="btn">Explore Posts</Link>
       </div>
       <h1>Speaking</h1>
       <p className="text">
@@ -50,7 +50,7 @@ const IndexPage = ({data}) => {
         <div className={styles.talkImg}>
           <Img fluid={talk.childImageSharp.fluid}/>
         </div>
-        <Link to={'talks'} className={classes(styles.talkBtn, 'btn')}>Explore Talks</Link>
+        <Link to={'/talks'} className={classes(styles.talkBtn, 'btn')}>Explore Talks</Link>
       </div>
       <h1>Projects</h1>
       <div className={styles.projects}>{Projects}</div>

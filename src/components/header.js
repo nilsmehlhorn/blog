@@ -36,10 +36,10 @@ class Header extends React.Component {
             <FaBars className={styles.menuIcon} size={32} onClick={() => this.toggleNav()}/>
           </button>
           <nav className={navClasses}>
-            <Link className={styles.link} to={'posts'}>Blog</Link>
-            <Link className={styles.link} to={'talks'}>Talks</Link>
-            <Link className={styles.link} to={'newsletter'}>Mailing List</Link>
-            <Link className={styles.link} to={'consulting'}>Work with me</Link>
+            <Link className={styles.link} to={'/posts'}>Blog</Link>
+            <Link className={styles.link} to={'/talks'}>Talks</Link>
+            <Link className={styles.link} to={'/newsletter'}>Mailing List</Link>
+            <Link className={styles.link} to={'/consulting'}>Work with me</Link>
           </nav>
         </div>
       </header>

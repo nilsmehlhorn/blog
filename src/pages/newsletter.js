@@ -9,7 +9,7 @@ const NewsletterPage = ({data}) => {
   const {newsletter} = data
   const desc = 'Newsletter on web technologies like Angular, Spring, Node.js as well as product building and agile development processes.'
   return <Layout>
-    <SEO description={desc} key={'seo'} title={'Newsletter'}
+    <SEO description={desc} key={'seo'} title={'Newsletter'} noMailSignup={true}
          keywords={['consulting', 'angular', 'javascript', 'nodejs', 'nativescript']}/>
     <div className={styles.content}>
       <div id={'test'} className={styles.newsletterCta}>

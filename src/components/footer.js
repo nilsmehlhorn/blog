@@ -15,15 +15,14 @@ const Footer = () => (
         <a title='Nils Mehlhorn on GitHub' href="https://github.com/nilsmehlhorn"><FaGithub size={32}/></a>
         <a title='Nils Mehlhorn on DEV' href="https://dev.to/n_mehlhorn"><FaDev size={32}/></a>
         <a title='Nils Mehlhorn via RSS' href="https://nils-mehlhorn.de/rss.xml"><FaRss size={32}/></a>
-        <button className={styles.link} title='Nils Mehlhorn Newsletter'
-                onClick={() => window.ml_webform_1483080('show')}>
+        <Link to={'/newsletter'} title='Nils Mehlhorn Newsletter' href="https://nils-mehlhorn.de/rss.xml">
           <GoMailRead size={32}/>
-        </button>
+        </Link>
       </div>
       <small className={styles.copyright}>Nils Mehlhorn &copy; 2019</small>
       <small>
-        <Link className={styles.smallLink} to='imprint'>Imprint</Link>
-        <Link className={styles.smallLink} to='privacy'>Privacy</Link>
+        <Link className={styles.smallLink} to='/imprint'>Imprint</Link>
+        <Link className={styles.smallLink} to='/privacy'>Privacy</Link>
       </small>
     </div>
   </footer>
