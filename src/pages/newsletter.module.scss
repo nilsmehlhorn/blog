@@ -2,6 +2,7 @@
 
 .newsletterCta {
   display: flex;
+  justify-content: center;
 
   .newsletterImg {
     display: none;
@@ -11,7 +12,7 @@
 @media screen and (min-width: $break-m) {
   .newsletterCta {
     flex-direction: column;
-
+    justify-content: normal;
     .newsletterImg {
       display: flex;
     }
@@ -20,15 +21,14 @@
 
 
 @media screen and (min-width: $break-l) {
+  .content {
+    padding: $content-padding;
+  }
   .newsletterCta {
     flex-direction: row;
     max-height: 526px;
     .newsletterImg {
       flex: 1;
-    }
-
-    .newsletterForm {
-      background: #f6f6f6;
     }
   }
 }

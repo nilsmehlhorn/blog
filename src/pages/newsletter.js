@@ -4,7 +4,6 @@ import React from 'react'
 import {graphql} from 'gatsby'
 import Img from 'gatsby-image'
 import styles from './newsletter.module.scss'
-import {classes} from '../util/classes'
 
 const NewsletterPage = ({data}) => {
   const {newsletter} = data
@@ -12,9 +11,9 @@ const NewsletterPage = ({data}) => {
   return <Layout>
     <SEO description={desc} key={'seo'} title={'Newsletter'}
          keywords={['consulting', 'angular', 'javascript', 'nodejs', 'nativescript']}/>
-    <div className="content-padding">
+    <div className={styles.content}>
       <div id={'test'} className={styles.newsletterCta}>
-        <div className={classes('ml-form-embed', styles.newsletterForm)}
+        <div className='ml-form-embed'
              data-account="1661492:z6v6l1q6j9"
              data-form="1496676:r3w8j1">
         </div>
