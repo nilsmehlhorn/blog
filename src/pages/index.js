@@ -33,6 +33,10 @@ const IndexPage = ({data}) => {
         building products, web technologies from vanilla to frameworks like Angular or Spring and anything that fits in
         between.
       </p>
+      <p className="text">
+        I'm an author for <a className='link' href='https://medium.com/angular-in-depth'>Angular In Depth</a> and part of the official <a
+        className='link' href='https://dev.to/angular'>Angular DEV Organization</a>.
+      </p>
       <div className={styles.posts}>{Posts}</div>
       <div className={styles.cta}>
         <Link to={'/posts'} className="btn">Explore Posts</Link>
