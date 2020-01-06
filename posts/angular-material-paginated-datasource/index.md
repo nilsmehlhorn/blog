@@ -4,9 +4,9 @@ date: "2019-12-19"
 title: "Angular Material Pagination Datasource"
 published: true
 tags: ["web development", "frontend", "angular"]
-keywords: ["test", "testing", "deploy", "angularjs", "typescript"]
+keywords: ["material", "pagination", "datasource", "filter", "sort", "rxjs", "typescript"]
 banner: "./pagination.png"
-description: "Lorem ipsum"
+description: "Build an Angular Material Datasource for pagination and reuse it for filtering and sorting dynamic data"
 ---
 
 In the course of this article we're developing a reactive datasource for
