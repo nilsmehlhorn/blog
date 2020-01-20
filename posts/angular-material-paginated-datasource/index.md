@@ -2,7 +2,7 @@
 path: "/posts/angular-material-pagination-datasource"
 date: "2019-12-19"
 title: "Angular Material Pagination Datasource"
-published: true
+published: false
 tags: ["web development", "frontend", "angular"]
 keywords: ["material", "pagination", "datasource", "filter", "sort", "rxjs", "typescript"]
 banner: "./pagination.png"
