@@ -32,7 +32,7 @@
 
 .postContent {
 
-  p {
+  p, ol, ul {
     font-size: 1.2rem;
   }
 
@@ -57,8 +57,6 @@
   }
 
   strong {
-    font-weight: normal;
-
     span {
       @include elevation;
     }
