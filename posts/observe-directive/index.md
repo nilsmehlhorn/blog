@@ -127,7 +127,7 @@ import {
   OnDestroy, OnInit, ChangeDetectorRef
 } from '@angular/core'
 import { Observable, Subject, AsyncSubject } from "rxjs";
-import { takeUntil, concatMapTo, finalize } from "rxjs/operators";
+import { takeUntil, concatMapTo } from "rxjs/operators";
 
 export interface ObserveContext<T> {
   $implicit: T;
