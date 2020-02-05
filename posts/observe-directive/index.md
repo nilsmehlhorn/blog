@@ -248,7 +248,7 @@ Our new directive is even better suited for handling observables than NgIf and t
 
 I've put together an example on StackBlitz showing the directive in action. I think it's even more useful than NgIf combined with the AsyncPipe in certain situations. In any case we've learned a lot about structural directives and change detection giving us a better understanding of the framework. 
 
-> If you've got any questions don't hesitate to leave a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). You can also follow me there or [subscribe to my newsletter](https://nils-mehlhorn.de/newsletter) to see when new articles are coming up and get smaller tips around Angular and web development in general.
+> If you've got any questions don't hesitate to leave a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). You can also follow me there and [join my mailing list](https://nils-mehlhorn.de/newsletter) to see when new articles are coming up and get smaller tips around Angular and web development in general.
 
 <iframe 
 style="width: 100%; height: 550px"
