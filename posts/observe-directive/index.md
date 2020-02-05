@@ -1,14 +1,14 @@
 ---
 path: "/posts/angular-observable-directive"
-date: "2020-02-01"
+date: "2020-02-05"
 title: "Handling Observables with Structural Directives in Angular"
 published: true
 tags: ["web development", "frontend", "angular"]
 keywords: ["ngif", "async", "microsyntax", "loading", "directive", "rxjs", "observable"]
 banner: "./banner.png"
-description: "Here's how you setup and access Angular environments with a proper type for multiple builds and tests with a mock - production-ready and with examples."
+description: "NgIf and the AsyncPipe are great for handling observables in Angular but we can build a structural directive that's even better."
 ---
-Handling observables is a much discussed topic in Angular. There are multiple ways to get reactive values displayed in your template, but sometimes they all just feel a bit clunky. Let's explore which options there are, how they work and how we might improve upon them.
+Handling observables is a much discussed topic in Angular. There are multiple ways to get reactive values displayed in your template, but sometimes they all just feel a bit clunky. Let's explore which options are available, how they work and how we might improve upon them.
 
 There are two main solutions for handling observables that bring data into a component's view:
 1. Manual Subscription Management
@@ -30,7 +30,7 @@ Let's find out how the approach works and how we can improve it further.
    
 ## Deconstructing ngIf and AsyncPipe
 
-Getting reactive data into the view involves defining the observable in our component and binding it by combining the NgIf directive and AsyncPipe through the infamous `as` syntax.
+Getting reactive data into the view involves defining the observable in our component and binding it by combining the NgIf directive and AsyncPipe through the famous `as` syntax.
 
 Keep in mind though that you won't be able to use the AsyncPipe when dealing with observables that represent an action - for example when you're updating a user based on a button click.
 
@@ -55,7 +55,7 @@ export class UsersComponent {
 </ng-template>
 ```
 
-Besides ending up with less code we get some advantages. Let's have at look at them one by one and see how they're working.
+Using this method is already a nicely declarative way of handling observables. Let's have a look at its advantages one by one and see how they're working.
 
 ### No Subscription Management 
 
@@ -87,7 +87,7 @@ There's also a keyword `then` which you could use to [assign a template for the 
 
 Now anytime the underlying observable emits a new value the AsyncPipe will pass it on to NgIf through our microsyntax expression and trigger re-evaluation inside of it. The directive will subsequently add the `else`-template while there's no value emitted from the observable (because it's still loading or has errored) or when that value in itself is falsy. The `then`-template will be added when there's a truthy value emitted by the observable. 
 
-The last bit to all of this is the `as` keyword. As it turns out there's no corresponding setter in the source code of the NgIf directive. That's because it's not specific to NgIf. Rather it has to do with the contexts of template references. Such a context is a type that's declaring all variables available while rendering the template. For NgIf this type is `NgIfContext<T>` and looks like this:
+The last bit to all of this is the `as` keyword. As it turns out there's no corresponding setter in the source code of the NgIf directive. That's because it's not specific to NgIf - rather it has to do with the context of a template reference. Such a context is a type that's declaring all variables available while rendering the template. For NgIf this type is `NgIfContext<T>` and looks like this:
 
 ```typescript
 export class NgIfContext<T> {
