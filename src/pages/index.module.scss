@@ -19,7 +19,7 @@
   .post {
     display: none;
     &:first-of-type {
-      display: block;
+      display: flex;
     }
   }
 }
@@ -67,7 +67,7 @@
   .posts {
     grid-template-columns: 1fr 1fr 1fr;
     .post {
-      display: block;
+      display: flex;
     }
   }
 

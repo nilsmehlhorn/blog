@@ -2,7 +2,6 @@ import React from 'react'
 import {graphql, StaticQuery} from 'gatsby'
 import Img from 'gatsby-image'
 import {FaGithub, FaLinkedin, FaTwitter} from 'react-icons/fa'
-import {GoMailRead} from 'react-icons/all'
 
 import styles from './bio.module.scss'
 import {classes} from '../util/classes'
