@@ -4,7 +4,7 @@ date: "2020-02-01"
 title: "Handling Observables with Structural Directives in Angular"
 published: true
 tags: ["web development", "frontend", "angular"]
-keywords: ["angularjs", "loading", "directive", "rxjs", "observable"]
+keywords: ["ngif", "async", "microsyntax", "loading", "directive", "rxjs", "observable"]
 banner: "./banner.png"
 description: "Here's how you setup and access Angular environments with a proper type for multiple builds and tests with a mock - production-ready and with examples."
 ---
@@ -237,7 +237,7 @@ The `observe` setter is where things get interesting. It's the main setter for o
 
 Eventually we're subscribing to the underlying observable and anytime a new value comes trough we'll update the view by first clearing it and then creating an embedded view based on our template with a context containing the value. Lastly we'll notify the change detector with `markForCheck()` to support `OnPush` detection. 
 
-When an error occurs we'll do almost the same thing just with the template for displaying errors and just with support for an implicit input variable - provided there is an error template available.
+When an error occurs we'll do almost the same thing just with the template for displaying errors and only with support for an implicit input variable - provided there is an error template available.
 
 ## Conclusion
 
