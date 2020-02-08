@@ -41,6 +41,7 @@ function SEO({description, lang, meta, keywords, title, previewImage, noMailSign
               {property: 'og:description', content: metaDescription},
               {property: 'og:type', content: 'website'},
               {property: 'og:image', content: imgUrl},
+              {property: 'og:site_name', content: data.site.siteMetadata.title},
               keywordsMeta,
               ...twitterMeta,
               ...meta
