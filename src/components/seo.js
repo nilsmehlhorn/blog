@@ -19,11 +19,12 @@ function SEO({description, lang, meta, keywords, title, previewImage, noMailSign
         const metaDescription =
           description || data.site.siteMetadata.description
         const imgSrc = previewImage || data.img.childImageSharp.fixed.src
+        const imgUrl = data.site.siteMetadata.baseUrl + imgSrc
         const twitterMeta = [
           {name: 'twitter:creator', content: data.site.siteMetadata.author},
           {name: 'twitter:title', content: title},
           {name: 'twitter:description', content: metaDescription},
-          {name: 'twitter:image', content: data.site.siteMetadata.baseUrl + imgSrc},
+          {name: 'twitter:image', content: imgUrl},
           {name: 'twitter:card', content: previewImage ? 'summary_large_image' : 'summary'}
         ]
         const keywordsMeta = keywords.length ? {name: 'keywords', content: keywords.join(', ')} : []
@@ -39,6 +40,7 @@ function SEO({description, lang, meta, keywords, title, previewImage, noMailSign
               {property: 'og:title', content: title},
               {property: 'og:description', content: metaDescription},
               {property: 'og:type', content: 'website'},
+              {property: 'og:image', content: imgUrl},
               keywordsMeta,
               ...twitterMeta,
               ...meta
