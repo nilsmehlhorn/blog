@@ -76,6 +76,16 @@ module.exports = {
         head: true
       }
     },
-    `gatsby-plugin-feed`
+    `gatsby-plugin-feed`,
+    {
+      resolve: `gatsby-plugin-netlify-headers`,
+      options: {
+        headers: {
+          "/*": [
+            "Access-Control-Allow-Origin: *",
+          ],
+        }
+      }
+    }
   ]
 }
