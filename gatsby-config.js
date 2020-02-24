@@ -77,15 +77,15 @@ module.exports = {
       }
     },
     `gatsby-plugin-feed`,
-    {
-      resolve: `gatsby-plugin-netlify-headers`,
-      options: {
-        headers: {
-          "/*": [
-            "Access-Control-Allow-Origin: *",
-          ],
-        }
-      }
-    }
+      {
+        resolve: `gatsby-plugin-netlify`,
+        options: {
+          headers: {
+            "/slides/*": [
+              "Access-Control-Allow-Origin: *"
+            ]
+          }
+        },
+      },
   ]
 }
