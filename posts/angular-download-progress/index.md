@@ -16,9 +16,9 @@ Downloading files is a common task for web applications. This could be some PDF,
 A simple download link can be easily achieved with plain HTML in Angular. You'll use an anchor tag pointing to the file with the `href` attribute. The `download` attribute informs the browser that it shouldn't follow the link but rather download the URL target. You can also specify its value in order to set the name of the file being downloaded.
 
 ```html
-<a href="/downloads/angular-file-download-progress.zip" 
-  download="angular-file-download-progress.zip">
-  angular-file-download-progress.zip
+<a href="/downloads/archive.zip" 
+  download="archive.zip">
+  archive.zip
 </a>
 ``` 
 
@@ -75,12 +75,12 @@ export class MyComponent  {
 
   download(): void {
     this.downloads
-      .download('/downloads/angular-file-download-progress.zip')
+      .download('/downloads/archive.zip')
       .subscribe(blob => {
         const a = document.createElement('a')
         const objectUrl = URL.createObjectURL(blob)
         a.href = objectUrl
-        a.download = 'angular-file-download-progress.zip';
+        a.download = 'archive.zip';
         a.click();
         URL.revokeObjectURL(objectUrl);
       })
@@ -96,8 +96,8 @@ import { saveAs } from 'file-saver';
 
 download() {
     this.downloads
-      .download('/downloads/angular-file-download-progress.zip')
-      .subscribe(blob => saveAs(blob, 'angular-file-download-progress.zip'))
+      .download('/downloads/archive.zip')
+      .subscribe(blob => saveAs(blob, 'archive.zip'))
 }
 ```
 
@@ -220,8 +220,8 @@ export class MyComponent  {
 
   download(): void {
     this.download$ = this.downloads.download(
-        '/downloads/angular-file-download-progress.zip', 
-        'angular-file-download-progress.zip'
+        '/downloads/archive.zip', 
+        'archive.zip'
     )
   }
 }
@@ -236,7 +236,10 @@ We can then subscribe to this observable through the [AsyncPipe in combination w
 </mat-progress-bar>
 ```
 
-Here's a StackBlitz showing everything in action:
+Here's a StackBlitz showing everything in action.
+
+> As always, if you've got any questions don't hesitate to leave a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). You can also follow me there and [join my mailing list](https://nils-mehlhorn.de/newsletter) to see when new articles are coming up and get smaller tips around Angular and web development in general.
+
 
 <iframe 
 style="width: 100%; height: 550px"
