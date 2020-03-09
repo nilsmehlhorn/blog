@@ -43,10 +43,10 @@ module.exports = {
               showCaptions: true,
               linkImagesToOriginal: false,
               backgroundColor: 'transparent'
-            },
+            }
           }
-        ],
-      },
+        ]
+      }
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
@@ -76,16 +76,43 @@ module.exports = {
         head: true
       }
     },
-    `gatsby-plugin-feed`,
-      {
-        resolve: `gatsby-plugin-netlify`,
-        options: {
-          headers: {
-            "/slides/*": [
-              "Access-Control-Allow-Origin: *"
-            ]
-          }
-        },
-      },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        feeds: [{
+          title: "Nils Mehlhorn Blog Posts",
+          output: "/rss.xml",
+          query: `
+              {
+                allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}, filter: {frontmatter: {path: {glob: "/posts/*"}}}) {
+                  edges {
+                    node {
+                      excerpt
+                      html
+                      fields {
+                        slug
+                      }
+                      frontmatter {
+                        title
+                        date
+                      }
+                    }
+                  }
+                }
+              }
+        `
+        }]
+      }
+    },
+    {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        headers: {
+          '/slides/*': [
+            'Access-Control-Allow-Origin: *'
+          ]
+        }
+      }
+    }
   ]
 }
