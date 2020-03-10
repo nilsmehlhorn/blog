@@ -8,3 +8,7 @@
     link: 'https://github.com/nilsmehlhorn/ngrx-wieder'
     img: './ngrx-wieder.jpg'
     description: 'Open source library for implementing undo-redo in Angular apps on top of NgRx'
+- project:
+      name: 'ngx-operators'
+      link: 'https://github.com/nilsmehlhorn/ngx-operators'
+      description: 'Open source library with RxJS operators for Angular'
