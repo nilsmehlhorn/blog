@@ -132,7 +132,7 @@ A `Download` can be in one of three states. Either it hasn't started yet, theref
 
 Now we want to abstract from specific HTTP events to our newly defined data structure. This way our components can be decoupled from the underlying network protocol. Since we're dealing with multiple events coming in over time, a RxJS operator is well suited here - so let's create one!
 
-The first step for this will be the creation of [type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards) helping us to distinguish different HTTP events. The guards will essentially compute which type of event we're dealing with and narrow the TypeScript type for us in the process. This way we can access event-specific fields in a type-safe way.
+The first step for this will be the creation of [type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards) helping us to distinguish different HTTP events. This way we can access event-specific fields in a type-safe way.
 
 We'll focus on the events [HttpResponse](https://angular.io/api/common/http/HttpResponse) and [HttpProgressEvents](https://angular.io/api/common/http/HttpProgressEvent). They both contain the discriminator field `type` allowing us to easily return a boolean for the type assertion in our guards.
 
@@ -168,12 +168,12 @@ Based on these guards we can now create our custom operator. It'll leverage [sca
 Our `accumulator` will use the previously defined guard to update the `Download` state over time with information from the HTTP events:
 
 ```typescript
-(download: Download, event: HttpEvent<Blob>): Download => {
+(previous: Download, event: HttpEvent<Blob>): Download => {
   if (isHttpProgressEvent(event)) {
     return {
       progress: event.total
         ? Math.round((100 * event.loaded) / event.total)
-        : 0,
+        : previous.progress,
       state: 'IN_PROGRESS',
       content: null
     }
@@ -185,7 +185,7 @@ Our `accumulator` will use the previously defined guard to update the `Download`
       content: event.body
     }
   }
-  return download
+  return previous
 }
 ```
 
@@ -199,12 +199,12 @@ export function download(
 ): (source: Observable<HttpEvent<Blob>>) => Observable<Download> {
   return (source: Observable<HttpEvent<Blob>>) =>
     source.pipe(
-      scan((download: Download, event: HttpEvent<Blob>): Download => {
+      scan((previous: Download, event: HttpEvent<Blob>): Download => {
           if (isHttpProgressEvent(event)) {
             return {
               progress: event.total
                 ? Math.round((100 * event.loaded) / event.total)
-                : 0,
+                : previous.progress,
               state: 'IN_PROGRESS',
               content: null
             }
@@ -219,7 +219,7 @@ export function download(
               content: event.body
             }
           }
-          return download
+          return previous
         },
         {state: 'PENDING', progress: 0, content: null}
       )
@@ -245,7 +245,7 @@ download(url: string, filename?: string): Observable<Download<Blob>> {
 
 ## Decoupling FileSaver.js
 
-By keeping FileSaver.js out of our custom operator, the resulting code is more maintainable. The `download` operator can be tested without somehow mocking the `saveAs` import (see [here](https://github.com/nilsmehlhorn/ngx-operators/blob/732fd1b5051ec05ae8a7d094f1afa164e4820a99/projects/ngx-operators/src/lib/download.spec.ts) for corresponding tests). If we apply the same pattern to the service, we'll be able to test it just as easy. So let's do that by creating a custom injection token for `saveAs`:
+By keeping FileSaver.js out of our custom operator, the resulting code is more maintainable. The `download` operator can be tested without somehow mocking the `saveAs` import (see [here](https://github.com/nilsmehlhorn/ngx-operators/blob/5d9c1f24665f6809b48a43db08d6d91afbbc80aa/projects/ngx-operators/src/lib/download.spec.ts) for corresponding tests). If we apply the same pattern to the service, we'll be able to test it just as easy. So let's do that by creating a custom injection token for `saveAs` in a file called `saver.provider.ts`:
 
 ```typescript
 import { InjectionToken } from '@angular/core'
@@ -263,7 +263,7 @@ export function getSaver(): Saver {
 Then use the token to register a provider in an Angular module:
 
 ```typescript
-import {SAVER, getSaver} from '../environments/environment.provider'
+import {SAVER, getSaver} from './saver.provider'
 
 @NgModule({
   ...
@@ -325,9 +325,9 @@ We can then subscribe to this observable through the [AsyncPipe in combination w
 </mat-progress-bar>
 ```
 
-**Pro Tip**: If you need to map something to more than two values inside a template or rather a ternary statement won't do it for you: use a [custom pipe](https://angular.io/guide/pipes#custom-pipes) instead of a component function. They're incredibly easy to write, more declarative and perform better.
+**Pro Tip**: If you need to map something to more than two values inside a template or rather a ternary statement won't do it for you: [map](https://rxjs-dev.firebaseapp.com/api/operators/map) the observable to the type you need or use a [custom pipe](https://angular.io/guide/pipes#custom-pipes) instead of calling a component function from the template. Both methods are pretty easy to write, more declarative and perform better.
 
-> The `download` operator is also available in the **[ngx-operators](https://github.com/nilsmehlhorn/ngx-operators)** library - a collection of battle-tested RxJS operators for Angular.
+> The `download` operator is available in the **[ngx-operators](https://github.com/nilsmehlhorn/ngx-operators)** library - a collection of battle-tested RxJS operators for Angular.
 
 > As always, if you've got any questions don't hesitate to leave a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). You can also follow me there and [join my mailing list](https://nils-mehlhorn.de/newsletter) to see when new articles are coming up and get smaller tips around Angular and web development in general.
 
