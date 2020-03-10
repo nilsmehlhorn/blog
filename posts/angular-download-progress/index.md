@@ -1,12 +1,12 @@
 ---
 path: "/posts/angular-file-download-progress"
-date: "2020-03-03"
+date: "2020-03-10"
 title: "Angular File Download with Progress"
 published: true
 banner: "./angular-file-download-progress.png"
 tags: ["web development", "frontend", "angular"]
 keywords: ["angular download link", "rxjs", "download progress bar", "loading", "observable"]
-description: "NgIf and the AsyncPipe are great for handling observables in Angular but we can build a structural directive that's even better."
+description: "Download files like PDF or ZIP in Angular either with download link or programmatically with the HttpClient so you can show a Material progress bar."
 ---
 
 Downloading files is a common task for web applications. These files could be some PDF, ZIP or any other binary or text-based file that you want to make accessible to your users. Here's how you can download files in Angular either with a rather simple link or JavaScript-based for more control and progress indication.
