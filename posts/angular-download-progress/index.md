@@ -331,7 +331,7 @@ We can then subscribe to this observable through the [AsyncPipe in combination w
 
 > As always, if you've got any questions don't hesitate to leave a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). You can also follow me there and [join my mailing list](https://nils-mehlhorn.de/newsletter) to see when new articles are coming up and get smaller tips around Angular and web development in general.
 
-Here's a StackBlitz showing everything in action.
+Here's a StackBlitz showing everything in action. The downloaded file is only 3MB, so you might want to [enable throttling](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor/Throttling) to see more of the progress bar.
 
 <iframe 
 style="width: 100%; height: 550px"
