@@ -1,6 +1,7 @@
 ---
 path: "/posts/indicating-loading-the-right-way-in-angular"
 date: "2019-01-30"
+update: "2020-03-11"
 title: "Loading Indication in Angular"
 published: true
 tags: ["web development", "frontend", "angular"]
@@ -215,6 +216,10 @@ export class UserComponent  {
   Creating, please wait <loading-indicator></loading-indicator>
 </div>
 ```
+
+> The operators `indicate` and `prepare` are now available in the [ngx-operators](https://github.com/nilsmehlhorn/ngx-operators) library - a collection of battle-tested RxJS operators for Angular.
+
+> You might also want to read my post on [handling observables with structural directives](https://nils-mehlhorn.de/posts/angular-file-download-progress). There we'll develop a template-based approach that is even better than NgIf with AsyncPipe. It supports falsy values, allows you to pass different templates for error and loading states and it lets you access errors inside the error template.
  
 I've put the snippets together into a complete example on StackBlitz - click 'Run Project' to see the indicators in
 action.

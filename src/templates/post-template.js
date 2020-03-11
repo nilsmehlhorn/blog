@@ -20,17 +20,23 @@ export default function Template({data}) {
     banner = <Img fluid={frontmatter.banner.full.fluid}/>
     previewImage = frontmatter.banner.preview.fluid.src
   }
+  let update
+  if (frontmatter.formattedUpdate) {
+    update = <p className={styles.update}>Last update on {frontmatter.formattedUpdate}</p>
+  }
+  const meta = [{name: 'date', content: frontmatter.update || frontmatter.date}];
   return (
     <Layout>
       <SEO previewImage={previewImage} keywords={[...frontmatter.tags, ...frontmatter.keywords]}
-           title={frontmatter.title} description={description}/>
+           title={frontmatter.title} description={description} meta={meta}/>
       <div className={styles.content}>
         {banner}
         <div className="content-padding">
           <h1 className={styles.heading}>{frontmatter.title}</h1>
           <div className={styles.sub}>
-            <p className={styles.date}>{frontmatter.date}</p>
+            <p className={styles.date}>{frontmatter.formattedDate}</p>
             <Tags className={styles.tags} tags={frontmatter.tags}/>
+            {update}
           </div>
           <div
             className={styles.postContent}
@@ -51,7 +57,10 @@ export const pageQuery = graphql`
       html
       excerpt(pruneLength: 250)
       frontmatter {
-        date(formatString: "MMMM DD, YYYY")
+        formattedDate: date(formatString: "MMMM DD, YYYY")
+        formattedUpdate: update(formatString: "MMMM DD, YYYY")
+        date
+        update
         path
         title
         tags
