@@ -16,6 +16,9 @@ growing user expectations can be surprisingly far from ease of their
 fulfillment. In this post we'll be looking at how you might go about
 pulling off undo-redo in your next Angular app.
 
+
+> The undo-redo solution developed in this article is available in the **[ngrx-wieder](https://github.com/nilsmehlhorn/ngrx-wieder)** library 📚. I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it.
+
 <img src="undo-redo.png" alt="undo-redo-feature-concept" title="Undo & redo allow you to traverse an application's state history parallel from the main application flow"/>
 
 At its core, the general undo-redo feature can be described as the
