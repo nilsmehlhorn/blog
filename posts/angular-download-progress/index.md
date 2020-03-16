@@ -234,7 +234,7 @@ The service code now looks like this when using the custom operator:
 ```typescript
 import { saveAs } from 'file-saver';
 ...
-download(url: string, filename?: string): Observable<Download<Blob>> {
+download(url: string, filename?: string): Observable<Download> {
     return this.http.get(url, {
       reportProgress: true,
       observe: 'events',
@@ -285,7 +285,7 @@ export class DownloadService {
     @Inject(SAVER) private save: Saver
   ) {}
 
-  download(url: string, filename?: string): Observable<Download<Blob>> {
+  download(url: string, filename?: string): Observable<Download> {
     return this.http.get(url, {
       reportProgress: true,
       observe: 'events',
@@ -303,7 +303,7 @@ Let's use the [Progress Bar from Angular Material](https://material.angular.io/c
 @Component({...})
 export class MyComponent  {
 
-  download$: Observable<Download<Blob>>
+  download$: Observable<Download>
 
   constructor(private downloads: DownloadService) {}
 
