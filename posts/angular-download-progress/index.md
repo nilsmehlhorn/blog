@@ -11,6 +11,9 @@ description: "Download files like PDF or ZIP in Angular either with download lin
 
 Downloading files is a common task for web applications. These files could be some PDF, ZIP or any other binary or text-based file that you want to make accessible to your users. Here's how you can download files in Angular either with a rather simple link or JavaScript-based for more control and progress indication.
 
+
+> The `download` operator developed in this article is available in the **[ngx-operators](https://github.com/nilsmehlhorn/ngx-operators)** library 📚 - a collection of battle-tested RxJS operators for Angular. I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it.
+
 ## Angular Download Link
 
 A simple download link can be easily achieved with plain HTML in Angular. You'll use an anchor tag pointing to the file with the `href` attribute. The `download` attribute informs the browser that it shouldn't follow the link but rather download the URL target. You can also specify its value in order to set the name of the file being downloaded.
@@ -326,8 +329,6 @@ We can then subscribe to this observable through the [AsyncPipe in combination w
 ```
 
 **Pro Tip**: If you need to map something to more than two values inside a template or rather a ternary statement won't do it for you: [map](https://rxjs-dev.firebaseapp.com/api/operators/map) the observable to the type you need or use a [custom pipe](https://angular.io/guide/pipes#custom-pipes) instead of calling a component function from the template. Both methods are pretty easy to write, more declarative and perform better.
-
-> The `download` operator is available in the **[ngx-operators](https://github.com/nilsmehlhorn/ngx-operators)** library - a collection of battle-tested RxJS operators for Angular.
 
 > As always, if you've got any questions don't hesitate to leave a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). You can also follow me there and [join my mailing list](https://nils-mehlhorn.de/newsletter) to see when new articles are coming up and get smaller tips around Angular and web development in general.
 
