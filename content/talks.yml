@@ -1,4 +1,12 @@
 - talk:
+    name: "Observables & Structural Directives"
+    date: '2020-03-18'
+    location: 'Angular Ruhr Meetup'
+    link: 'https://www.meetup.com/de-DE/Angular-Ruhr/events/269456375/'
+    slides: '/slides/observables_structural_directives_angular_ruhr.pdf'
+    img: './angular_ruhr_observables_structural_directives.png'
+    description: 'Remote talk on handling observables with and without structural directives'
+- talk:
     name: "Let's talk about Node.js"
     date: '2019-10-21'
     location: 'International JavaScript Conference'
