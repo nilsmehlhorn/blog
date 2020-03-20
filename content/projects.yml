@@ -11,4 +11,5 @@
 - project:
       name: 'ngx-operators'
       link: 'https://github.com/nilsmehlhorn/ngx-operators'
+      img: './ngx-operators.png'
       description: 'Open source library with RxJS operators for Angular'
