@@ -10,6 +10,9 @@ description: "NgIf and the AsyncPipe are great for handling observables in Angul
 ---
 Handling observables is a much discussed topic in Angular. There are multiple ways to get reactive values displayed in your template, but sometimes they all just feel a bit clunky. Let's explore which options are available, how they work and how we might improve upon them.
 
+> The `observe` directive developed in this article is available in the **[ngx-observe](https://github.com/nilsmehlhorn/ngx-observe)** library 📚   
+> I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it
+
 There are two main solutions for handling observables that bring data into a component's view:
 1. Manual Subscription Management
 2. Using the [AsyncPipe](https://angular.io/api/common/AsyncPipe) in combination with [NgIf](https://angular.io/api/common/NgIf).
