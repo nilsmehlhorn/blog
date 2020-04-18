@@ -7,14 +7,19 @@
     name: 'ngrx-wieder'
     link: 'https://github.com/nilsmehlhorn/ngrx-wieder'
     img: './ngrx-wieder.jpg'
-    description: 'Open source library for implementing undo-redo in Angular apps on top of NgRx'
+    description: 'Open-source library for implementing undo-redo in Angular apps on top of NgRx'
 - project:
       name: 'ngx-operators'
       link: 'https://github.com/nilsmehlhorn/ngx-operators'
       img: './ngx-operators.png'
-      description: 'Open source library with RxJS operators for Angular'
+      description: 'Open-source library with RxJS operators for Angular'
 - project:
       name: 'ngx-observe'
       link: 'https://github.com/nilsmehlhorn/ngx-observe'
       img: './ngx-observe.png'
-      description: 'Open source library with Angular structural directive for observables'
+      description: 'Open-source Library with Angular structural directive for observables'
+- project:
+    name: 'ngx-pagination-data-source'
+    link: 'https://github.com/nilsmehlhorn/ngx-pagination-data-source'
+    img: './ngx-pagination-data-source.png'
+    description: 'Open-source library with Angular Material DataSource for Pagination'
