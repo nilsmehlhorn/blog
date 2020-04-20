@@ -17,6 +17,11 @@ configure search and sorting inputs on a per-instance basis. The final
 result is available on
 [StackBlitz](https://stackblitz.com/edit/angular-paginated-material-datasource).
 
+
+> The data source developed in this article is available in the **[ngx-pagination-data-source](https://github.com/nilsmehlhorn/ngx-pagination-data-source)** library 📚   
+> I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it
+
+
 Although there is a bunch of
 [stuff you can do with JavaScript](https://nils-mehlhorn.de/posts/what-you-can-do-with-javascript-today),
 on many occasions we're using it to fetch and display some data. In
@@ -88,7 +93,7 @@ export interface Page<T> {
   number: number;
 }
 
-export type PaginatedEndpoint<T> = (req: PageRequest<T>) => Observable<Page<T>>
+export type PaginationEndpoint<T> = (req: PageRequest<T>) => Observable<Page<T>>
 ```
 The generic parameter `T` always refers to the type of data we're
 dealing with - later on in our example it's `User`.
@@ -103,7 +108,7 @@ A `PageRequest<T>` is what we'll eventually pass to a service which in
 turn will kick off a corresponding HTTP request. This service will then
 respond with a `Page<T>` containing the requested data.
 
-A `PaginatedEndpoint<T>` is a function accepting a `PageRequest<T>` and
+A `PaginationEndpoint<T>` is a function accepting a `PageRequest<T>` and
 returning an RxJS stream aka. observable containing a corresponding
 `Page<T>`.
 
@@ -112,17 +117,17 @@ datasource as follows:
 
 ```typescript
 import { Observable, Subject } from 'rxjs';
-import { switchMap, startWith, pluck, share } from 'rxjs/operators';
-import { Page, Sort, PaginatedEndpoint } from './page';
+import { switchMap, startWith, pluck, shareReplay } from 'rxjs/operators';
+import { Page, Sort, PaginationEndpoint } from './page';
 
-export class PaginatedDataSource<T> implements SimpleDataSource<T> {
+export class PaginationDataSource<T> implements SimpleDataSource<T> {
   private pageNumber = new Subject<number>();
   private sort = new Subject<Sort<T>>();
 
   public page$: Observable<Page<T>>;
 
   constructor(
-    endpoint: PaginatedEndpoint<T>,
+    endpoint: PaginationEndpoint<T>,
     initialSort: Sort<T>,
     size = 20) {
       this.page$ = this.sort.pipe(
@@ -131,7 +136,7 @@ export class PaginatedDataSource<T> implements SimpleDataSource<T> {
           startWith(0),
           switchMap(page => endpoint({page, sort, size}))
         )),
-        share()
+        shareReplay(1)
       )
   }
 
@@ -179,7 +184,7 @@ When the datasource is supposed to fetch a different page - triggered by
 a call to `fetch(page: number)` - we'll query the paginated endpoint
 with the required parameters. Eventually this observable now provides
 data pages to possibly multiple consuming components. Therefore you
-might use `share()` to synchronize those subscriptions.
+might use `shareReplay(1)` to synchronize those subscriptions while providing late subscribers with the most recent page.
 
 Finally, inside `connect()` we just provide a stream of lists of items
 by mapping any page to its contents using the `pluck()` operator. This
@@ -210,7 +215,7 @@ server API inside the `page()` method.
 export class UsersComponent  {
     displayedColumns = ['id', 'name', 'email', 'registration']
 
-    data = new PaginatedDataSource<User>(
+    data = new PaginationDataSource<User>(
       request => this.users.page(request),
       {property: 'username', order: 'desc'}
     )
@@ -255,7 +260,7 @@ set of query parameters.
 
 First we'll add a generic parameter `Q` to the datasource's type
 representing a query model for some data, ending up with the type
-`PaginatedDataSource<T, Q>`.
+`PaginationDataSource<T, Q>`.
 
 We'll then add a constructor parameter for an initial query and create a
 subject property with `this.query = new
@@ -304,11 +309,11 @@ Subsequently we'll also pass the query to the pagination endpoint.
 In order to do this we need to adapt its type like follows:
 
 ```typescript
-export type PaginatedEndpoint<T, Q> = (req: PageRequest<T>, query: Q) => Observable<Page<T>>
+export type PaginationEndpoint<T, Q> = (req: PageRequest<T>, query: Q) => Observable<Page<T>>
 ```
 
 Now we can update our component to provide some query inputs. First
-adapt the initialization of `PaginatedDataSource<T, Q>` with a type for
+adapt the initialization of `PaginationDataSource<T, Q>` with a type for
 a specific query like `UserQuery`. Then provide a paginated endpoint
 that forwards page request and query to `UserService`. And lastly pass
 an initial query.
@@ -323,7 +328,7 @@ interface UserQuery {
 }
 ```
 ```typescript
-data = new PaginatedDataSource<User, UserQuery>(
+data = new PaginationDataSource<User, UserQuery>(
     (request, query) => this.users.page(request, query),
     {property: 'username', order: 'desc'},
     {search: '', registration: undefined}
@@ -357,7 +362,7 @@ your servers and handle them there correctly.
 ## Loading Indication
 
 If you like to indicate to the user that you're fetching a page, you can
-extend the `PaginatedDataSource<T, Q>` with a corresponding observable
+extend the `PaginationDataSource<T, Q>` with a corresponding observable
 property based on a private subject:
 
 ```typescript
@@ -367,7 +372,7 @@ public loading$ = this.loading.asObservable();
 ```
 
 Then you can either manually update the subject's value before and after
-calling the `PaginatedEndpoint<T, Q>` or rather use the operator
+calling the `PaginationEndpoint<T, Q>` or rather use the operator
 `indicate(indicator: Subject<boolean>)` I've introduced in my article
 about
 [loading indication in Angular](https://nils-mehlhorn.de/posts/indicating-loading-the-right-way-in-angular).
