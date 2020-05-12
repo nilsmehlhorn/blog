@@ -11,8 +11,8 @@ description: "Download files like PDF or ZIP in Angular either with download lin
 
 Downloading files is a common task for web applications. These files could be some PDF, ZIP or any other binary or text-based file that you want to make accessible to your users. Here's how you can download files in Angular either with a rather simple link or JavaScript-based for more control and progress indication.
 
-
-> The `download` operator developed in this article is available in the **[ngx-operators](https://github.com/nilsmehlhorn/ngx-operators)** library 📚 - a collection of battle-tested RxJS operators for Angular. I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it.
+[[info]]
+| The `download` operator developed in this article is available in the **[ngx-operators](https://github.com/nilsmehlhorn/ngx-operators)** 📚 library - a collection of battle-tested RxJS operators for Angular. I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it.
 
 ## Angular Download Link
 
@@ -43,8 +43,9 @@ Older browsers, like the Internet Explorer, might not recognize the `download` a
 
 If there's no `download` attribute, the filename for your download will solely depend on the HTTP header [Content-Disposition](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition) sent by the server that's providing the file. The information from this header might also take precedence even if the `download` attribute is present. 
 
-> _Recommended Read:_  
-> [Building a Good Download… Button?](https://css-tricks.com/building-good-download-button/) - Eric Bailey
+[[info]]
+| _Recommended Read:_    
+| [Building a Good Download… Button?](https://css-tricks.com/building-good-download-button/) - Eric Bailey
 
 A link-based solution conforms well to HTML standards and lets the browser do most of the work. However, if you want more control over the download and would like to display some custom progress indicator you can also download files via Angular's [HttpClient](https://angular.io/api/common/http/HttpClient).  
 
@@ -107,7 +108,10 @@ download() {
 }
 ```
 
-_If you don't like adding a dependency for this and would prefer to use the manual approach shown before, you might as well refactor the code for saving the blob into a separate service. There you probably want to inject `document` with Angular's built-in injection token [DOCUMENT](https://angular.io/api/common/DOCUMENT). You can also [create a custom injection token](https://angular.io/guide/dependency-injection-in-action#supply-a-custom-provider-with-inject) for `URL` - also see below how we'll do this for FileSaver.js._
+If you don't like adding a dependency for this and would prefer to use the manual approach shown before, you might as well refactor the code for saving the blob into a separate service. There you probably want to inject `document` with Angular's built-in injection token [DOCUMENT](https://angular.io/api/common/DOCUMENT). You can also [create a custom injection token](https://angular.io/guide/dependency-injection-in-action#supply-a-custom-provider-with-inject) for `URL` - also see below how we'll do this for FileSaver.js.
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth Angular knowledge
 
 ## Calculating the Download Progress
 
@@ -193,6 +197,9 @@ Our `accumulator` will use the previously defined guard to update the `Download`
 ```
 
 When we encounter a `HttpProgressEvent`, we calculate the progress based on the number of bytes already loaded and the total bytes. A download is done when we receive a `HttpResponse` containing the file contents in its body. When receiving any other events than `HttpProgressEvent` or `HttpResponse`, we won't alter the download's state and return it as it is. This way, for example, we can keep the information in the `progress` property while other events that won't allow us to compute the progress can be ignored for now.
+
+[[info]]
+| Anything unclear? Post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
 
 Let's finally define our custom operator that's using `scan` with our `accumulator` and `seed`:
 
@@ -329,8 +336,6 @@ We can then subscribe to this observable through the [AsyncPipe in combination w
 ```
 
 **Pro Tip**: If you need to map something to more than two values inside a template or rather a ternary statement won't do it for you: [map](https://rxjs-dev.firebaseapp.com/api/operators/map) the observable to the type you need or use a [custom pipe](https://angular.io/guide/pipes#custom-pipes) instead of calling a component function from the template. Both methods are pretty easy to write, more declarative and perform better.
-
-> As always, if you've got any questions don't hesitate to leave a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). You can also follow me there and [join my mailing list](https://nils-mehlhorn.de/newsletter) to see when new articles are coming up and get smaller tips around Angular and web development in general.
 
 Here's a StackBlitz showing everything in action. The downloaded file is only 3MB, so you might want to [enable throttling](https://developer.mozilla.org/en-US/docs/Tools/Network_Monitor/Throttling) to see more of the progress bar.
 
