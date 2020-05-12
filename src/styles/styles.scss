@@ -80,6 +80,21 @@ button {
   max-width: $container-width-m;
 }
 
+.custom-block.info {
+  @include elevation;
+  background-color: white;
+  margin-bottom: 1.5rem;
+  padding: $half-gap $gap;
+  border-left: 0.25rem solid $accent-color;
+  font-style: italic;
+
+  .custom-block-body {
+    p {
+      margin: 0;
+    }
+  }
+}
+
 @media all and (min-width: $break-m) {
   .content {
     margin: 0 auto;

@@ -254,6 +254,9 @@ We'll provide a [selection](https://material.angular.io/components/select/overvi
 </mat-paginator>
 ```
 
+[[info]]
+| Got stuck? Post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
+
 ## Searching & Filtering
 
 When there's a lot of data you probably want to assist your users in finding what they're looking for. You might provide a text-based search or structured inputs for filtering the data by a certain property. These query parameters will differ based on the data you're querying. To compensate for this we'll adapt our datasource to work with a generic set of query parameters. For this purpose we'll add a generic parameter `Q` to the datasource's type representing a query model for some data, ending up with the type `PaginationDataSource<T, Q>`.
@@ -341,6 +344,9 @@ query parameter:
 Now anytime you change the inputs, the displayed page will update
 accordingly - provided you properly forwarded the query parameters to
 your servers and handle them there correctly.
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth knowledge on web development.
 
 ## Loading Indication
 

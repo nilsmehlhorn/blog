@@ -44,6 +44,17 @@ module.exports = {
               linkImagesToOriginal: false,
               backgroundColor: 'transparent'
             }
+          },
+          {
+            resolve: 'gatsby-remark-custom-blocks',
+            options: {
+              blocks: {
+                info: {
+                  classes: 'info',
+                  title: 'optional'
+                }
+              }
+            }
           }
         ]
       }
@@ -80,8 +91,8 @@ module.exports = {
       resolve: `gatsby-plugin-feed`,
       options: {
         feeds: [{
-          title: "Nils Mehlhorn Blog Posts",
-          output: "/rss.xml",
+          title: 'Nils Mehlhorn Blog Posts',
+          output: '/rss.xml',
           query: `
               {
                 allMarkdownRemark(sort: {order: DESC, fields: [frontmatter___date]}, filter: {frontmatter: {path: {glob: "/posts/*"}}}) {
