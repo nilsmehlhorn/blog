@@ -16,8 +16,9 @@ growing user expectations can be surprisingly far from ease of their
 fulfillment. In this post we'll be looking at how you might go about
 pulling off undo-redo in your next Angular app.
 
-
-> The undo-redo solution developed in this article is available in the **[ngrx-wieder](https://github.com/nilsmehlhorn/ngrx-wieder)** library 📚. I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it.
+[[info]]
+| The undo-redo solution developed in this article is available in the **[ngrx-wieder](https://github.com/nilsmehlhorn/ngrx-wieder)** library 📚  
+| I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it.
 
 <img src="undo-redo.png" alt="undo-redo-feature-concept" title="Undo & redo allow you to traverse an application's state history parallel from the main application flow"/>
 
@@ -157,6 +158,9 @@ approach](https://redux.js.org/recipes/implementing-undo-history).
 There's nothing as big for NgRx yet some smaller ones are using the
 approach as well.
 
+[[info]]
+| Anything unclear? Post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
+
 ## Repeating history
 
 Reducers are just pure functions. Calculating the next state based on a
@@ -212,6 +216,10 @@ covered one direction. While it's definitely possible to use the
 [recalculation approach for implementing both undo and redo](https://github.com/JannicBeck/undox),
 it'll get a bit too complex for my taste. That's also probably one
 reason why there's no library for NgRx doing that.
+
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth knowledge on web development
 
 ## States are changing
 

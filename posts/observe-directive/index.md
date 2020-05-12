@@ -10,8 +10,9 @@ description: "NgIf and the AsyncPipe are great for handling observables in Angul
 ---
 Handling observables is a much discussed topic in Angular. There are multiple ways to get reactive values displayed in your template, but sometimes they all just feel a bit clunky. Let's explore which options are available, how they work and how we might improve upon them.
 
-> The `observe` directive developed in this article is available in the **[ngx-observe](https://github.com/nilsmehlhorn/ngx-observe)** library 📚   
-> I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it
+[[info]]
+| The directive developed in this article is available in the **[ngx-observe](https://github.com/nilsmehlhorn/ngx-observe)** library 📚     
+| I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it
 
 There are two main solutions for handling observables that bring data into a component's view:
 1. Manual Subscription Management
@@ -77,6 +78,9 @@ Currently there's no official documentation on how the `OnPush` change detection
 Change detection means that Angular will update the template bindings with the values from your component's class instance. When using the default ChangeDetectionStrategy this is done in a multitude of cases and not just those three mentioned above - this is where the perfomance improvement is coming from when using OnPush. 
 
 Updating template bindings often means updating the DOM and that's a relatively costly operation. So when Angular has to do it less often, your application will run more smoothly. On the other hand though you'll have to tell Angular explicitly when changes occur - or rather let the AsyncPipe do it.
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth knowledge on web development.
 
 ### Rendering Templates Conditionally
 
@@ -242,6 +246,9 @@ Eventually we're subscribing to the underlying observable and anytime a new valu
 
 When an error occurs we'll do almost the same thing just with the template for displaying errors and only with support for an implicit input variable - provided there is an error template available.
 
+[[info]]
+| Anything unclear? Don't hesitate to post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
+
 ## Conclusion
 
 Our new directive is even better suited for handling observables than NgIf and the AsyncPipe:
@@ -249,10 +256,7 @@ Our new directive is even better suited for handling observables than NgIf and t
 * it allows you to define separate templates for loading and errors
 * it lets you access errors from inside the error template
 
-I've put together an example on StackBlitz showing the directive in action. I think it's even more useful than NgIf combined with the AsyncPipe in certain situations. In any case we've learned a lot about structural directives and change detection giving us a better understanding of the framework. 
-
-> If you've got any questions don't hesitate to leave a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). You can also follow me there and [join my mailing list](https://nils-mehlhorn.de/newsletter) to see when new articles are coming up and get smaller tips around Angular and web development in general.
-
+I've put together an example on [StackBlitz](https://stackblitz.com/edit/angular-observe-directive) showing the directive in action. I think it's even more useful than NgIf combined with the AsyncPipe in certain situations. In any case we've learned a lot about structural directives and change detection giving us a better understanding of the framework. 
 <iframe 
 style="width: 100%; height: 550px"
 src="https://stackblitz.com/edit/angular-observe-directive?ctl=1&embed=1&view=preview">

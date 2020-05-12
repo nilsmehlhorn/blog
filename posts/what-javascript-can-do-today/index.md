@@ -115,6 +115,9 @@ Personally, I really like showing people the
 impressively illustrates how easy you can get up and running with a
 native app powered by JavaScript.
 
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth knowledge on JavaScript
+
 ## Servers and APIs
 
 Most apps need some kind of backend - and you can build that with
@@ -174,6 +177,11 @@ allowing you to access virtual and augmented reality devices. This means
 you can create immersive VR/AR experiences with JavaScript! You can use
 one of the mentioned 3D framworks or have a look at
 [A-Frame](https://aframe.io/).
+
+
+
+[[info]]
+| Missing anything? Post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
 
 ## Machine Learning
 

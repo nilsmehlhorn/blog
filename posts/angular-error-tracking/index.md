@@ -119,6 +119,9 @@ It should show up in your Sentry dashboard like this:
 <img src="sentry_issues.png" alt="Sentry Issue Dashboard" title="Test error in Sentry dashboard"/>
 </strong>
 
+[[info]]
+| Got stuck? Post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
+
 ## Dealing with environments
 
 There are some easy steps we can complete which will make our handling a
@@ -180,6 +183,10 @@ class SentryErrorHandler implements ErrorHandler {
 
 ...
 ```
+
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth Angular knowledge
 
 ## Providing context
 

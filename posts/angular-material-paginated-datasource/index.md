@@ -19,8 +19,9 @@ result is available on
 [StackBlitz](https://stackblitz.com/edit/angular-paginated-material-datasource).
 
 
-> The data source developed in this article is available in the **[ngx-pagination-data-source](https://github.com/nilsmehlhorn/ngx-pagination-data-source)** library 📚   
-> I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it
+[[info]]
+| The data source developed in this article is available in the **[ngx-pagination-data-source](https://github.com/nilsmehlhorn/ngx-pagination-data-source)** library 📚   
+| I'd appreciate it if you'd give it a star ⭐️ on GitHub, this helps to let people know about it
 
 
 Although there is a bunch of

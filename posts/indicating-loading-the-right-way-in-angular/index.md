@@ -13,6 +13,10 @@ Its a common desire: having something rotate or fly around to entertain the user
 fishes data from god knows where. Though it seems easy to borrow a [spinner from CodePen](https://codepen.io/search/pens?q=spinner)
  and display it while you make the server roundtrip, there are some common misconceptions and pitfalls that 
  we'll clear up.
+ 
+[[info]]
+| The operators `indicate` and `prepare` developed in this article are available in the [ngx-operators](https://github.com/nilsmehlhorn/ngx-operators) 📚 library - a collection of battle-tested RxJS operators for Angular. Give it a star ⭐️ on GitHub to help other developers find it.
+
 
 ## Waiting for data
 
@@ -150,6 +154,9 @@ unrelated to the user's current task got stuck?
 them from view logic just so you can now go behind your own back. I won't completely condemn it, just something to 
 think about.
 
+[[info]]
+| Anything unclear? Post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
+
 ### Know what you want
 
 If you're fine with the downsides of the interceptor approach, you could use it for a global indication like a progress
@@ -170,6 +177,10 @@ illustration) is still loading although another call originating from somewhere 
 widget in the illustration) is the actual culprit.
 
 Don't get fooled by simplicity, instead know what you want and how to build it.
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth knowledge on Angular
+
 
 ### Reactive contextual approach
 If you want specific, contextual loading indication without explicitly flipping the loading flag, you could do that
@@ -217,9 +228,8 @@ export class UserComponent  {
 </div>
 ```
 
-> The operators `indicate` and `prepare` are now available in the [ngx-operators](https://github.com/nilsmehlhorn/ngx-operators) library - a collection of battle-tested RxJS operators for Angular.
-
-> You might also want to read my post on [handling observables with structural directives](https://nils-mehlhorn.de/posts/angular-file-download-progress). There we'll develop a template-based approach that is even better than NgIf with AsyncPipe. It supports falsy values, allows you to pass different templates for error and loading states and it lets you access errors inside the error template.
+[[info]]
+| Read my post on [handling observables with structural directives](https://nils-mehlhorn.de/posts/angular-file-download-progress). There we'll develop a template-based approach that is even better than NgIf with AsyncPipe. It supports falsy values, allows you to pass different templates for error and loading states and it lets you access errors inside the error template.
  
 I've put the snippets together into a complete example on StackBlitz - click 'Run Project' to see the indicators in
 action.

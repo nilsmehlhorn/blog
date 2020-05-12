@@ -157,6 +157,9 @@ Do this in all your environment files and you'll greatly benefit from
 the type system. This way you won't get any surprises when deploying a
 new environment-related feature.
 
+[[info]]
+| Got stuck? Post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
+
 ## Testing with Environments
 
 Sometimes I found myself in situations where I'd wanted to perform
@@ -172,6 +175,10 @@ The Angular architecture is based on the principle of
 with everything it needs during instantiation. So any dependencies are
 injected by Angular into the class constructor. This allows us to switch
 these dependencies for mocked counterparts during testing.
+
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth knowledge on web development.
 
 When providing our environment through dependency injection, we'll be
 able to easily mock it for environment-specific test cases. For this we
