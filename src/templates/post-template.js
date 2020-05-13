@@ -22,7 +22,7 @@ export default function Template({data}) {
   }
   let update
   if (frontmatter.formattedUpdate) {
-    update = <p className={styles.update}>Last update on {frontmatter.formattedUpdate}</p>
+    update = <p className={styles.update}>Updated on {frontmatter.formattedUpdate}</p>
   }
   const meta = [{name: 'date', content: frontmatter.update || frontmatter.date}];
   return (

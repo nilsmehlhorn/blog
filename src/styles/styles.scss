@@ -59,12 +59,11 @@ button {
 }
 
 .date {
-  margin: 0 0 8px -16px;
+  margin: $half-gap 0;
   font-weight: bold;
+  font-size: 80%;
   text-transform: uppercase;
-  color: white;
-  background: $accent-color-dark;
-  padding: $half-gap $gap;
+  color: $light-gray;
   display: block;
   width: fit-content;
 }

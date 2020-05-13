@@ -19,7 +19,7 @@ const PostLink = ({post, className}) => {
         <Link className={styles.headlineLink} to={post.frontmatter.path}>{post.frontmatter.title}</Link>
       </h2>
       <p className="date">{post.frontmatter.date}</p>
-      <p className={styles.excerpt}><Link to={post.frontmatter.path}>{post.excerpt}</Link></p>
+      <p className={styles.excerpt}><Link to={post.frontmatter.path}>{post.frontmatter.description || post.excerpt}</Link></p>
       <Tags className={styles.tags} tags={post.frontmatter.tags}/>
     </div>
   </div>
