@@ -9,10 +9,12 @@ import Bio from '../components/bio'
 import styles from './post-template.module.scss'
 import RelatedPosts from '../components/related-posts'
 import Comments from '../components/comments'
+import Sharing from '../components/sharing'
 
 export default function Template({data}) {
-  const {markdownRemark, relatedPosts} = data
+  const {markdownRemark, relatedPosts, site: {siteMetadata}} = data
   const {frontmatter, html, excerpt} = markdownRemark
+  const url = `${siteMetadata.siteUrl}${frontmatter.path}`
   const description = frontmatter.description || excerpt
   let banner = ''
   let previewImage
@@ -43,6 +45,7 @@ export default function Template({data}) {
             dangerouslySetInnerHTML={{__html: html}}
           />
         </div>
+        <Sharing title={frontmatter.title} url={url}/>
         <Bio short={true}/>
         <Comments id={frontmatter.path}/>
         <RelatedPosts posts={relatedPosts.nodes}/>
@@ -53,6 +56,11 @@ export default function Template({data}) {
 
 export const pageQuery = graphql`
   query($path: String!, $relatedPosts: [String!]!) {
+    site {
+      siteMetadata {
+        siteUrl
+      }
+    }
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
       excerpt(pruneLength: 250)

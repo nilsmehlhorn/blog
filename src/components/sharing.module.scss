@@ -1,0 +1,37 @@
+@import "../styles/variables";
+
+.sharing {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  justify-content: left;
+  margin: 0 0 $gap 0;
+  li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: $half-gap $gap;
+    border-radius: $half-gap;
+    border: 3px solid $accent-color-dark;
+    i {
+      padding: $quarter-gap $half-gap;
+      display: flex;
+    }
+    a {
+      display: flex;
+      padding: $quarter-gap $half-gap;
+      text-decoration: none;
+    }
+
+    &:hover {
+      background: $accent-color-dark;
+      color: white;
+    }
+  }
+}
+@media screen and (min-width: $break-m) {
+
+  .sharing {
+    flex-direction: row;
+  }
+}
