@@ -26,26 +26,28 @@ export default function Template({data}) {
   if (frontmatter.formattedUpdate) {
     update = <p className={styles.update}>Updated on {frontmatter.formattedUpdate}</p>
   }
-  const meta = [{name: 'date', content: frontmatter.update || frontmatter.date}];
+  const meta = [{name: 'date', content: frontmatter.update || frontmatter.date}]
   return (
     <Layout>
       <SEO previewImage={previewImage} keywords={[...frontmatter.tags, ...frontmatter.keywords]}
            title={frontmatter.title} description={description} meta={meta}/>
+      {banner}
       <div className={styles.content}>
-        {banner}
-        <div className="content-padding">
-          <h1 className={styles.heading}>{frontmatter.title}</h1>
-          <div className={styles.sub}>
-            <p className={styles.date}>{frontmatter.formattedDate}</p>
-            <Tags className={styles.tags} tags={frontmatter.tags}/>
-            {update}
+        <div className={styles.postWrapper}>
+          <div>
+            <h1 className={styles.heading}>{frontmatter.title}</h1>
+            <div className={styles.sub}>
+              <p className={styles.date}>{frontmatter.formattedDate}</p>
+              <Tags className={styles.tags} tags={frontmatter.tags}/>
+              {update}
+            </div>
+            <div
+              className={styles.postContent}
+              dangerouslySetInnerHTML={{__html: html}}
+            />
           </div>
-          <div
-            className={styles.postContent}
-            dangerouslySetInnerHTML={{__html: html}}
-          />
+          <Sharing title={frontmatter.title} url={url}/>
         </div>
-        <Sharing title={frontmatter.title} url={url}/>
         <Bio short={true}/>
         <Comments id={frontmatter.path}/>
         <RelatedPosts posts={relatedPosts.nodes}/>

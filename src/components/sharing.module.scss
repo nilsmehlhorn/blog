@@ -1,11 +1,11 @@
 @import "../styles/variables";
 
 .sharing {
+  margin: 0 0 $gap 0;
   display: flex;
   flex-direction: column;
   list-style-type: none;
-  justify-content: left;
-  margin: 0 0 $gap 0;
+
   li {
     display: flex;
     justify-content: center;
@@ -13,14 +13,20 @@
     margin: $half-gap $gap;
     border-radius: $half-gap;
     border: 3px solid $accent-color-dark;
+
     i {
       padding: $quarter-gap $half-gap;
       display: flex;
     }
+
     a {
       display: flex;
       padding: $quarter-gap $half-gap;
       text-decoration: none;
+
+      span {
+        display: inline;
+      }
     }
 
     &:hover {
@@ -29,9 +35,18 @@
     }
   }
 }
+
 @media screen and (min-width: $break-m) {
 
   .sharing {
-    flex-direction: row;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    margin-top: 48px;
+    margin-left: 24px;
+
+    li a span {
+      display: none;
+    }
   }
 }

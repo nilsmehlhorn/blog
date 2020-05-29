@@ -6,8 +6,7 @@
 }
 
 .heading {
-  margin-top: $gap;
-  margin-bottom: $half-gap;
+  margin: $half-gap 0;
 }
 
 .sub {
@@ -37,6 +36,10 @@
     margin: $half-gap 0 $half-gap auto;
     flex-basis: 100%;
   }
+}
+
+.postWrapper {
+  padding: $content-padding;
 }
 
 .postContent {
@@ -83,8 +86,16 @@
 
 
 @media screen and (min-width: $break-m) {
+  .heading {
+    margin-top: 48px;
+  }
+
+  .postWrapper {
+    display: flex;
+    padding: 0;
+  }
   .sub {
-    margin-bottom: $gap;
+    margin-bottom: $big-gap;
 
     .date {
       margin: 0 $gap 0 0;

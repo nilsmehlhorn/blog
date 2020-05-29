@@ -2,7 +2,9 @@
 
 .tags {
   display: inline-flex;
+
   .tag {
+    text-transform: uppercase;
     color: $accent-color;
     font-weight: bold;
     margin-right: $quarter-gap;

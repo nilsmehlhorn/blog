@@ -8,7 +8,7 @@ const Tags = ({tags, className}) => {
     return null
   }
   const Tags = tags
-    .map(tag => <small key={tag} className={styles.tag}>{tag}</small>)
+    .map(tag => <span key={tag} className={styles.tag}>{tag}</span>)
 
   return <section className={classes(styles.tags, className)}>{Tags}</section>
 }

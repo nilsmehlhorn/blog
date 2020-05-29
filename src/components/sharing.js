@@ -30,21 +30,21 @@ const Sharing = ({url, title}) => {
       <a href={twitterShare}
          onClick={openTwitter}>
         <i><FaTwitter size={16}/></i>
-        Share on Twitter
+        <span>Share on Twitter</span>
       </a>
     </li>
     <li>
       <a href={hnShare}
          onClick={openHn}>
         <i><FaHackerNews size={16}/></i>
-        Share on Hacker News
+        <span>Share on Hacker News</span>
       </a>
     </li>
     <li>
       <a href={fbShare}
          onClick={openFb}>
         <i><FaFacebook size={16}/></i>
-        Share on Facebook
+        <span>Share on Facebook</span>
       </a>
     </li>
   </ul>
