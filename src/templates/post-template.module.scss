@@ -80,8 +80,16 @@
     }
 
     blockquote {
-      border-left-color: $accent-color;
+      display: flex;
+      color: $gray;
       font-style: italic;
+      border: none;
+      &::before {
+        content: "\"";
+        font-size: 3.5rem;
+        color: $accent-color;
+        margin-right: 8px;
+      }
     }
   }
 }
