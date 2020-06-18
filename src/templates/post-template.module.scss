@@ -84,6 +84,7 @@
       color: $gray;
       font-style: italic;
       border: none;
+      margin-left: 0;
       &::before {
         content: "\"";
         font-size: 3.5rem;
