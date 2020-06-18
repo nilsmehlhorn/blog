@@ -1,0 +1,34 @@
+@import '../styles/variables';
+
+.hire {
+  font-size: 1.2rem;
+  background-color: white;
+  padding: $half-gap $gap;
+  border-left: 0.25rem solid $accent-color;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  .hireIcon {
+    display: none;
+  }
+
+  .hireText {
+    margin: 0;
+  }
+
+  .hireLink {
+    font-weight: bold;
+    color: $accent-color;
+    text-decoration: none;
+  }
+  @media screen and (min-width: $break-m) {
+    @include elevation;
+
+    .hireIcon {
+      display: block;
+      margin-right: 16px;
+      flex: 1 0 auto;
+    }
+  }
+}

@@ -1,112 +1,122 @@
-@import "../styles/variables";
+@import '../styles/variables';
 
 .content {
   max-width: $container-width-m;
   margin: 0 auto;
-}
 
-.heading {
-  margin: $half-gap 0;
-}
-
-.sub {
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  margin-bottom: $half-gap;
-  flex-wrap: wrap;
-
-  .date {
-    display: inline;
-    margin: $half-gap 0;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: $light-gray;
-  }
-
-  .tags {
-    display: none;
-  }
-
-  .update {
-    display: inline;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: $light-gray;
-    margin: $half-gap 0 $half-gap auto;
-    flex-basis: 100%;
+  & > * {
+    grid-column: main;
   }
 }
 
 .postWrapper {
   padding: $content-padding;
-}
-
-.postContent {
-
-  p, ol, ul {
-    font-size: 1.2rem;
-  }
-
-  code {
-    font-size: 1rem;
-  }
-
-  pre {
-    background-color: white;
-    margin-bottom: 1.5rem;
-    @include elevation;
-  }
-
-  :not(pre) > code {
-    background: white;
-  }
-
-  figcaption {
-    margin-top: $half-gap;
-    text-align: center;
-    font-style: italic;
-  }
-
-  strong {
-    span {
-      @include elevation;
-    }
-  }
-
-  p > strong {
-    font-weight: bolder;
-  }
-
-  blockquote {
-    border-left-color: $accent-color;
-    font-style: italic;
-  }
-}
-
-
-@media screen and (min-width: $break-m) {
   .heading {
-    margin-top: 48px;
+    margin: $half-gap 0;
   }
 
-  .postWrapper {
-    display: flex;
-    padding: 0;
-  }
   .sub {
-    margin-bottom: $big-gap;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: $half-gap;
+    flex-wrap: wrap;
 
     .date {
-      margin: 0 $gap 0 0;
+      display: inline;
+      margin: $half-gap 0;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $light-gray;
     }
 
     .tags {
-      display: inline-flex;
+      display: none;
     }
 
     .update {
-      flex-basis: auto;
+      display: inline;
+      font-weight: bold;
+      text-transform: uppercase;
+      color: $light-gray;
+      margin: $half-gap 0 $half-gap auto;
+      flex-basis: 100%;
+    }
+  }
+  .postContent {
+    p,
+    ol,
+    ul {
+      font-size: 1.2rem;
+    }
+
+    code {
+      font-size: 1rem;
+    }
+
+    pre {
+      background-color: white;
+      margin: 0 (-$half-gap) 1.5rem (-$half-gap);
+    }
+
+    :not(pre) > code {
+      background: white;
+    }
+
+    figcaption {
+      margin-top: $half-gap;
+      text-align: center;
+      font-style: italic;
+    }
+
+    strong {
+      span {
+        @include elevation;
+      }
+    }
+
+    p > strong {
+      font-weight: bolder;
+    }
+
+    blockquote {
+      border-left-color: $accent-color;
+      font-style: italic;
+    }
+  }
+}
+
+@media screen and (min-width: $break-m) {
+  .content {
+    display: grid;
+    grid-template-columns: [main] auto [side] 80px;
+    grid-template-rows: auto;
+    .postWrapper {
+      padding: 0;
+
+      .heading {
+        margin-top: 48px;
+      }
+
+      .sub {
+        margin-bottom: $big-gap;
+
+        .date {
+          margin: 0 $gap 0 0;
+        }
+
+        .tags {
+          display: inline-flex;
+        }
+
+        .update {
+          flex-basis: auto;
+        }
+      }
+
+      .postContent pre {
+        margin: 0 0 1.5rem 0;
+      }
     }
   }
 }

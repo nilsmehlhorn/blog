@@ -80,9 +80,8 @@ button {
 }
 
 .custom-block.info {
-  @include elevation;
   background-color: white;
-  margin-bottom: 1.5rem;
+  margin: 0 (-$half-gap) 1.5rem (-$half-gap);
   padding: $half-gap $gap;
   border-left: 0.25rem solid $accent-color;
   font-style: italic;
@@ -97,6 +96,11 @@ button {
 @media all and (min-width: $break-m) {
   .content {
     margin: 0 auto;
+  }
+
+  .custom-block.info {
+    @include elevation;
+    margin: 0 0 1.5rem 0;
   }
 }
 
