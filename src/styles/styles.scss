@@ -6,6 +6,7 @@
 
 html {
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body, html {
@@ -93,6 +94,28 @@ button {
   }
 }
 
+.toc {
+  display: block;
+  margin: 0 (-$half-gap);
+  ul {
+    background-color: $background-color-dark;
+    list-style: none;
+    padding: $gap;
+    margin: 0;
+    &::before {
+      content: 'Contents';
+      margin-bottom: 40px;
+      font-weight: bold;
+    }
+    li {
+      margin-bottom: $half-gap;
+      &:first-of-type {
+        margin-top: $half-gap;
+      }
+    }
+  }
+}
+
 @media all and (min-width: $break-m) {
   .content {
     margin: 0 auto;
@@ -101,6 +124,12 @@ button {
   .custom-block.info {
     @include elevation;
     margin: 0 0 1.5rem 0;
+  }
+
+  .toc {
+    float: right;
+    margin-left: $big-gap;
+    margin-bottom: $big-gap;
   }
 }
 
