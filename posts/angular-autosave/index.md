@@ -1,12 +1,12 @@
 ---
 path: '/posts/angular-autosave-form-ngrx'
-date: '2020-06-24'
-title: 'Angular Autosave for Forms and NgRx with RxJS'
+date: '2020-06-26'
+title: 'Angular RxJS Autosave for Forms, Services and NgRx'
 published: true
 tags: ['web development', 'frontend', 'angular']
-keywords: ['rxjs', 'observable']
-description: 'Lorem ipsum'
-banner: ./autosave-bank-symbol-image.jpg
+keywords: ['rxjs', 'observable', 'ngrx', 'subjects', 'reactive forms', 'user experience']
+description: "Saving changes automatically to the server improves user-experience. Here's how to implement this in Angular for forms, subject services and NgRx"
+banner: './autosave-bank-symbol-image.jpg'
 ---
 
 ```toc
@@ -61,7 +61,7 @@ export class MyComponent implements OnInit, OnDestroy {
 
 In the snippet above, every change to the form will trigger a save call. Yet, due to the use of [switchMap](https://rxjs-dev.firebaseapp.com/api/operators/switchMap), only the most recent save call will be active at one point in time. Subsequent value changes will cancel prior save calls when these haven't completed yet.
 
-We could replace switchMap with [mergeMap](https://rxjs-dev.firebaseapp.com/api/operators/mergeMap) and thus have all created autosave requests run simultaneously. Similarly, we might use [concatMap](https://rxjs-dev.firebaseapp.com/api/operators/mergeMap) to execute the save calls one after another. Another option might be [exhaustMap](https://www.learnrxjs.io/learn-rxjs/operators/transformation/exhaustmap) which would ignore value changes until the current save call is done.
+We could replace switchMap with [mergeMap](https://rxjs-dev.firebaseapp.com/api/operators/mergeMap) and thus have all created autosave requests run simultaneously. Similarly, we might use [concatMap](https://rxjs-dev.firebaseapp.com/api/operators/mergeMap) to execute the save calls one after another. Another option might be [exhaustMap](https://rxjs-dev.firebaseapp.com/api/operators/exhaustMap) which would ignore value changes until the current save call is done.
 
 Either way, since we're dealing with a long-lived observable (meaning it doesn't just emit one time but indefinitely), we should unsubscribe from the stream once the component encapsulating our form is destroyed. In the snippet above I'm doing this with the [takeUntil](https://rxjs-dev.firebaseapp.com/api/operators/debounceTime) operator.
 
@@ -80,7 +80,43 @@ If you'd like to run a save periodically while the user is constantly inputting 
 [[info]]
 | Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth Angular & RxJS knowledge
 
-## Autosave for Behavior Subject Services
+## Autosave for Subject Services
+
+When you're handling state through any kind of RxJS subject in a service, you can apply the same principle. Just pipe the subject using the operator combination that fits the behavior you want to achieve. 
+
+The following service will autosave any setting changes periodically after 1s while they occur thanks to [auditTime](https://rxjs.dev/api/operators/auditTime). The [concatMap](https://rxjs-dev.firebaseapp.com/api/operators/mergeMap) operator makes sure that none of the save requests are cancelled while keeping them in chronological order.
+
+```typescript
+export interface Settings {
+    darkMode: boolean
+}
+
+export class SettingsService implements OnDestroy {
+
+    private unsubscribe = new Subject<void>()
+
+    private settings = new BehaviorSubject<Settings>({darkMode: false})
+
+    public settings$ = this.settings.asObservable()
+
+    constructor(private service: MyService) {
+        this.settings.pipe(
+            auditTime(1000),
+            concatMap(settings => service.save(settings)),
+            takeUntil(this.unsubscribe)
+        ).subscribe(() => console.log('Saved'))
+    }
+
+    setDarkMode(darkMode: boolean) {
+        this.settings.next({...this.settings.getValue(), darkMode})
+    }
+
+    ngOnDestroy() {
+        this.unsubscribe.next()
+    }
+}
+}
+```
 
 ## NgRx Autosave
 
@@ -110,7 +146,7 @@ autosave$ = createEffect(() => this.actions$.pipe(
 ))
 ```
 
-After being debounced, the effect will create a saving action which we will handle in a separate effect. This allows us to easily trigger a save from other places while properly separating concerns. The actual save effect will eventually look very much how you'd write any asynchronous effect for NgRx:
+After being debounced, the effect will create a saving action which we will handle in a separate effect. This allows us to easily trigger a save from other places while properly separating concerns. The actual save effect will eventually look very much how you'd write any asynchronous effect for NgRx. I'm also using [withLatestFrom](https://rxjs-dev.firebaseapp.com/api/operators/withLatestFrom) to access the latest state to save.
 
 ```typescript
 save$ = createEffect(() => this.actions$.pipe(
@@ -159,14 +195,19 @@ If you want to get the UX here perfectly right and not display 'saving...' befor
 
 ## HTTP or WebSocket? LocalStorage?
 
-I've been using `service.save(state)` as a placeholder for making the HTTP server request that persists data. However, you might be wondering whether HTTP is the right protocol to use for autosave - so am I. From my perspective, there are three aspects to consider:
+I've been using `service.save(state)` as a placeholder for making the HTTP server request that persists data. However, you might be wondering whether HTTP is the right protocol to use for autosave - so am I. From my perspective, there are two aspects to consider:
 
 - payload size
-- serialization effort
-- save frequency
+- request frequency
 
-For [SceneLab](https://scenelab.io) we went with HTTP since the payload size is commonly around a few kilobytes while the serialization effort.
+Since HTTP has a moderate overhead per request, it'd be better fit for _lower_ request frequencies while the payload size can be arbitrarily big. However, you probably want to keep the payload size - just like any serialization efforts - possibly low anyways for good performance.
 
-- http v2 is pretty good
-- your server & proxy has to support websockets, scale for many long-lived connections
-- google docs is using http post on every keystroke
+[Websockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API), on the other hand, open a connection once in order to send only minimal messages after that. Therefore it'd be better for _higher_ request frequencies with smaller payloads. Websockets are especially useful for pushing data from the server to the client e.g. for a chat application. Though, for autosave, we only need to send client data to the server. 
+
+Yet, what are _lower_ and _higher_ request frequencies? I'd argue that with a debounced implementation based on user-changes, the save frequency won't be all that high. Therefore I'd advise you to try out an HTTP-based solution before jumping into a new protocol involving long-lived connections that your servers and proxies need to support - possibly at a certain scale. Make sure though, your server is using [HTTP/2](https://developer.mozilla.org/en-US/docs/Glossary/HTTP_2) to get the most out of it.
+
+For [SceneLab](https://scenelab.io) we went with HTTP while the payload size is usually around a few kilobytes. Try it out in the [app](app.scenelab.io) and see how it feels (you need to be logged-in for autosaving to the server).
+
+As a reference, [Google Docs](https://www.google.de/intl/de/docs/about/) is also sending HTTP POST request on every single keystroke.
+
+Meanwhile, you might have a use-case where you don't need to send data to the server at all. Maybe it's enough to store the data in [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) or [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API). That's what we're doing in SceneLab when you're using the app without being logged-in. Once you login, it'll allow you to recover a project you've drafted up before committing to a registration.
