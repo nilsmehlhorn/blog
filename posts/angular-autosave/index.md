@@ -216,6 +216,6 @@ Yet, what are _lower_ and _higher_ request frequencies? I'd argue that with a de
 
 For [SceneLab](https://scenelab.io) we went with HTTP while the payload size is usually around a few kilobytes. Try it out in the [app](app.scenelab.io) and see how it feels (you need to be logged-in for autosaving to the server).
 
-As a reference, [Google Docs](https://www.google.de/intl/de/docs/about/) is also sending HTTP POST request on every single keystroke.
+As a reference, [Google Docs](https://www.google.de/intl/de/docs/about/) is also sending HTTP POST requests on every single keystroke.
 
 Meanwhile, you might have a use-case where you don't need to send data to the server at all. Maybe it's enough to store the data in [LocalStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) or [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API). That's what we're doing in SceneLab when you're using the app without being logged-in. Once you login, it'll allow you to recover a project you've drafted up before committing to a registration.
