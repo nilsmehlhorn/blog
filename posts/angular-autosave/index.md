@@ -1,11 +1,11 @@
 ---
-path: '/posts/angular-autosave-form-ngrx'
+path: '/posts/angular-autosave-form-services-ngrx'
 date: '2020-06-26'
-title: 'Angular RxJS Autosave for Forms, Services and NgRx'
+title: 'Angular Autosave for Forms, Services and NgRx'
 published: true
 tags: ['web development', 'frontend', 'angular']
 keywords: ['rxjs', 'observable', 'ngrx', 'subjects', 'reactive forms', 'user experience']
-description: "Saving changes automatically to the server improves user-experience. Here's how to implement this in Angular for forms, subject services and NgRx"
+description: "Saving changes automatically to the server improves user-experience. Let's implement autosave with Angular and RxJS for forms, subject services and NgRx"
 banner: './autosave-bank-symbol-image.jpg'
 ---
 
@@ -192,6 +192,14 @@ export class MyComponent implements OnInit, OnDestroy {
 
 If you want to get the UX here perfectly right and not display 'saving...' before the user has made any changes, you'll also have to manage a [pristine flag similar to the one from Angular forms](https://angular.io/api/forms/AbstractControl#pristine).
 
+Here's how this looks for SceneLab where the indicator is located in the header:
+
+<figure className={styles.wrapper}>
+    <video autoPlay loop>
+        <source src="./autosave-user-interface-demo.mp4" type="video/mp4" />
+    </video>
+    <figcaption>Angular & NgRx autosave demo with <a href="https://scenelab.io">SceneLab</a></figcaption>
+</figure>
 
 ## HTTP or WebSocket? LocalStorage?
 

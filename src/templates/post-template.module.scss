@@ -92,6 +92,16 @@
         margin-right: 8px;
       }
     }
+
+    figure {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      video {
+        max-width: 800px;
+      }
+    }
   }
 }
 
