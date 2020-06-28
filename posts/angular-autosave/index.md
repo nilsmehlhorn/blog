@@ -115,7 +115,6 @@ export class SettingsService implements OnDestroy {
         this.unsubscribe.next()
     }
 }
-}
 ```
 
 ## NgRx Autosave
