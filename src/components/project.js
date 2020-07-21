@@ -16,7 +16,7 @@ const Project = ({project: {project}, className}) => {
     <div className={styles.innerWrapper}>
       <div className={styles.title}>
         <h2 className={styles.name}>{name}</h2>
-        <a href={link} className='btn'>View</a>
+        <a href={link} className='btn-subtle'>View</a>
       </div>
       <p>{description}</p>
     </div>

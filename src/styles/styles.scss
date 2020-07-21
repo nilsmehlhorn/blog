@@ -26,7 +26,7 @@ button {
 }
 
 .btn {
-  background: $accent-color;
+  background-color: $accent-color;
   padding: 12px $gap;
   border-radius: 4px;
   color: white;
@@ -38,7 +38,22 @@ button {
   @include elevation;
 
   &:hover {
-    background: $accent-color-dark;
+    background-color: $accent-color-dark;
+  }
+}
+
+.btn-subtle {
+  padding: 12px $gap;
+  border-radius: 4px;
+  color: $accent-color;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  user-select: none;
+  &:hover {
+    background-color: $background-color;
   }
 }
 
