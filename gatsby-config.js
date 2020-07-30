@@ -8,6 +8,12 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-react-helmet',
+    {
+      resolve: `gatsby-plugin-react-helmet-canonical-urls`,
+      options: {
+        siteUrl: `https://nils-mehlhorn.de`,
+      },
+    },
     'gatsby-transformer-yaml',
     {
       resolve: `gatsby-source-filesystem`,
