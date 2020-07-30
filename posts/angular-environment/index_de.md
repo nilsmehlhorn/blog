@@ -45,7 +45,7 @@ export const environment = {
 }
 ```
 
- Manchmal unterscheidet sich auch der Pfad unter dem der Backend-Server erreichbar ist (hier `apiPath` genannt). Für Eigenschaften die an vielen Stellen gebraucht werden, deren Wert aber in jeder Umgebung gleich ist, kann übrigens besser ein einziger File names `constants.ts` angelegt werden. Das spart unnötigen Mehrfachaufwand.
+Manchmal unterscheidet sich auch der Pfad unter dem der Backend-Server erreichbar ist (hier `apiPath` genannt). Für Eigenschaften die an vielen Stellen gebraucht werden, deren Wert aber in jeder Umgebung gleich ist, kann übrigens besser ein einziger File names `constants.ts` angelegt werden. Das spart unnötigen Mehrfachaufwand.
 
  Um nun in der Anwendung immer das richtige Environment für verschiedene Builds zu verwenden, legen wir jeweils eine Build-Konfiguration in der `angular.json` an. In jeder Konfiguration richten wir ein [File Replacement](https://angular.io/guide/build#configure-target-specific-file-replacements) ein, welches `environment.ts` immer durch eine spezifische Alternative wie `environment.prod.ts` austauscht:
 
@@ -76,7 +76,7 @@ export const environment = {
 }
 ```
 
-Beim Build aktivieren wir ein der Konfigurationen indem wir dessen Namen an die Angular CLI mitgeben:
+Beim Build aktivieren wir eine der Konfigurationen indem wir dessen Namen an die Angular CLI mitgeben:
 ```commandline
 ng build --configuration <config>
 ```
