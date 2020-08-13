@@ -84,7 +84,7 @@ such as `environment.prod.ts` like so:
           "with": "src/environments/environment.prod.ts"
         }],
         ...
-      }
+      },
       "stage": {
         "fileReplacements": [{
           "replace": "src/environments/environment.ts",
@@ -98,7 +98,7 @@ such as `environment.prod.ts` like so:
 }
 ```
 
-When building, you'll trigger a configuration by passing it's name to
+When building, you'll activate a configuration - thus an environment - by passing it's name to
 the Angular CLI: 
 ```commandline
 ng build --configuration <config>
