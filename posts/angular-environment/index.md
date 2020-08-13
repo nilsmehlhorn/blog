@@ -1,6 +1,7 @@
 ---
 path: "/posts/angular-environment-setup-testing"
 date: "2019-11-21"
+update: "2020-08-13"
 title: "Angular Environment Setup - Safe & Testable"
 published: true
 tags: ["web development", "frontend", "angular"]
@@ -15,7 +16,7 @@ be kept to a minimum, your webapp is probably supposed to behave a
 little bit different on a developer's machine compared to when it's
 deployed to production.
 
-Angular already has a solution for this called
+Angular and the Angular CLI already provide a solution for this called
 [environments](https://angular.io/guide/build#configuring-application-environments).
 To recap how they work: you place an arbitrary number of environment
 files in a directory such as `src/environments` like so: 
@@ -27,8 +28,8 @@ src
     └── environment.ts
 ```
 
-Any non-default environments are suffixed correspondingly, for example
-with 'prod' for your production environment.
+Any non-default environment is suffixed correspondingly, for example
+with 'prod' for your production environment. Here we also configure a staging environment which you might use for QA or testing deployments. Sometimes you'll also have a specific environment for continuous integration (CI).
 
 Inside of every file you'll export an object called `environment`
 defining the same properties just with environment-specific values. This
@@ -61,6 +62,8 @@ export const environment = {
   apiPath: '/prod/api'
 }
 ```
+
+Here the path under which you can reach the backend server also differs between environments - indicated by the `apiPath` property. However, when properties are re-used in many placed but don't change with the environment you may want to introduce a single separate `constant.ts` file.
 
 Now in order to let the application use a different environment for
 different builds, you'll define a build configuration for each
