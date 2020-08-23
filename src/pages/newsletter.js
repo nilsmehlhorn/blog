@@ -24,7 +24,7 @@ export default NewsletterPage
 
 export const pageQuery = graphql`
   query {
-    newsletter: file(relativePath: { eq: "newsletter_background.jpg" }) {
+    newsletter: file(relativePath: { eq: "ijs_talk.jpeg" }) {
       childImageSharp {
         fluid(maxWidth: 964, quality: 100) {
           ...GatsbyImageSharpFluid
