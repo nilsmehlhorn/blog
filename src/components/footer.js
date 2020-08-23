@@ -4,6 +4,9 @@ import {GoMailRead} from 'react-icons/go'
 import {Link} from 'gatsby'
 
 import styles from './footer.module.scss'
+
+const year = new Date().getFullYear()
+
 /* eslint-disable */
 const Footer = () => (
   <footer className={styles.footer}>
@@ -19,7 +22,7 @@ const Footer = () => (
           <GoMailRead size={32}/>
         </Link>
       </div>
-      <small className={styles.copyright}>Nils Mehlhorn &copy; 2019</small>
+      <small className={styles.copyright}>Nils Mehlhorn &copy; {year}</small>
       <small>
         <Link className={styles.smallLink} to='/imprint'>Imprint</Link>
         <Link className={styles.smallLink} to='/privacy'>Privacy</Link>
