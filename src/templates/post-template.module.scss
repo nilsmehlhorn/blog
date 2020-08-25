@@ -10,6 +10,7 @@
 }
 
 .postWrapper {
+  min-width: 0;
   padding: $content-padding;
   .heading {
     margin: $half-gap 0;
