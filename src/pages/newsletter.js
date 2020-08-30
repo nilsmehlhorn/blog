@@ -27,7 +27,7 @@ export const pageQuery = graphql`
     newsletter: file(relativePath: { eq: "ijs_talk.jpeg" }) {
       childImageSharp {
         fluid(maxWidth: 964, quality: 100) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }

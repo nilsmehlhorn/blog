@@ -74,7 +74,7 @@ export const pageQuery = graphql`
     talk: file(relativePath: { eq: "talk.jpg" }) {
       childImageSharp {
         fluid(maxWidth: 964, quality: 100) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
@@ -93,7 +93,7 @@ export const pageQuery = graphql`
             banner {
               preview: childImageSharp {
                 fluid(maxWidth: 630) {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }
@@ -112,7 +112,7 @@ export const pageQuery = graphql`
             img {
               preview: childImageSharp {
                 fluid(maxWidth: 624, quality: 100) {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }

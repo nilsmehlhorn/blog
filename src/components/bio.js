@@ -19,7 +19,7 @@ const Bio = ({short, className}) => (
         mug: file(relativePath: { eq: "proud_mug_extended_sqr.jpg" }) {
           childImageSharp {
             fixed(width: 196, quality: 100) {
-              ...GatsbyImageSharpFixed
+              ...GatsbyImageSharpFixed_withWebp
             }
           }
         }

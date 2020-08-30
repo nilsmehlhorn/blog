@@ -44,7 +44,7 @@ export const pageQuery = graphql`
             banner {
               preview: childImageSharp {
                 fluid(maxHeight: 300, maxWidth: 960) {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }

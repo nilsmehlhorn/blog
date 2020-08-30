@@ -92,12 +92,12 @@ export const pageQuery = graphql`
         banner {
           full: childImageSharp {
             fluid(maxWidth: 960, maxHeight: 400, quality: 100) {
-              ...GatsbyImageSharpFluid
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
           preview: childImageSharp {
             fluid(maxWidth: 630) {
-              ...GatsbyImageSharpFluid
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
@@ -118,7 +118,7 @@ export const pageQuery = graphql`
           banner {
             preview: childImageSharp {
               fluid(maxWidth: 630, maxHeight: 250) {
-                ...GatsbyImageSharpFluid
+                ...GatsbyImageSharpFluid_withWebp
               }
             }
           }
