@@ -25,7 +25,7 @@ Three short [principles](https://redux.js.org/introduction/three-principles#stat
 
 Together these principles make sure that state transitions are explicit and deterministic, meaning you can easily tell how the application state evolves over time.
 
-TODO: concept image
+![Components dispatch actions to the store, reducers update the state and components are then updated with the new state](./how-ngrx-store-works-reducer-action.png)
 
 ## Action, State & Reducer
 
@@ -50,7 +50,7 @@ const addTodoAction: Action = {
 }
 ```
 
-We can even create custom action data types and action creators to increase type-safety and ease development. That's basically what the [createAction](https://ngrx.io/api/store/createAction) and [props](https://ngrx.io/api/store/props) functions from NgRx are doing:
+We can even create custom action data types and action creators to ease development. That's _basically_ what the [createAction](https://ngrx.io/api/store/createAction) and [props](https://ngrx.io/api/store/props) functions from NgRx are doing - it doesn't give you quite the same type-safety though:
 
 ```typescript
 // todos.actions.ts
@@ -67,23 +67,26 @@ export function addTodo(text: string): AddAction {
 }
 
 export interface ToggleAction extends Action {
-  type: 'ADD'
-  todo: Todo
+  type: 'TOGGLE'
+  index: number
 }
 
-export function toggleTodo(todo: Todo): ToggleAction {
+export function toggleTodo(index: number): ToggleAction {
   return {
-    todo,
+    index,
     type: 'TOGGLE',
   }
 }
 ```
+
+We could [implement better type checking](https://redux.js.org/recipes/usage-with-typescript#type-checking-actions--action-creators) here, but let's not complicate things for now.
 
 **State**: a plain JavaScript object that holds the global application state. In an actual application it can have many shapes, therefore we'll treat it as a generic type named `S` in our NgRx implementation. We'll use `S` for typing reducers and eventually initializing the store. Meanwhile, the state of our todo app will look like follows. So, for the todo app `State` will take the place of `S` everywhere where we refer to `S` in our custom NgRx implementation:
 
 ```typescript
 // todos.state.ts
 export interface Todo {
+  index: number
   text: string
   done: boolean
 }
@@ -100,7 +103,9 @@ The initial state for the todo app will just contain an empty array:
 const initialState: State = { todos: [] }
 ```
 
-**Reducer**: a pure function that takes the current state and an action as parameters while returning the next state. We can convert these claims into a type signature for a reducer using the generic state type `S` and our action interface:
+**Reducer**: a pure function that takes the current state and an action as parameters while returning the next state. 
+
+We can convert these claims into a type signature for a reducer using the generic state type `S` and our action interface:
 
 ```typescript
 // store.ts
@@ -115,12 +120,19 @@ const reducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case 'ADD':
       return {
-        todos: [...state.todos, { text: action.text, done: false }],
+        todos: [
+          ...state.todos,
+          {
+            index: state.todos.length,
+            text: action.text,
+            done: false,
+          },
+        ],
       }
     case 'TOGGLE':
       return {
-        todos: state.todos.map((todo) => {
-          if (todo === action.todo) {
+        todos: state.todos.map((todo, index) => {
+          if (index === action.index) {
             return {
               ...todo,
               done: !todo.done,
@@ -135,7 +147,7 @@ const reducer = (state = initialState, action: Action) => {
 }
 ```
 
-Normally, you'd be using the [createReducer]() and [on]() functions to define a reducer. However, under the hood this is not really different from doing a switch-case on the action type. In fact, prior to Angular and NgRx 8 this was the normal way of writing reducers.
+Normally, you'd be using the [createReducer](https://ngrx.io/api/store/createReducer) and [on](https://ngrx.io/api/store/on) functions to define a reducer. However, under the hood this is not really different from doing a switch-case on the action type. In fact, prior to Angular and NgRx 8 this was the normal way of writing reducers.
 
 ## Where Does NgRx Store Data?
 
@@ -204,6 +216,12 @@ export class AppModule { }
 Then we can use our store almost like the real NgRx store in a component:
 
 ```typescript
+// app.component.ts
+...
+import { Store, Action } from "./store/store";
+import { Todo, State } from "./store/todos.state";
+import { addTodo, toggleTodo } from "./store/todos.actions";
+
 @Component({...})
 export class AppComponent  {
 
@@ -214,11 +232,11 @@ export class AppComponent  {
   }
 
   add(text: string): void {
-    this.store.dispatch(addTodo(text))
+    this.store.dispatch(addTodo(text));
   }
 
   toggle(todo: Todo): void {
-    this.store.dispatch(toggleTodo(todo))
+    this.store.dispatch(toggleTodo(todo.index));
   }
 }
 ```
@@ -239,7 +257,9 @@ export class AppComponent  {
 
 ## How NgRx Effects Works
 
-NgRx effects are managing asynchronous side-effects with RxJS observables resulting in actions being dispatched to the store. Since reducers are pure functions, they can't have side-effects - so things like HTTP requests aren't allowed. However, actions can be dispatched anytime, for example as the result of an HTTP request that saves a todo to the server. Here's a corresponding action definition:
+![Effects are triggered by dispatched actions. After performing async tasks they also dispatch actions again.](./how-ngrx-effects-works.png)
+
+NgRx effects are managing asynchronous side-effects with RxJS observables resulting in actions being dispatched to the store. Since reducers are pure functions, they can't have side-effects - so things like HTTP requests aren't allowed. However, actions can be dispatched at anytime, for example as the result of an HTTP request that saves a todo to the server. Here's a corresponding action definition:
 
 ```typescript
 // todos.actions.ts
@@ -267,7 +287,7 @@ this.http.post<Todo>('/todos', todo).subscribe((saved) => {
 })
 ```
 
-Yet, with the current setup, we can't really run this call before the reducer creates the actual todo. Therefore we'd need to wait for the action to be processed. For this we need a way to hook into all dispatched actions. With some adjustments to our store implementation, we can simply expose another observable of actions:
+Yet, with the current setup, we can't really run this call before the reducer creates the actual todo. Therefore we'd need to wait for the `'ADD'` action to be processed. For this we need a way to hook into all dispatched actions. With some adjustments to our store implementation, we can simply expose another observable of actions:
 
 ```typescript
 // store.ts
@@ -305,6 +325,12 @@ Now, we can use the `action$` observable from the store to compose a stream that
 
 ```typescript
 // todo.effects.ts
+import { Injectable } from '@angular/core'
+import { filter, mergeMap, map, withLatestFrom } from 'rxjs/operators'
+import { Store } from './store'
+import { State, Todo } from './todos.state'
+import { savedTodo, AddAction } from './todos.actions'
+
 @Injectable()
 export class TodoEffects {
   constructor(private store: Store<State>, private http: HttpClient) {
@@ -317,11 +343,11 @@ export class TodoEffects {
         // wait for HTTP request
         mergeMap(([action, state]: [AddAction, State]) => {
           // (use some kind of ID in a real app or only add todo to state after 'SAVED')
-          const todo = state.todos.find(({ text }) => text === action.text)
+          const todo = state.todos[state.todos.length - 1]
           return this.http.post<Todo>('/todos', todo)
         }),
         // map to 'SAVED' action
-        map((saved) => savedTodo(saved))
+        map((todo) => savedTodo(todo.index))
       )
       .subscribe((action) => this.store.dispatch(action))
   }
@@ -338,18 +364,18 @@ Eventually, we can extend our reducer to handle the `'SAVED'` action. Note that 
 
 ```typescript
 // todos.reducer.ts
-case 'SAVED':
+case "SAVED":
   return {
-    todos: state.todos.map((todo) => {
-      if (todo === action.todo) {
+    todos: state.todos.map((todo, index) => {
+      if (index === action.index) {
         return {
           ...todo,
           saved: true
-        }
+        };
       }
-      return todo
+      return todo;
     })
-  }
+  };
 ```
 
 ## Wrapping up
