@@ -15,7 +15,7 @@ description: "Let's learn how NgRx works and where it stores data by creating a 
 
 The concepts behind [NgRx](https://ngrx.io/) are inspired by the [Flux](https://facebook.github.io/flux/) architecture and it's most famous implementation: the [Redux](https://redux.js.org/) library. In theory, these concepts aren't too complicated, but in practice it might be hard to wrap your head around how everything fits together. So, let's demystify how NgRx works under the hood by coming up with a custom implementation of it - you'll be surprised with how few lines we can get really close to the real thing. At the same time we'll use our NgRx clone to implement a simple todo app.
 
-Three short [principles](https://redux.js.org/introduction/three-principles#state-is-read-only) are the foundation for state management with NgRx:
+Three short [principles](https://redux.js.org/introduction/three-principles) are the foundation for state management with NgRx:
 
 **Single Source of Truth**: The application state is stored in one object
 
@@ -25,13 +25,15 @@ Three short [principles](https://redux.js.org/introduction/three-principles#stat
 
 Together these principles make sure that state transitions are explicit and deterministic, meaning you can easily tell how the application state evolves over time.
 
-![Components dispatch actions to the store, reducers update the state and components are then updated with the new state](./how-ngrx-store-works-reducer-action.png)
+![Components dispatch actions to the store, reducers compute the next state which updates the components](./how-ngrx-store-works-reducer-action.png)
 
 ## Action, State & Reducer
 
 Our custom NgRx store implementation will be represented by a single file `store.ts` that reflects the principles just mentioned. Meanwhile, any app using this store can work with the same building blocks that you know from the real library.
 
-**Action**: a plain JavaScript object that references an event occurring in the application. Actions are distinguished by a type but can have arbitrary more properties to serve as a payload containing information about a corresponding event. We can leverage TypeScript's [index types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types) to define an interface representing the action data type:
+### Action
+
+ Actions are plain JavaScript objects that reference an events occurring in the application. Actions are distinguished by a type but can have arbitrary more properties to serve as a payload containing information about a corresponding event. We can leverage TypeScript's [index types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types) to define an interface representing the action data type:
 
 ```typescript
 // store.ts
@@ -81,7 +83,9 @@ export function toggleTodo(index: number): ToggleAction {
 
 We could [implement better type checking](https://redux.js.org/recipes/usage-with-typescript#type-checking-actions--action-creators) here, but let's not complicate things for now.
 
-**State**: a plain JavaScript object that holds the global application state. In an actual application it can have many shapes, therefore we'll treat it as a generic type named `S` in our NgRx implementation. We'll use `S` for typing reducers and eventually initializing the store. Meanwhile, the state of our todo app will look like follows. So, for the todo app `State` will take the place of `S` everywhere where we refer to `S` in our custom NgRx implementation:
+### State
+
+A plain JavaScript object holds the global application state. In an actual application it can have many shapes, therefore we'll treat it as a generic type named `S` in our NgRx implementation. We'll use `S` for typing reducers and eventually initializing the store. Meanwhile, the state of our todo app will look like follows. So, for the todo app `State` will take the place of `S` everywhere where we refer to `S` in our custom NgRx implementation:
 
 ```typescript
 // todos.state.ts
@@ -103,9 +107,9 @@ The initial state for the todo app will just contain an empty array:
 const initialState: State = { todos: [] }
 ```
 
-**Reducer**: a pure function that takes the current state and an action as parameters while returning the next state. 
+### Reducer
 
-We can convert these claims into a type signature for a reducer using the generic state type `S` and our action interface:
+A reducer is a pure function that takes the current state and an action as parameters while returning the next state. We can convert these claims into a type signature for a reducer using the generic state type `S` and our action interface:
 
 ```typescript
 // store.ts
@@ -382,4 +386,9 @@ case "SAVED":
 
 While it's fun and definitely a good learning experience to implement NgRx yourself, you should definitely stick with the official library for you real Angular apps. This way you'll get a tested and type-safe implementation with a lot more features.
 
-I hope I was able to shed some light on the inner workings of NgRx and thus make the library more approachable for you. [Here's a StackBlitz](https://stackblitz.com/edit/ngrx-custom-implementation) showing the full implementation.
+Hopefully I was able to shed some light on the inner workings of NgRx and thus make the library more approachable for you. [Here's a StackBlitz](https://stackblitz.com/edit/ngrx-custom-implementation) showing the full implementation.
+
+<iframe 
+style="width: 100%; height: 550px"
+src="https://stackblitz.com/edit/ngrx-custom-implementation?ctl=1&embed=1">
+</iframe>
