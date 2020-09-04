@@ -1,6 +1,6 @@
 @import '../styles/variables';
 
-$animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+$animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
 
 .header {
   z-index: 2;
@@ -57,6 +57,7 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1.0);
       padding: $gap;
       margin-top: 64px;
       transition: right $animation;
+      align-items: center;
 
       &.open {
         @include elevation;
@@ -71,9 +72,15 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1.0);
         margin: $gap 0;
         text-align: center;
       }
+
+      .bookLink {
+        color: white;
+        background-color: #412846;
+        padding: 4px 16px;
+        border-radius: 16px;
+      }
     }
   }
-
 
   @media all and (min-width: $break-m) {
     position: relative;
@@ -106,6 +113,10 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1.0);
           }
 
           margin-left: $big-gap;
+        }
+
+        .bookLink:hover {
+          color: #e2e3e5;
         }
       }
       .heading .firstname {

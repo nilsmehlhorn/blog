@@ -27,6 +27,9 @@ Together these principles make sure that state transitions are explicit and dete
 
 ![Components dispatch actions to the store, reducers compute the next state which updates the components](./how-ngrx-store-works-reducer-action.png)
 
+[[info]]
+| I'm writing a book on NgRx and you can [get it for free](https://gumroad.com/l/ngrx-book). Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
+
 ## Action, State & Reducer
 
 Our custom NgRx store implementation will be represented by a single file `store.ts` that reflects the principles just mentioned. Meanwhile, any app using this store can work with the same building blocks that you know from the real library.
@@ -197,6 +200,9 @@ export class Store<S> {
 }
 ```
 
+[[info]]
+| Anything unclear? Post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
+
 Note that the actual NgRx will allow you to register multiple reducers, however, for the sake of simplicity our implementation only accepts a single one. Either way, the approach stays the same: we're managing state through an RxJS BehaviorSubject - a pattern that has been described many times, for example [here](https://medium.com/@rmcavin/my-favorite-state-management-technique-in-angular-rxjs-behavior-subjects-49f18daa31a7) by Rachel Cavin. However, we also make state transitions explicit through actions while keeping each state read-only with pure reducer functions.
 
 In order to use our custom store now for the todo app, we have to register it as a provide while passing an application-specific reducer. This can be done with a [value provider](https://angular.io/guide/dependency-injection-providers#value-providers) as follows. The actual NgRx is doing pretty much the same thing, it's just wrapped in another module.
@@ -258,6 +264,9 @@ export class AppComponent  {
   </li>
 </ul>
 ```
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth Angular & RxJS knowledge
 
 ## How NgRx Effects Works
 
@@ -384,7 +393,7 @@ case "SAVED":
 
 ## Wrapping up
 
-While it's fun and definitely a good learning experience to implement NgRx yourself, you should definitely stick with the official library for you real Angular apps. This way you'll get a tested and type-safe implementation with a lot more features.
+While it's fun and definitely a good learning experience to implement NgRx store and effects yourself, you should definitely stick with the official library for real Angular apps. This way you'll get a tested and type-safe implementation with a lot more features.
 
 Hopefully I was able to shed some light on the inner workings of NgRx and thus make the library more approachable for you. [Here's a StackBlitz](https://stackblitz.com/edit/ngrx-custom-implementation) showing the full implementation.
 
