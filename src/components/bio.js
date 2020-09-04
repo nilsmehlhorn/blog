@@ -28,7 +28,7 @@ const Bio = ({short, className}) => (
     render={({mug, site}) => {
       const intro = short ? null : <p className={styles.introduction}>
         I help companies develop sophisticated and maintainable software solutions. A major focus
-        of mine are web technologies with languages such JavaScript, TypeScript and Java used with frameworks like
+        of mine are web technologies with languages such as JavaScript, TypeScript and Java used with frameworks like
         Angular and Spring.
       </p>
       return (

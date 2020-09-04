@@ -26,6 +26,8 @@ button {
 }
 
 .btn {
+  display: block;
+  width: fit-content;
   background-color: $accent-color;
   padding: 12px $gap;
   border-radius: 4px;

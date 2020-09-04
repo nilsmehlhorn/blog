@@ -1,11 +1,12 @@
-@import "../styles/variables";
+@import '../styles/variables';
 
 .writing {
   height: 128px;
 }
 
 .cta {
-  margin: $gap auto;display: flex;
+  margin: $gap auto;
+  display: flex;
   justify-content: center;
   width: 100%;
 }
@@ -31,6 +32,36 @@
   grid-gap: $gap;
 }
 
+.book {
+  display: flex;
+  @include elevation;
+  border-radius: 32px;
+  background-color: white;
+  width: 100%;
+  max-height: 500px;
+  margin-bottom: 32px;
+
+  .bookDesc {
+    padding: 16px 32px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bookImg {
+    max-height: 100%;
+  }
+
+  img {
+    height: 100%;
+    width: auto;
+    border-radius: 32px 0 0 32px;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+}
+
 .bio {
   margin-top: $half-gap;
 }
@@ -48,8 +79,8 @@
     opacity: 0.5;
     filter: blur(1px);
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     bottom: 0;
     right: 0;
     width: 100%;
@@ -61,7 +92,6 @@
     z-index: 1;
   }
 }
-
 
 @media screen and (min-width: $break-m) {
   .posts {

@@ -75,7 +75,7 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
 
       .bookLink {
         color: white;
-        background-color: #412846;
+        background-color: $purple;
         padding: 4px 16px;
         border-radius: 16px;
       }
@@ -116,7 +116,7 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
         }
 
         .bookLink:hover {
-          color: #e2e3e5;
+          color: $background-color-dark;
         }
       }
       .heading .firstname {
