@@ -32,28 +32,42 @@
   grid-gap: $gap;
 }
 
-.book {
-  @include elevation;
-  border-radius: 32px;
-  background-color: white;
+.bookBanner {
+  background-color: $light-gray;
+  margin: 64px auto 0;
   width: 100%;
-  margin-bottom: 32px;
-
-  display: flex;
-  flex-direction: column;
-
-  .bookDesc {
-    padding: 16px 32px;
+  padding: $content-padding;
+  .bookBannerContent {
+    width: 100%;
+    margin-bottom: 32px;
+    max-width: $container-width;
+    color: white;
     display: flex;
-    flex-direction: column;
-  }
+    margin: 0 auto;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-bottom: $half-gap;
 
-  .bookImg {
-    display: flex;
-  }
+    .bookDesc {
+      display: flex;
+      flex-direction: column;
+    }
 
-  p {
-    font-size: 1.2rem;
+    .bookImg {
+      display: flex;
+    }
+
+    img {
+      margin: 0;
+    }
+
+    h1 {
+      margin: 0 0 $half-gap;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
   }
 }
 
@@ -89,16 +103,11 @@
 }
 
 @include lg-m() {
+  .bookBanner {
+    margin: 0 auto;
 
-  .book {
-    flex-direction: row;
-
-    .bookImg {
-      justify-content: center;
-    }
-
-    img {
-      border-radius: 32px 0 0 32px;
+    .bookBannerContent {
+      flex-direction: row;
     }
   }
 

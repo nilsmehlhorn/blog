@@ -32,29 +32,34 @@ const IndexPage = ({ data }) => {
     />
   ))
 
+  const banner = (
+    <section className={styles.bookBanner}>
+      <div className={styles.bookBannerContent}>
+        <div className={styles.bookDesc}>
+          <h1>Free Book: Learn NgRx for Angular</h1>
+          <p>
+            Pay what you want for the complete learning resource on state
+            management with NgRx Store &amp; Effects in Angular
+          </p>
+          <a class="btn" href="https://gumroad.com/l/ngrx-book">
+            Get the Book
+          </a>
+        </div>
+        <div className={styles.bookImg}>
+          <Img fixed={book.childImageSharp.fixed} />
+        </div>
+      </div>
+    </section>
+  )
+
   return (
-    <Layout>
+    <Layout banner={banner}>
       <SEO
         key={'seo'}
         title={site.siteMetadata.title}
         keywords={['blog', 'software', 'angular']}
       />
       <div className="content-padding">
-        <section className={styles.book}>
-          <div className={styles.bookImg}>
-            <Img fixed={book.childImageSharp.fixed} />
-          </div>
-          <div className={styles.bookDesc}>
-            <h1>Free Book: Learn NgRx for Angular</h1>
-            <p>
-              Pay what you want for the complete learning resource on state
-              management with NgRx Store &amp; Effects in Angular. Dolor sit amet bla bla blas
-            </p>
-            <a class="btn" href="https://gumroad.com/l/ngrx-book">
-              Get the Book
-            </a>
-          </div>
-        </section>
         <Bio className={styles.bio} key={'bio'} />
         <h1>Writing</h1>
         <p className="text">
@@ -122,9 +127,9 @@ export const pageQuery = graphql`
         }
       }
     }
-    book: file(relativePath: { eq: "book_mockup.jpg" }) {
+    book: file(relativePath: { eq: "book_mockup.png" }) {
       childImageSharp {
-        fixed(height: 400, quality: 100) {
+        fixed(height: 280, quality: 100) {
           ...GatsbyImageSharpFixed_withWebp
         }
       }
