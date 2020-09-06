@@ -42,16 +42,13 @@ const IndexPage = ({ data }) => {
       <div className="content-padding">
         <section className={styles.book}>
           <div className={styles.bookImg}>
-            <Img fluid={book.childImageSharp.fluid} />
+            <Img fixed={book.childImageSharp.fixed} />
           </div>
           <div className={styles.bookDesc}>
-            <h1>Learn NgRx for Angular</h1>
+            <h1>Free Book: Learn NgRx for Angular</h1>
             <p>
-              Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-              nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-              erat, sed diam voluptua. At vero eos et accusam et justo duo
-              dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-              sanctus est Lorem ipsum dolor sit amet.
+              Pay what you want for the complete learning resource on state
+              management with NgRx Store &amp; Effects in Angular. Dolor sit amet bla bla blas
             </p>
             <a class="btn" href="https://gumroad.com/l/ngrx-book">
               Get the Book
@@ -127,9 +124,8 @@ export const pageQuery = graphql`
     }
     book: file(relativePath: { eq: "book_mockup.jpg" }) {
       childImageSharp {
-        fluid(maxHeight: 600, quality: 100) {
-          ...GatsbyImageSharpFluid_withWebp
-          ...GatsbyImageSharpFluidLimitPresentationSize
+        fixed(height: 400, quality: 100) {
+          ...GatsbyImageSharpFixed_withWebp
         }
       }
     }

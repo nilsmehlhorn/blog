@@ -49,7 +49,7 @@
   }
 
   .bookImg {
-    width: 100%;
+    display: flex;
   }
 
   p {
@@ -88,16 +88,19 @@
   }
 }
 
-@media screen and (min-width: $break-m) {
+@include lg-m() {
 
   .book {
     flex-direction: row;
+
+    .bookImg {
+      justify-content: center;
+    }
 
     img {
       border-radius: 32px 0 0 32px;
     }
   }
-
 
   .posts {
     grid-template-columns: 1fr 1fr 1fr;

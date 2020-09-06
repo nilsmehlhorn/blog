@@ -52,20 +52,20 @@ $break-l: 1024px;
   box-shadow: unset;
 }
 
-@mixin not-s {
+@mixin lg-m {
   @media (min-width: #{$break-m}) {
+    @content;
+  }
+}
+
+@mixin lg-l {
+  @media (min-width: #{$break-l}) {
     @content;
   }
 }
 
 @mixin m {
   @media (min-width: #{$break-m}) and (max-width: #{$break-l - 1px}) {
-    @content;
-  }
-}
-
-@mixin l {
-  @media (min-width: #{$break-l}) {
     @content;
   }
 }

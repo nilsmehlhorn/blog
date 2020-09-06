@@ -26,9 +26,7 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
       margin: 0;
       color: $gray;
 
-      .firstname {
-        display: none;
-      }
+      display: none;
     }
 
     .menu {
@@ -82,7 +80,7 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
     }
   }
 
-  @media all and (min-width: $break-m) {
+  @include lg-m() {
     position: relative;
     background: $background-color;
     @include no-elevation;
@@ -119,9 +117,12 @@ $animation: 0.2s cubic-bezier(0.77, 0.2, 0.05, 1);
           color: $background-color-dark;
         }
       }
-      .heading .firstname {
-        display: inline;
-      }
+    }
+  }
+
+  @include lg-l() {
+    .content .heading {
+      display: inline;
     }
   }
 }
