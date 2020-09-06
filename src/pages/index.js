@@ -42,7 +42,7 @@ const IndexPage = ({ data }) => {
       <div className="content-padding">
         <section className={styles.book}>
           <div className={styles.bookImg}>
-            <img src={"/book_mockup.jpg"} />
+            <Img fluid={book.childImageSharp.fluid} />
           </div>
           <div className={styles.bookDesc}>
             <h1>Learn NgRx for Angular</h1>
@@ -127,8 +127,9 @@ export const pageQuery = graphql`
     }
     book: file(relativePath: { eq: "book_mockup.jpg" }) {
       childImageSharp {
-        fluid(maxHeight: 400, quality: 100) {
+        fluid(maxHeight: 600, quality: 100) {
           ...GatsbyImageSharpFluid_withWebp
+          ...GatsbyImageSharpFluidLimitPresentationSize
         }
       }
     }

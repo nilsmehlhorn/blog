@@ -33,13 +33,14 @@
 }
 
 .book {
-  display: flex;
   @include elevation;
   border-radius: 32px;
   background-color: white;
   width: 100%;
-  max-height: 500px;
   margin-bottom: 32px;
+
+  display: flex;
+  flex-direction: column;
 
   .bookDesc {
     padding: 16px 32px;
@@ -48,13 +49,7 @@
   }
 
   .bookImg {
-    max-height: 100%;
-  }
-
-  img {
-    height: 100%;
-    width: auto;
-    border-radius: 32px 0 0 32px;
+    width: 100%;
   }
 
   p {
@@ -94,6 +89,16 @@
 }
 
 @media screen and (min-width: $break-m) {
+
+  .book {
+    flex-direction: row;
+
+    img {
+      border-radius: 32px 0 0 32px;
+    }
+  }
+
+
   .posts {
     grid-template-columns: 1fr 1fr 1fr;
     .post {
