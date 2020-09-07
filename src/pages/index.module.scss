@@ -51,6 +51,8 @@
     .bookDesc {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      text-align: center;
     }
 
     .bookImg {
@@ -108,6 +110,12 @@
 
     .bookBannerContent {
       flex-direction: row;
+
+      .bookDesc {
+        align-items: flex-start;
+        text-align: left;
+      }
+
     }
   }
 

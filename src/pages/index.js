@@ -46,7 +46,9 @@ const IndexPage = ({ data }) => {
           </a>
         </div>
         <div className={styles.bookImg}>
-          <Img fixed={book.childImageSharp.fixed} />
+          <a href="https://gumroad.com/l/angular-ngrx-book">
+            <Img fixed={book.childImageSharp.fixed} />
+          </a>
         </div>
       </div>
     </section>
