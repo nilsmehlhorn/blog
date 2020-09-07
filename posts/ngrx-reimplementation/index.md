@@ -16,7 +16,7 @@ description: "Let's learn how NgRx works and where it stores data by creating a 
 The concepts behind [NgRx](https://ngrx.io/) are inspired by the [Flux](https://facebook.github.io/flux/) architecture and it's most famous implementation: the [Redux](https://redux.js.org/) library. In theory, these concepts aren't too complicated, but in practice it might be hard to wrap your head around how everything fits together. So, let's demystify how NgRx works under the hood by coming up with a custom implementation of it - you'll be surprised with how few lines we can get really close to the real thing. At the same time we'll use our NgRx clone to implement a simple todo app.
 
 [[info]]
-| **[I'm writing a book on NgRx and you can get it for free](https://gumroad.com/l/angular-ngrx-book)** 📖. Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
+| **[📖 I'm writing a book on NgRx and you can get it for free!](https://gumroad.com/l/angular-ngrx-book)** Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
 
 Three short [principles](https://redux.js.org/introduction/three-principles) are the foundation for state management with NgRx:
 
@@ -36,7 +36,7 @@ Our custom NgRx store implementation will be represented by a single file `store
 
 ### Action
 
- Actions are plain JavaScript objects that reference an events occurring in the application. Actions are distinguished by a type but can have arbitrary more properties to serve as a payload containing information about a corresponding event. We can leverage TypeScript's [index types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types) to define an interface representing the action data type:
+Actions are plain JavaScript objects that reference events occurring in the application. Actions are distinguished by a type but can have arbitrary more properties to serve as a payload containing information about a corresponding event. We can leverage TypeScript's [index types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types) to define an interface representing the action data type:
 
 ```typescript
 // store.ts
@@ -66,8 +66,8 @@ export interface AddAction extends Action {
 
 export function addTodo(text: string): AddAction {
   return {
-    text,
     type: 'ADD',
+    text,
   }
 }
 
@@ -78,8 +78,8 @@ export interface ToggleAction extends Action {
 
 export function toggleTodo(index: number): ToggleAction {
   return {
-    index,
     type: 'TOGGLE',
+    index,
   }
 }
 ```
@@ -158,7 +158,7 @@ Normally, you'd be using the [createReducer](https://ngrx.io/api/store/createRed
 
 ## Where Does NgRx Store Data?
 
-NgRx stores the application state in an RxJS observable inside an Angular service called [Store](https://github.com/ngrx/platform/blob/10.0.0/modules/store/src/store.ts). At the same time, this service implements the `Observable` interface, forwarding any subscriptions to the underlying observable in order to allow direct subscription calls on the service itself.
+NgRx stores the application state in an RxJS observable inside an Angular service called [Store](https://github.com/ngrx/platform/blob/10.0.0/modules/store/src/store.ts). At the same time, this service implements the `Observable` interface. So, when you subscribe to the store, the service actually forwards the subscription to the underlying observable.
 
 Internally, NgRx is actually using a [BehaviorSubject](https://rxjs-dev.firebaseapp.com/api/index/class/BehaviorSubject) which is a special observable that has the following characteristics:
 
@@ -283,8 +283,8 @@ export interface SavedAction extends Action {
 
 export function savedTodo(todo: Todo): SavedAction {
   return {
-    todo,
     type: 'SAVED',
+    todo,
   }
 }
 ```
@@ -396,7 +396,7 @@ case "SAVED":
 While it's fun and a good learning experience to implement NgRx store and effects yourself, you should definitely stick with the official library for real Angular apps. This way you'll get a tested and type-safe implementation with a lot more features.
 
 [[info]]
-| If you want to learn solid NgRx foundations, you've come to the right place, because I'm righting a book on that and you can **[get it for free](https://gumroad.com/l/angular-ngrx-book)** 📖. 
+| If you want to learn solid NgRx foundations, you've come to the right place, because I'm writing a book on that and you can **[get it for free](https://gumroad.com/l/angular-ngrx-book)** 📖
 
 I'm pouring all my experience into this complete learning resource while allowing you to pay what you want - it's my main goal to help people to gain proper software development skills, so share the link to the book with anyone who might like it.
 
