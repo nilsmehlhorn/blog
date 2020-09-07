@@ -6,7 +6,7 @@ published: true
 tags: ['web development', 'angular']
 keywords: ['angular', 'ngrx', 'store', 'redux', 'rxjs', 'observable']
 banner: './how-ngrx-works-banner.jpg'
-description: "Let's learn how NgRx works and where it stores data by creating a custom Redux implementation for Angular with a RxJS Behavior Subject."
+description: "Let's learn how NgRx works and where it stores data by creating a custom Redux implementation for Angular with an RxJS Behavior Subject."
 ---
 
 ```toc
@@ -14,6 +14,9 @@ description: "Let's learn how NgRx works and where it stores data by creating a 
 ```
 
 The concepts behind [NgRx](https://ngrx.io/) are inspired by the [Flux](https://facebook.github.io/flux/) architecture and it's most famous implementation: the [Redux](https://redux.js.org/) library. In theory, these concepts aren't too complicated, but in practice it might be hard to wrap your head around how everything fits together. So, let's demystify how NgRx works under the hood by coming up with a custom implementation of it - you'll be surprised with how few lines we can get really close to the real thing. At the same time we'll use our NgRx clone to implement a simple todo app.
+
+[[info]]
+| **[I'm writing a book on NgRx and you can get it for free](https://gumroad.com/l/angular-ngrx-book)** 📖. Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
 
 Three short [principles](https://redux.js.org/introduction/three-principles) are the foundation for state management with NgRx:
 
@@ -26,9 +29,6 @@ Three short [principles](https://redux.js.org/introduction/three-principles) are
 Together these principles make sure that state transitions are explicit and deterministic, meaning you can easily tell how the application state evolves over time.
 
 ![Components dispatch actions to the store, reducers compute the next state which updates the components](./how-ngrx-store-works-reducer-action.png)
-
-[[info]]
-| I'm writing a book on NgRx and you can [get it for free](https://gumroad.com/l/ngrx-book). Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
 
 ## Action, State & Reducer
 
@@ -173,7 +173,7 @@ Additionally, we provide a `dispatch` function accepting a single action. This f
 
 Eventually, the BehaviorSubject is exposed in form of the more restrictive `Observable` type via `asObservable()` so that it's only possibly to cause a new state emission by dispatching an action.
 
-So, here you go, a **NgRx Store re-implementation in less than 20 lines of code**:
+So, here you go, **NgRx Store re-implementation in less than 20 lines of code**:
 
 ```typescript
 import { Injectable } from '@angular/core'
@@ -203,9 +203,9 @@ export class Store<S> {
 [[info]]
 | Anything unclear? Post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
 
-Note that the actual NgRx will allow you to register multiple reducers, however, for the sake of simplicity our implementation only accepts a single one. Either way, the approach stays the same: we're managing state through an RxJS BehaviorSubject - a pattern that has been described many times, for example [here](https://medium.com/@rmcavin/my-favorite-state-management-technique-in-angular-rxjs-behavior-subjects-49f18daa31a7) by Rachel Cavin. However, we also make state transitions explicit through actions while keeping each state read-only with pure reducer functions.
+Note that the actual NgRx will allow you to register multiple reducers, however, for the sake of simplicity our implementation only accepts a single one. Either way, the approach stays the same: we're managing state through an RxJS BehaviorSubject - a pattern that has been described many times, for example [here](https://coryrylan.com/blog/angular-observable-data-services) by Cory Rylan. However, we also make state transitions explicit through actions while keeping each state read-only with pure reducer functions.
 
-In order to use our custom store now for the todo app, we have to register it as a provide while passing an application-specific reducer. This can be done with a [value provider](https://angular.io/guide/dependency-injection-providers#value-providers) as follows. The actual NgRx is doing pretty much the same thing, it's just wrapped in another module.
+In order to use our custom store now for the todo app, we have to register it as a provider while passing an application-specific reducer. This can be done with a [value provider](https://angular.io/guide/dependency-injection-providers#value-providers) as follows. The actual NgRx is doing pretty much the same thing, it's just wrapped in another module.
 
 ```typescript
 ...
@@ -272,7 +272,7 @@ export class AppComponent  {
 
 ![Effects are triggered by dispatched actions. After performing async tasks they also dispatch actions again.](./how-ngrx-effects-works.png)
 
-NgRx effects are managing asynchronous side-effects with RxJS observables resulting in actions being dispatched to the store. Since reducers are pure functions, they can't have side-effects - so things like HTTP requests aren't allowed. However, actions can be dispatched at anytime, for example as the result of an HTTP request that saves a todo to the server. Here's a corresponding action definition:
+NgRx effects are managing asynchronous side-effects with [RxJS observables](https://rxjs-dev.firebaseapp.com/guide/observable) resulting in actions being dispatched to the store. Since reducers are pure functions, they can't have side-effects - so things like HTTP requests aren't allowed. However, actions can be dispatched at anytime, for example as the result of an HTTP request that saves a todo to the server. Here's a corresponding action definition:
 
 ```typescript
 // todos.actions.ts
@@ -300,7 +300,7 @@ this.http.post<Todo>('/todos', todo).subscribe((saved) => {
 })
 ```
 
-Yet, with the current setup, we can't really run this call before the reducer creates the actual todo. Therefore we'd need to wait for the `'ADD'` action to be processed. For this we need a way to hook into all dispatched actions. With some adjustments to our store implementation, we can simply expose another observable of actions:
+Yet, with the current setup, we can't really run this call before the reducer creates the actual todo. Therefore we'd need to wait for the `'ADD'` action to be processed. For this we need a way to hook into all dispatched actions. With some adjustments to our store implementation, we can simply expose another observable of actions through a regular [RxJS subject](https://rxjs-dev.firebaseapp.com/guide/subject):
 
 ```typescript
 // store.ts
@@ -391,11 +391,16 @@ case "SAVED":
   };
 ```
 
-## Wrapping up
+## Learning NgRx
 
-While it's fun and definitely a good learning experience to implement NgRx store and effects yourself, you should definitely stick with the official library for real Angular apps. This way you'll get a tested and type-safe implementation with a lot more features.
+While it's fun and a good learning experience to implement NgRx store and effects yourself, you should definitely stick with the official library for real Angular apps. This way you'll get a tested and type-safe implementation with a lot more features.
 
-Hopefully I was able to shed some light on the inner workings of NgRx and thus make the library more approachable for you. [Here's a StackBlitz](https://stackblitz.com/edit/ngrx-custom-implementation) showing the full implementation.
+[[info]]
+| If you want to learn solid NgRx foundations, you've come to the right place, because I'm righting a book on that and you can **[get it for free](https://gumroad.com/l/angular-ngrx-book)** 📖. 
+
+I'm pouring all my experience into this complete learning resource while allowing you to pay what you want - it's my main goal to help people to gain proper software development skills, so share the link to the book with anyone who might like it.
+
+Either way, hopefully I was able to shed some light on the inner workings of NgRx and thus make the library more approachable for you. [Here's a StackBlitz](https://stackblitz.com/edit/ngrx-custom-implementation) showing the full implementation.
 
 <iframe 
 style="width: 100%; height: 550px"

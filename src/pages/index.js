@@ -41,7 +41,7 @@ const IndexPage = ({ data }) => {
             Pay what you want for the complete learning resource on state
             management with NgRx Store &amp; Effects in Angular
           </p>
-          <a class="btn" href="https://gumroad.com/l/ngrx-book">
+          <a class="btn" href="https://gumroad.com/l/angular-ngrx-book">
             Get the Book
           </a>
         </div>
@@ -127,7 +127,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    book: file(relativePath: { eq: "book_mockup.png" }) {
+    book: file(relativePath: { eq: "ngrx-book-cover.png" }) {
       childImageSharp {
         fixed(height: 280, quality: 100) {
           ...GatsbyImageSharpFixed_withWebp
