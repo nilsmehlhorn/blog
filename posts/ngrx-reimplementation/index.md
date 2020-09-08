@@ -302,7 +302,7 @@ this.http.post<Todo>('/todos', todo).subscribe((saved) => {
 
 Yet, with the current setup, we can't really run this call before the reducer creates the actual todo. Therefore we'd need to wait for the `'ADD'` action to be processed. For this we need a way to hook into all dispatched actions. With some adjustments to our store implementation, we can simply expose another observable of actions through a regular [RxJS subject](https://rxjs-dev.firebaseapp.com/guide/subject):
 
-```typescript
+```typescript{8,12,19,20,27}
 // store.ts
 import { Injectable } from '@angular/core'
 import { Observable, BehaviorSubject, Subject } from 'rxjs'
