@@ -1,9 +1,9 @@
 ---
 path: '/posts/how-ngrx-store-works'
-date: '2020-09-05'
+date: '2020-09-10'
 title: 'How NgRx Store & Effects Work: 20 LoC Re-Implementation'
 published: true
-tags: ['web development', 'angular']
+tags: ['web development', 'frontend', 'angular']
 keywords: ['angular', 'ngrx', 'store', 'redux', 'rxjs', 'observable']
 banner: './how-ngrx-works-banner.jpg'
 description: "Let's learn how NgRx works and where it stores data by creating a custom Redux implementation for Angular with an RxJS Behavior Subject."
