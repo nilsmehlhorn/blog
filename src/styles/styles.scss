@@ -26,6 +26,8 @@ button {
 }
 
 .btn {
+  display: block;
+  width: fit-content;
   background-color: $accent-color;
   padding: 12px $gap;
   border-radius: 4px;
@@ -130,6 +132,21 @@ button {
     }
   }
 }
+
+.gatsby-highlight-code-line {
+  background-color: $accent-color-light;
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid #77a354;
+
+  .token.operator {
+    background: none
+  }
+}
+
 
 @media all and (min-width: $break-m) {
   .content {

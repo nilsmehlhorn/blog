@@ -6,14 +6,27 @@
   grid-template-rows: auto 1fr;
   grid-gap: $gap;
   grid-auto-columns: min-content;
+
+  .post {
+    min-width: 0;
+  }
 }
 
-@media screen and (min-width: $break-m) {
+@include lg-m {
+  .posts {
+    grid-template-columns: 1fr 1fr;
+    .post:first-of-type {
+      grid-column: 1 / 2;
+    }
+    margin: 0 0 $gap 0;
+  }
+}
+
+@include lg-l {
   .posts {
     grid-template-columns: 1fr 1fr 1fr;
     .post:first-of-type {
       grid-column: 1 / 3;
     }
-    margin: 0 0 $gap 0;
   }
 }

@@ -36,6 +36,7 @@ class Header extends React.Component {
             <FaBars className={styles.menuIcon} size={32} onClick={() => this.toggleNav()}/>
           </button>
           <nav className={navClasses}>
+            <a className={classes(styles.link, styles.bookLink)} href={'https://gumroad.com/l/angular-ngrx-book'}>NgRx Book</a>
             <Link className={styles.link} to={'/posts'}>Blog</Link>
             <Link className={styles.link} to={'/talks'}>Talks</Link>
             <Link className={styles.link} to={'/newsletter'}>Mailing List</Link>

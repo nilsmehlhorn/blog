@@ -1,11 +1,12 @@
-@import "../styles/variables";
+@import '../styles/variables';
 
 .writing {
   height: 128px;
 }
 
 .cta {
-  margin: $gap auto;display: flex;
+  margin: $gap auto;
+  display: flex;
   justify-content: center;
   width: 100%;
 }
@@ -31,6 +32,47 @@
   grid-gap: $gap;
 }
 
+.bookBanner {
+  background-color: $light-gray;
+  margin: 64px auto 0;
+  width: 100%;
+  padding: $content-padding;
+  .bookBannerContent {
+    width: 100%;
+    margin-bottom: 32px;
+    max-width: $container-width;
+    color: white;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-bottom: $half-gap;
+
+    .bookDesc {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .bookImg {
+      display: flex;
+    }
+
+    img {
+      margin: 0;
+    }
+
+    h1 {
+      margin: 0 0 $half-gap;
+    }
+
+    p {
+      font-size: 1.2rem;
+    }
+  }
+}
+
 .bio {
   margin-top: $half-gap;
 }
@@ -48,8 +90,8 @@
     opacity: 0.5;
     filter: blur(1px);
     position: absolute;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     bottom: 0;
     right: 0;
     width: 100%;
@@ -62,8 +104,21 @@
   }
 }
 
+@include lg-m() {
+  .bookBanner {
+    margin: 0 auto;
 
-@media screen and (min-width: $break-m) {
+    .bookBannerContent {
+      flex-direction: row;
+
+      .bookDesc {
+        align-items: flex-start;
+        text-align: left;
+      }
+
+    }
+  }
+
   .posts {
     grid-template-columns: 1fr 1fr 1fr;
     .post {

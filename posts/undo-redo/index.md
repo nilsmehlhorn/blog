@@ -50,6 +50,9 @@ You'll quickly end up at
 in your app. It's a good way to plan ahead, yet, as we're about to see,
 it may not fulfill all your needs out-of-the-box.
 
+[[info]]
+| **[📖 I'm writing a book on NgRx and you can get it for free!](https://gumroad.com/l/angular-ngrx-book)** Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
+
 In order to have a pluggable solution, undo-redo is probably best
 implemented as a
 [middleware](https://redux.js.org/advanced/middleware) or

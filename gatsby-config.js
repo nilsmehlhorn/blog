@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: 'Nils Mehlhorn',
-    description: 'Product Developer. Freelance Software Consultant. Blogger.',
+    description: 'Founder. Software Engineer. Author. Speaker',
     author: '@n_mehlhorn',
     baseUrl: 'https://nils-mehlhorn.de',
     siteUrl: 'https://nils-mehlhorn.de'
@@ -41,16 +41,28 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-copy-linked-files`,
-          `gatsby-remark-table-of-contents`,
-          `gatsby-remark-autolink-headers`,
+          {
+            resolve: `gatsby-remark-table-of-contents`,
+            options: {
+              fromHeading: 1,
+              toHeading: 2,
+            },
+          },
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              isIconAfterHeader: true,
+            },
+          },
           `gatsby-remark-prismjs`,
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 640,
+              maxWidth: 944,
               showCaptions: true,
               linkImagesToOriginal: false,
-              backgroundColor: 'transparent'
+              backgroundColor: 'transparent',
+              withWebp: true
             }
           },
           {
