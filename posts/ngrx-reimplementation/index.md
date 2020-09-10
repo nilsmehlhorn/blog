@@ -176,6 +176,7 @@ Eventually, the BehaviorSubject is exposed in form of the more restrictive `Obse
 So, here you go, **NgRx Store re-implementation in less than 20 lines of code**:
 
 ```typescript
+// store.ts
 import { Injectable } from '@angular/core'
 import { Observable, BehaviorSubject } from 'rxjs'
 
@@ -208,6 +209,7 @@ Note that the actual NgRx will allow you to register multiple reducers, however,
 In order to use our custom store now for the todo app, we have to register it as a provider while passing an application-specific reducer. This can be done with a [value provider](https://angular.io/guide/dependency-injection-providers#value-providers) as follows. The actual NgRx is doing pretty much the same thing, it's just wrapped in another module.
 
 ```typescript
+// app.module.ts
 ...
 import { Store } from './store/store'
 import { State } from './store/todos.state'
@@ -252,6 +254,7 @@ export class AppComponent  {
 ```
 
 ```html
+<!-- app.component.html -->
 <label for="text">Todo</label>
 <input #textInput type="text" id="text" />
 <button (click)="add(textInput.value)">Add</button>
