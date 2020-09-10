@@ -41,7 +41,7 @@ const IndexPage = ({ data }) => {
             Pay what you want for the complete learning resource on state
             management with NgRx Store &amp; Effects in Angular
           </p>
-          <a class="btn" href="https://gumroad.com/l/angular-ngrx-book">
+          <a className="btn" href="https://gumroad.com/l/angular-ngrx-book">
             Get the Book
           </a>
         </div>
