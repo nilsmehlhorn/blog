@@ -216,7 +216,7 @@ Since HTTP has a moderate overhead per request, it'd be better fit for _lower_ r
 
 Yet, what are _lower_ and _higher_ request frequencies? I'd argue that with a debounced implementation based on user-changes, the save frequency won't be all that high. Therefore I'd advise you to try out an HTTP-based solution before jumping into a new protocol involving long-lived connections that your servers and proxies need to support - possibly at a certain scale. Make sure though, your server is using [HTTP/2](https://developer.mozilla.org/en-US/docs/Glossary/HTTP_2) to get the most out of it.
 
-For [SceneLab](https://scenelab.io) we went with HTTP while the payload size is usually around a few kilobytes. Try it out in the [app](app.scenelab.io) and see how it feels (you need to be logged-in for autosaving to the server).
+For [SceneLab](https://scenelab.io) we went with HTTP while the payload size is usually around a few kilobytes. Try it out in the [app](https://app.scenelab.io) and see how it feels (you need to be logged-in for autosaving to the server).
 
 As a reference, [Google Docs](https://www.google.de/intl/de/docs/about/) is also sending HTTP POST requests on every single keystroke.
 
