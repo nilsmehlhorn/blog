@@ -5,7 +5,7 @@ title: 'How to Navigate to Previous Page in Angular'
 published: true
 tags: ['web development', 'frontend', 'angular']
 keywords: ['router', 'history', 'back button', 'user experience', 'navigation']
-description: "Here's how you implement something similar to the browser back button to navigate to the previous page in Angular."
+description: "Here's how you implement a back button to navigate to the previous page in Angular. We'll explore static and dynamic routing approaches in a live example."
 banner: './banner.jpg'
 ---
 
