@@ -23,24 +23,12 @@ const routes: Routes = [
     path: 'users',
     component: UsersComponent,
     children: [
-      {
-        path: '',
-        component: UserListComponent,
-      },
-      {
-        path: 'active',
-        component: ActiveUsersComponent,
-      },
-      {
-        path: ':id',
-        component: UserDetailComponent,
-      },
+      { path: '', component: UserListComponent },
+      { path: 'active', component: ActiveUsersComponent },
+      { path: ':id', component: UserDetailComponent },
     ],
   },
-  {
-    path: '**',
-    redirectTo: 'users',
-  },
+  { path: '**', redirectTo: 'users' },
 ]
 ```
 
@@ -166,21 +154,19 @@ export class UserDetailComponent {
 Additionally, we could wrap the existing solution in an Angular directive for easy re-use. Simply inject the `NavigationService` and call the `back()` method using a [HostListener](https://angular.io/api/core/HostListener):
 
 ```typescript
-import { Directive, HostListener } from '@angular/core';
-import { NavigationService } from './navigation.service';
+import { Directive, HostListener } from '@angular/core'
+import { NavigationService } from './navigation.service'
 
 @Directive({
-  selector: '[backButton]'
+  selector: '[backButton]',
 })
 export class BackButtonDirective {
-
-  constructor(private navigation: NavigationService) { }
+  constructor(private navigation: NavigationService) {}
 
   @HostListener('click')
   onClick(): void {
-    this.navigation.back();
+    this.navigation.back()
   }
-
 }
 ```
 
@@ -192,10 +178,9 @@ Afterwards you can apply the directive in component templates like this:
 
 ## Live Example
 
-Here's a StackBlitz showing examples for all approaches. If you've got any questions post a comment below  or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). Also follow me there and join my [mailing list](https://nils-mehlhorn.de/newsletter) to get notified when I'm posting something new.
+Here's a StackBlitz showing examples for all approaches. If you've got any questions post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn). Also follow me there and join my [mailing list](https://nils-mehlhorn.de/newsletter) to get notified when I'm posting something new.
 
 <iframe 
 style="width: 100%; height: 550px"
 src="https://stackblitz.com/edit/angular-back-previous-page?ctl=1&embed=1&view=preview">
 </iframe>
-
