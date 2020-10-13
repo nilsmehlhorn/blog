@@ -1,6 +1,6 @@
 ---
 path: '/posts/angular-navigate-back-previous-page'
-date: '2020-10-12'
+date: '2020-10-13'
 title: 'How to Navigate to Previous Page in Angular'
 published: true
 tags: ['web development', 'frontend', 'angular']
@@ -13,7 +13,7 @@ banner: './banner.jpg'
 
 ```
 
-Sometimes we would like to offer users a way to navigate back to where they had been before. Generally, this is what the browser's back button is for, but we can also provide the same feature in other places. For example when there's a list of users linked to a detail view and youwant to display some kind of back button to return to the list. Let's explore a couple different approaches - scroll to the end to see a working example with all of them.
+Sometimes we would like to offer users a way to navigate back to where they had been before. Generally, this is what the browser's back button is for, but we can also provide the same feature in other places. For example when there's a list of users linked to a detail view and you want to display some kind of back button to return to the list. Let's explore a couple different approaches - scroll to the end to see a working example with all of them.
 
 This is how I'm setting up my routes for this example. Note that `UserListComponent` is supposed to contain a list of all users, while `ActiveUsersComponent` contains only some. Both components will link to `UserDetailComponent` from which we'd then like to navigate back.
 
@@ -34,7 +34,7 @@ const routes: Routes = [
 
 ## Static Back Navigation with Routing
 
-One solution would be defining a router link in the detail component and explicitly navigating back to the parent:
+One solution would be defining a router link in the detail component and explicitly navigating back to the parent with an absolute route:
 
 ```html
 <a routerLink="/users">Back with Absolute Routing</a>
@@ -71,7 +71,7 @@ back(): void {
 
 However, this will only work when the list component is registered as the child with an empty path or when there's a redirect to the list component. Basically, this approach just navigates one layer up in the the routing hierarchy.
 
-Both absolute and relative routes won't necessarily go back to where the user has been before. They provide static navigation and it's already clear during development where the corresponding navigations will end up. Therefore, it's not easily possible to go back to `/users/active` even when this is where the user was before navigating to the detail view.
+Both absolute and relative routes won't necessarily go back to where the user has been before. They provide static navigation and it's already clear during development where the corresponding navigations will end up. Therefore, it's not easily possible to go back to `/users/active` even when this is where the user was before navigating to the detail view. We need to find another solution to facilitate this behavior.
 
 [[info]]
 | Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth Angular knowledge
@@ -104,7 +104,7 @@ This solves the problem we had before and the user can now navigate back to the 
 5. `/users/1`: Click on "back with location"
 6. `/users/active`: Also works!
 
-Sadly, there's one edge case: if the application is started on the detail router after opening the browser or a new tab there's no entry in the history to go back to. In that case `location.back()` will throw the user out of your Angular app. There's also no API for directly inspecting the browser history as that might pose security issues, but there's still a way how we can fix this.
+Sadly, there's one edge case: if the application is started on the detail router after opening the browser or a new tab there won't be an entry in the history to go back to. In that case `location.back()` will throw the user out of your Angular app. There's also no API for directly inspecting the browser history as that might pose security issues, but there's still a way how we can fix this.
 
 We'll create a service for wrapping the back navigation. There we'll also be listening to router events of type [NavigationEnd](https://angular.io/api/router/NavigationEnd) to manage an app-specific navigation history. Now, if the history still contains entries after popping the current URL off of the stack, we can safely navigate back. Otherwise we're falling back to the application route:
 
