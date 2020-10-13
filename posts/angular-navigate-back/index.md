@@ -32,6 +32,9 @@ const routes: Routes = [
 ]
 ```
 
+[[info]]
+| Trying to build a table of users or other entities with Angular Material? Checkout my article on implementing a [datasource for server-side paging, sorting and filtering](https://nils-mehlhorn.de/posts/angular-material-pagination-datasource).
+
 ## Static Back Navigation with Routing
 
 One solution would be defining a router link in the detail component and explicitly navigating back to the parent with an absolute route:
