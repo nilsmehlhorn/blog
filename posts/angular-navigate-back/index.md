@@ -48,7 +48,7 @@ Alternatively, you could also do this programmatically from the component class,
 ```typescript
 import { Router } from '@angular/router'
 
-@Component({})
+@Component({...})
 export class UserDetailComponent {
   constructor(private router: Router) {}
 
@@ -88,7 +88,7 @@ This service has a `back()` method which does exactly what we want: it navigates
 ```typescript
 import { Location } from '@angular/common'
 
-@Component({})
+@Component({...})
 export class UserDetailComponent {
   constructor(private location: Location) {}
 
@@ -116,7 +116,7 @@ import { Injectable } from '@angular/core'
 import { Location } from '@angular/common'
 import { Router, NavigationEnd } from '@angular/router'
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class NavigationService {
   private history: string[] = []
 
@@ -144,7 +144,7 @@ We can then inject the `NavigationService` into components and call it's custom 
 ```typescript
 import { NavigationService } from './navigation.service'
 
-@Component({})
+@Component({...})
 export class UserDetailComponent {
   constructor(private navigation: NavigationService) {}
 
