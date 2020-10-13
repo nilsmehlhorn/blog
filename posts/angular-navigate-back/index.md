@@ -72,7 +72,7 @@ back(): void {
 <a routerLink="..">Back with Relative Routing</a>
 ```
 
-However, this will only work when the list component is registered as the child with an empty path or when there's a redirect to the list component. Basically, this approach just navigates one layer up in the the routing hierarchy.
+However, this will only work when the list component is registered as the child with an empty path like I've done in the route configuration above. Otherwise you'd have to append the dots with the child route that you're targeting (e.g. `../list`) Basically, this approach just navigates one layer up in the the routing hierarchy.
 
 Both absolute and relative routes won't necessarily go back to where the user has been before. They provide static navigation and it's already clear during development where the corresponding navigations will end up. Therefore, it's not easily possible to go back to `/users/active` even when this is where the user was before navigating to the detail view. We need to find another solution to facilitate this behavior.
 
