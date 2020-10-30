@@ -1,11 +1,28 @@
 - talk:
+    name: "Undo-Redo with Angular & NgRx"
+    date: '2020-10-28'
+    location: 'iJS Munich'
+    link: 'https://javascript-conference.com/angular/undo-redo-with-ngrx-for-a-better-ux-in-angular-apps/'
+    slides: '/slides/undo_redo_angular_ngrx_ijs.pdf'
+    img: './undo_redo_angular_ngrx_ijs.png'
+    description: 'Talk on implementing undo-redo in Angular with NgRx and immer.js'
+- talk:
+    name: "Observables + Structural Directives = ❤️"
+    date: '2020-10-28'
+    location: 'iJS Munich'
+    link: 'https://javascript-conference.com/angular/observables-structural-directives-%e2%9d%a4/'
+    slides: '/slides/observables_directives_ijs.pdf'
+    img: './observables_directives_ijs.png'
+    description: 'Talk on handling observables with and without structural directives'
+- talk:
     name: "Observables & Structural Directives"
     date: '2020-03-18'
     location: 'Angular Ruhr Meetup'
     link: 'https://www.meetup.com/de-DE/Angular-Ruhr/events/269456375/'
+    video: 'https://youtu.be/-a568_NtAtI?t=1170'
     slides: '/slides/observables_structural_directives_angular_ruhr.pdf'
     img: './angular_ruhr_observables_structural_directives.png'
-    description: 'Remote talk on handling observables with and without structural directives'
+    description: 'Talk on handling observables with and without structural directives'
 - talk:
     name: "Let's talk about Node.js"
     date: '2019-10-21'

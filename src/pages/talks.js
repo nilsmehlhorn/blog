@@ -45,6 +45,7 @@ export const pageQuery = graphql`
           talk {
             name
             link
+            video
             date(formatString: "MMMM DD, YYYY")
             location
             description
