@@ -1,5 +1,5 @@
 /short/ymmFt https://twitter.com/intent/tweet?text=Read%20the%20NgRx%20book%20for%20reactive%20state%20management%20in%20Angular%20by%20%40n_mehlhorn%20%23ngrxbook%20%23javascript%20%23typescript&url=https%3A%2F%2Fgumroad.com%2Fl%2Fangular-ngrx-book
-/short/VjGPF https://gumroad.com/l/angular-ngrx-book
+/short/VjGPF https://gumroad.com/l/angular-ngrx-book?utm_source=ngrx-book&utm_medium=ebook&utm_content=Share+This+Book
 /short/cgyXp https://twitter.com/n_mehlhorn
 /short/u7iVX https://rxjs.dev/api/index/class/BehaviorSubject
 /short/EQsEf https://martinfowler.com/bliki/CQRS.html
@@ -10,7 +10,7 @@
 /short/vZ9uh https://firebase.google.com/
 /short/KfuDk https://www.youtube.com/watch?v=Azus3_CEkpw
 /short/JSLuV https://rxjs.dev/guide/observable
-/short/WXFuM https://nils-mehlhorn.de/posts/how-ngrx-store-works
+/short/WXFuM https://nils-mehlhorn.de/posts/how-ngrx-store-works?utm_source=ngrx-book&utm_medium=ebook&utm_content=Concepts+%26+Terminology
 /short/NpuDN https://ngrx.io/guide/component
 /short/mvq87 https://ngrx.io/guide/component-store
 /short/KLXfH https://ngrx.io/about
@@ -252,7 +252,7 @@
 /short/5xk3w https://angular.io/api/core/ChangeDetectorRef
 /short/s2FUn https://github.com/rx-angular/rx-angular/tree/master/libs/template
 /short/ZYsw9 https://angular.io/guide/built-in-directives#ngfor
-/short/2WvQY https://nils-mehlhorn.de/posts/angular-material-pagination-datasource
+/short/2WvQY https://nils-mehlhorn.de/posts/angular-material-pagination-datasource?utm_source=ngrx-book&utm_medium=ebook&utm_content=Efficient+Handling+of+Remote+Data
 /short/2VtGR https://github.com/nilsmehlhorn/ngrx-issue-tracker/commit/566241b2f75f12b589a04d26e289c95f002c50a5
 /short/wf2NF https://github.com/nilsmehlhorn/ngrx-issue-tracker/tree/566241b2f75f12b589a04d26e289c95f002c50a5
 /short/Hqrwh https://stackblitz.com/github/nilsmehlhorn/ngrx-issue-tracker/tree/566241b2f75f12b589a04d26e289c95f002c50a5
@@ -276,7 +276,7 @@
 /short/Z99Kc https://angular.io/guide/dependency-injection-in-action#supply-a-custom-provider-with-inject
 /short/AveGz https://www.learnrxjs.io/learn-rxjs/operators/filtering/audittime
 /short/WPKWh https://ngrx.io/guide/store/recipes/injecting
-/short/RUJit https://nils-mehlhorn.de/posts/angular-autosave-form-services-ngrx
+/short/RUJit https://nils-mehlhorn.de/posts/angular-autosave-form-services-ngrx?utm_source=ngrx-book&utm_medium=ebook&utm_content=Re-Hydration
 /short/SMDoE https://github.com/nilsmehlhorn/ngrx-issue-tracker/commit/dc46f3c8182589f47f12b53c5fdb90c8cf9fc9e4
 /short/Zy7vK https://github.com/nilsmehlhorn/ngrx-issue-tracker/tree/dc46f3c8182589f47f12b53c5fdb90c8cf9fc9e4
 /short/HxBJ7 https://stackblitz.com/github/nilsmehlhorn/ngrx-issue-tracker/tree/dc46f3c8182589f47f12b53c5fdb90c8cf9fc9e4
