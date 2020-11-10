@@ -97,17 +97,27 @@ button {
   max-width: $container-width-m;
 }
 
-.custom-block.info {
-  background-color: white;
-  margin: 0 (-$half-gap) 1.5rem (-$half-gap);
-  padding: $half-gap $gap;
-  border-left: 0.25rem solid $accent-color;
-  font-style: italic;
-
+.custom-block {
   .custom-block-body {
     p {
       margin: 0;
     }
+  }
+  background-color: white;
+  margin: 0 (-$half-gap) 1.5rem (-$half-gap);
+  padding: $half-gap $gap;
+  border-left: 0.25rem solid;
+
+  &.info {
+    border-left-color:  $accent-color;
+  }
+
+  &.warning {
+    border-left-color: $orange;
+  }
+
+  &.book {
+    border-left-color: $purple;
   }
 }
 
@@ -153,7 +163,7 @@ button {
     margin: 0 auto;
   }
 
-  .custom-block.info {
+  .custom-block {
     @include elevation;
     margin: 0 0 1.5rem 0;
   }
