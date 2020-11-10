@@ -72,6 +72,14 @@ module.exports = {
                 info: {
                   classes: 'info',
                   title: 'optional'
+                },
+                warning: {
+                  classes: 'warning',
+                  title: 'optional'
+                },
+                book: {
+                  classes: 'book',
+                  title: 'optional'
                 }
               }
             }
