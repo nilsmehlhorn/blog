@@ -41,7 +41,7 @@ Here's how this looks in practice:
 You can't really ask your users to install a browser extension. So, read on if you want to re-hydrate the store to improve not only the developer experience but user experience as well.
 
 [[info]]
-| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth Angula knowledge
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth Angular knowledge
 
 ## Re-Hydration Meta-Reducer
 
