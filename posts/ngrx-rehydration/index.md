@@ -1,7 +1,7 @@
 ---
 path: '/posts/ngrx-keep-state-refresh'
 date: '2020-11-10'
-title: 'How to Keep NgRx State On Refresh'
+title: 'How to Keep NgRx State on Refresh'
 published: true
 tags: ['web development', 'frontend', 'angular']
 keywords: ['angular', 'ngrx', 'store', 'redux', 'rxjs', 'observable']
