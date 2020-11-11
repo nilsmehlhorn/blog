@@ -21,6 +21,8 @@ There are some pitfalls to watch out for when applying this pattern. For one thi
 
 Also, keep in mind that the shape of your application state can change between different releases. Meanwhile, your clients will have old versions in their storage - carelessly re-hydrating those will probably break your app. Possible solutions might involve tracking some kind of version or deep-checking state keys. Depending on the outcome you could discard or migrate serialized states.
 
+Lastly, you should consider that refreshing the page is usually the go-to way of resetting an app. So, watch out not to lock your users in a broke state.
+
 For this example we'll develop a simplified solution that saves the whole root state to the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage).
 
 ## Persist with Redux DevTools
