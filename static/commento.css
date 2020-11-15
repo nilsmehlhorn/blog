@@ -1,3 +1,7 @@
 .commento-root .commento-submit-button {
     background: #77a354;
 }
+
+img.commento-avatar-img {
+    margin-bottom: 0;
+}
