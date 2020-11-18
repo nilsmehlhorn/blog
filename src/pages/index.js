@@ -36,9 +36,9 @@ const IndexPage = ({ data }) => {
     <section className={styles.bookBanner}>
       <div className={styles.bookBannerContent}>
         <div className={styles.bookDesc}>
-          <h1>Free Book: Learn NgRx for Angular</h1>
+          <h1>New Book: Learn NgRx for Angular</h1>
           <p>
-            Pay what you want for the complete learning resource on state
+            Get the complete learning resource on state
             management with NgRx Store &amp; Effects in Angular
           </p>
           <a className="btn" href="https://gumroad.com/l/angular-ngrx-book">

@@ -158,8 +158,8 @@ save$ = createEffect(() => this.actions$.pipe(
 
 Note that the save call could produce errors which you might want to [handle differently than NgRx](https://ngrx.io/guide/effects/lifecycle#resubscribe-on-error). By default it will re-subscribe to the effect observable up to 10 times.
 
-[[info]]
-| **[📖 I'm writing a book on NgRx and you can get it for free!](https://gumroad.com/l/angular-ngrx-book)** Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
+[[book]]
+| **[📕 I've written a book on NgRx.](https://gumroad.com/l/angular-ngrx-book)** Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
 
 Meanwhile, we can also manage a flag in our state indicating to the user that we are currently saving their data.
 
