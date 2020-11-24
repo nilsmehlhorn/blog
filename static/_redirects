@@ -342,7 +342,6 @@
 /short/6sje5 https://ngrx.io/api/data/EntityAction
 /short/ogE8L https://ngrx.io/api/data/EntityCollectionReducer
 /short/hYJVd https://ngrx.io/api/data/EntityCollection
-/short/5jjrH https://ngrx.io/api/data/EntityDataService
 /short/LAtTz https://ngrx.io/api/data/EntityEffects
 /short/gmEuQ https://ngrx.io/api/data/EntityCollectionService
 /short/GJoud https://ngrx.io/api/data/EntitySelectors
@@ -360,3 +359,4 @@
 /short/7xrXj https://angular-checklist.io
 /short/Sqz53 https://pandoc.org/
 /short/mkrJ5 https://excalidraw.com
+/short/hnQsZ https://ngrx.io/api/data/EntityCollectionDataService
