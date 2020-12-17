@@ -99,7 +99,10 @@ const initialState = {
 const reducer = createReducer(initialState,
   on(addTodo, (state, { todo }) => {
 -   state.todos.set(todo.id, todo)
-+   state.todos = {...state.todos, [todo.id]: todo}
++   return {
++      ...state,
++      todos: {...state.todos, [todo.id]: todo}
++   }
   })
 );
 ```
@@ -123,12 +126,16 @@ const initialState = {
 
 const reducer = createReducer(initialState,
   on(selectTodo, (state, { id }) => {
--   state.selected.set(todo.id, todo)
-+   if (!state.selected.includes(id)) {
-+     state.selected = [...state.selected, id]
+-   state.selected.add(id)
++   return {
++     ...state,
++     selected: state.selected.includes(id) ? state.selected : [...state.selected, id]
 +   }
 +   // OR
-+   state.selected = Array.from(new Set([...state.selected, id]))
++   return {
++     ...state,
++     selected: Array.from(new Set([...state.selected, id]))
++   }
   })
 );
 ```
@@ -195,11 +202,14 @@ const reducer = createReducer(
   initialState,
   on(changeText, (state, { id, text }) => {
     const todo = state.todos[id]
-    state.todos = {
-      ...state.todos,
-      [id]: {
-        ...todo,
-        text,
+    return {
+      ...state,
+      todos: {
+        ...state.todos,
+        [id]: {
+          ...todo,
+          text,
+        },
       },
     }
   })
@@ -231,7 +241,8 @@ interface Todo {
   text: string
   done: boolean
   comments?: string[]
-  //  comments$: Observable<string[]> <- don't do something like this
+  // don't add something like this
+  comments$: Observable<string[]>
 }
 
 interface State {
@@ -257,12 +268,22 @@ const loadCommentsSuccess = createAction(
   props<{ id: string; comments: string[] }>()
 )
 
+const reducer = createReducer(
+  initialState,
+  on(loadCommentsSuccess, (state, { id, comments }) => ({
+    ...state,
+    comments: {
+      [id]: comments,
+    },
+  }))
+)
+
 @Injectable()
 class CommentEffects {
   comments$ = createEffect(() =>
     this.action$.pipe(
       ofType(loadComments),
-      switchMap(({ id }) =>
+      mergeMap(({ id }) =>
         this.http.get<string[]>(`/todos/${id}/comments`)
       ).pipe(map((comments) => loadCommentsSuccess({ id, comments })))
     )
