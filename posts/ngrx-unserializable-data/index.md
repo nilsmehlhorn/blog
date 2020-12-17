@@ -259,11 +259,13 @@ const loadCommentsSuccess = createAction(
 
 @Injectable()
 class CommentEffects {
-  comments$ = this.action$.pipe(
-    ofType(loadComments),
-    switchMap(({ id }) =>
-      this.http.get<string[]>(`/todos/${id}/comments`)
-    ).pipe(map((comments) => loadCommentsSuccess({ id, comments })))
+  comments$ = createEffect(() =>
+    this.action$.pipe(
+      ofType(loadComments),
+      switchMap(({ id }) =>
+        this.http.get<string[]>(`/todos/${id}/comments`)
+      ).pipe(map((comments) => loadCommentsSuccess({ id, comments })))
+    )
   )
 
   constructor(private action$: Actions, private http: HttpClient) {}
@@ -388,7 +390,6 @@ You'd have to populate such a service through effects while making sure that any
 ## Conclusion
 
 Serializibility is an important aspect when managing state with NgRx. While it requires us to deviate from certain types there's a serializable replacement or at least a feasible workaround for every case. If your specific use-case is not covered, drop me a comment and we'll add it.
-
 
 [[book]]
 | **[📕 Get the NgRx book to master all aspects of the Angular state management solution](https://gumroad.com/l/angular-ngrx-book)**
