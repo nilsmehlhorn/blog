@@ -15,14 +15,12 @@ description: "Let's learn how NgRx works and where it stores data by creating a 
 
 A fundamental aspect of managing state with NgRx is that all state data needs to be serializable. Runtime state objects are serializable when they can be predictably saved to a persistent storage or transferred over network. In practice, JavaScript objects are mostly serialized to JSON and eventually we'll want our NgRx state to be almost identical to its JSON representation. This way, state can easily be serialized with [`JSON.stringify()`](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) and de-serialized with [`JSON.parse()`](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) without errors or loss of information. Effectively, the result of `JSON.parse(JSON.stringify(state))` should be equal to the state itself.
 
+In addition to keeping the state inside the NgRx store serializable, the same considerations also apply for actions and their payloads. Serialiazibilty then enables the use of things like the [Redux DevTools](https://github.com/reduxjs/redux-devtools) or [persisting NgRx state to the local storage](https://nils-mehlhorn.de/posts/ngrx-keep-state-refresh). Other than that, it works well with other functional programming concepts embraced by NgRx like immutability or separation of logic and data.
+
 [[book]]
 | **[📕 I've written a book on NgRx.](https://gumroad.com/l/angular-ngrx-book)** Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
 
-Serialiazibilty enables the use of things like the [Redux DevTools](https://github.com/reduxjs/redux-devtools) or [persisting NgRx state to the local storage](https://nils-mehlhorn.de/posts/ngrx-keep-state-refresh). Other than that, it works well with other functional programming concepts embraced by NgRx like immutability or separation of logic and data.
-
-In addition to keeping the state inside the NgRx store serializable, the same considerations also apply for actions and their payloads.
-
-NgRx provides certain [runtime checks](https://ngrx.io/guide/store/configuration/runtime-checks) for verifying that your state and actions are serialiazble. However, per default these aren't turned on and you'll probably only notice problems with serializiblity once you run into bugs. Therefore it's advisable to active the corresponding runtime checks for [`strictStateSerializability`](https://ngrx.io/guide/store/configuration/runtime-checks#strictstateserializability) and [`strictActionSerializability`](https://ngrx.io/guide/store/configuration/runtime-checks#strictactionserializability) - actually it's probably best to activate all available checks while you're at it. This can be done by passing a second configuration parameter to the [`StoreModule`](https://ngrx.io/api/store/StoreModule) during reducer registration:
+NgRx provides certain [runtime checks](https://ngrx.io/guide/store/configuration/runtime-checks) for verifying that your state and actions are serialiazble. However, per default these aren't turned on and you'll probably only notice problems with serializiblity once you run into bugs. Therefore it's advisable to activate the corresponding runtime checks for [`strictStateSerializability`](https://ngrx.io/guide/store/configuration/runtime-checks#strictstateserializability) and [`strictActionSerializability`](https://ngrx.io/guide/store/configuration/runtime-checks#strictactionserializability) - actually it's probably best to activate all available checks while you're at it. This can be done by passing a second configuration parameter to the [`StoreModule`](https://ngrx.io/api/store/StoreModule) during reducer registration:
 
 ```typescript
 @NgModule({
@@ -55,7 +53,7 @@ These errors tell us exactly what's wrong, so let's figure out how to fix it.
 
 ## What is Serializable and What's Not?
 
-First off, here's an list of types that are generally deemed serializable by NgRx and which can therefore be safely stored in the state - note that I'm referring to the JavaScript runtime types:
+First off, here's a list of types that are generally deemed serializable by NgRx and which can therefore be safely stored in the state - note that I'm referring to the JavaScript runtime types:
 
 - [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
 - [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number)
@@ -81,9 +79,9 @@ Some types have good serializable replacements. So you can just use these while 
 
 ### Map: Object
 
-A [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is almost identical to a regular object - both implement a key-value store. Although they have a different API and there are some subtle differences (e.g. objects only accepts plain keys while maps work with any type of key), it's pretty straightforward to replace maps with regular objects. You can ensure type safety with [index types](https://www.typescriptlang.org/docs/handbook/interfaces.html#indexable-types) or leverage TypeScript's [`Record<Keys, Type>`](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeystype).
+A [`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) is almost identical to a regular object - both implement a key-value store. Although they have a different API and there are some subtle differences (e.g. objects only accepts plain keys while maps work with any type of key), it's pretty straightforward to replace maps with regular objects in most cases. You can ensure type safety with [index types](https://www.typescriptlang.org/docs/handbook/interfaces.html#indexable-types) or leverage TypeScript's [`Record<Keys, Type>`](https://www.typescriptlang.org/docs/handbook/utility-types.html#recordkeystype).
 
-Apart from not being serializable, maps are also not immutable. You mutate them by calling methods like `set()` or `delete()`. Leveraging objects and the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) is therefore the better choice.
+Apart from not being serializable, maps are also not immutable. You mutate them by calling methods like `set()` or `delete()`. Leveraging objects and the [spread syntax](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) is therefore definitely the better choice.
 
 ```diff
 type Todo = {id: number, text: string, done: boolean}
@@ -166,6 +164,10 @@ function schedule(id: number, date: Date) {
 
 As I've said, a classes prototype chain will get lost during serialization. However, usually the prototype contains instance methods which don't really fit the picture anyway when we're working with NgRx because that means we're embracing immutability. But we can replace class instances with regular objects and ensure type safety through interfaces or type aliases.
 
+Meanwhile we convert class methods into either reducer logic or external functions depending on what they do. Instance methods which would change the inner state of a class instance should become (immutable) reducer logic because that's where we update state in NgRx. On the other hand, when a class method only exists to derive information, we put it's code into a separate function. Such a function could then be used in a selector to derive a view model.
+
+Heres' an example with before and after:
+
 ```typescript
 class Todo {
   private id: string
@@ -181,8 +183,6 @@ class Todo {
   }
 }
 ```
-
-Meanwhile we convert class methods into either reducer logic or external functions depending on what they do. Instance methods which would change the inner state of a class instance should become (immutable) reducer logic because that's where we update state in NgRx. On the other hand, when a class method only exists to derive information, we put it's code into a separate function. Such a function could then be used in a selector to derive a view model.
 
 ```typescript
 interface Todo {
@@ -212,11 +212,11 @@ function getDescription(todo: Todo): string {
 
 ## Outsourcing Non-Serializable Data
 
-Some types don't really have a direct replacement which would be serializable. In that case we need workarounds in order to keep them out of the store. This part is usually a bit more tricky as solutions are specific to each use-case, but there's always a solution.
+Some types don't really have a direct replacement which would be serializable. In that case we need workarounds in order to keep them out of the store. This part is usually a bit more tricky as solutions are specific to each use-case, but there's always at least one solution.
 
 ### Function
 
-We already outsourced some functions while replacing classes with regular objects. You can apply the same approach for any other functions you've got floating around and invoke them where necessary. That might be from inside a component, service, selector, effect or similar. The function should be place according to it's logic. So, something like `getDescription()` from before could belong next to the model, other operations might be better served as a service method.
+We already outsourced some functions while replacing classes with regular objects. You can apply the same approach for any other functions you've got floating around and invoke them where necessary. That might be from inside a component, service, selector, effect or similar. The function should be placed according to it's logic. So, something like `getDescription()` from before could belong next to the model, other operations might be better served as a service method.
 
 ### Observable
 
@@ -281,7 +281,7 @@ class TodoDetailComponent {
 }
 ```
 
-If you don't want to have additional data in your store or the respective observable is not relevant to the state, you can still outsource it into a selection:
+If you don't want to have additional data in your store or the respective observable is not relevant to the state, you can still outsource it - e.g. into a selection:
 
 ```typescript
 interface Todo {
@@ -329,7 +329,7 @@ The same considerations apply for promises.
 
 ### Special Objects
 
-Special objects like HTML elements or blobs don't have serializable counterparts or serializing (and constantly de-serializing) them might hurt your application performance. However, you might still want to associate these objects with data in you store. In that case you can leverage additional stateful services.
+Special objects like HTML elements or blobs don't have serializable counterparts or serializing (and constantly de-serializing) them would hurt your application performance. However, you might still want to associate these objects with data in you store. In that case you can leverage additional stateful services.
 
 ```typescript
 interface Images {
@@ -384,4 +384,4 @@ You'd have to populate such a service through effects while making sure that any
 
 ## Conclusion
 
-Serializibility is an important aspect when managing state with NgRx. While it requires us to deviate from certain types there's a serializable replacement or at least a feasible workaround for every case. If your specific use-case is not listed, drop me a comment and we'll add it.
+Serializibility is an important aspect when managing state with NgRx. While it requires us to deviate from certain types there's a serializable replacement or at least a feasible workaround for every case. If your specific use-case is not covered, drop me a comment and we'll add it.
