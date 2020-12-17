@@ -242,7 +242,7 @@ interface State {
 const selectTodo = createSelector(
   (state: State) => state.todos,
   (state: State) => state.comments,
-  (todos, comments, id: string) => ({
+  (todos, comments, id: number) => ({
     ...todos[id],
     comments: comments[id],
   })
