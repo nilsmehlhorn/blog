@@ -210,6 +210,9 @@ function getDescription(todo: Todo): string {
 }
 ```
 
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth content
+
 ## Outsourcing Non-Serializable Data
 
 Some types don't really have a direct replacement which would be serializable. In that case we need workarounds in order to keep them out of the store. This part is usually a bit more tricky as solutions are specific to each use-case, but there's always at least one solution.
@@ -385,3 +388,7 @@ You'd have to populate such a service through effects while making sure that any
 ## Conclusion
 
 Serializibility is an important aspect when managing state with NgRx. While it requires us to deviate from certain types there's a serializable replacement or at least a feasible workaround for every case. If your specific use-case is not covered, drop me a comment and we'll add it.
+
+
+[[book]]
+| **[📕 Get the NgRx book to master all aspects of the Angular state management solution](https://gumroad.com/l/angular-ngrx-book)**
