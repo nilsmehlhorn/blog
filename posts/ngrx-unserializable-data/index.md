@@ -15,12 +15,12 @@ description: "Here's why serializability is important and how to handle unserial
 
 A fundamental aspect of managing state with NgRx is that all state data needs to be serializable. Runtime state objects are serializable when they can be predictably saved to a persistent storage or transferred over network. In practice, JavaScript objects are mostly serialized to JSON and eventually we'll want our NgRx state to be almost identical to its JSON representation. This way, state can easily be serialized with [`JSON.stringify()`](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) and de-serialized with [`JSON.parse()`](https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse) without errors or loss of information. Effectively, the result of `JSON.parse(JSON.stringify(state))` should be equal to the state itself.
 
-In addition to keeping the state inside the NgRx store serializable, the same considerations also apply for actions and their payloads. Serialiazibilty then enables the use of things like the [Redux DevTools](https://github.com/reduxjs/redux-devtools) or [persisting NgRx state to the local storage](https://nils-mehlhorn.de/posts/ngrx-keep-state-refresh). On top of that, it works well with other functional programming concepts embraced by NgRx like immutability or separation of logic and data.
+In addition to keeping the state inside the NgRx store serializable, the same considerations also apply for actions and their payloads. Serializability then enables the use of things like the [Redux DevTools](https://github.com/reduxjs/redux-devtools) or [persisting NgRx state to the local storage](https://nils-mehlhorn.de/posts/ngrx-keep-state-refresh). On top of that, it works well with other functional programming concepts embraced by NgRx like immutability or separation of logic and data.
 
 [[book]]
 | **[📕 I've written a book on NgRx.](https://gumroad.com/l/angular-ngrx-book)** Learn how to structure your state, write testable reducers and work with actions and effects from one well-crafted resource.
 
-NgRx provides certain [runtime checks](https://ngrx.io/guide/store/configuration/runtime-checks) for verifying that your state and actions are serialiazble. However, per default these aren't turned on and you'll probably only notice problems with serializiblity once you run into bugs. Therefore it's advisable to activate the corresponding runtime checks for [`strictStateSerializability`](https://ngrx.io/guide/store/configuration/runtime-checks#strictstateserializability) and [`strictActionSerializability`](https://ngrx.io/guide/store/configuration/runtime-checks#strictactionserializability) - actually it's probably best to activate all available checks while you're at it. This can be done by passing a second configuration parameter to the [`StoreModule`](https://ngrx.io/api/store/StoreModule) during reducer registration:
+NgRx provides certain [runtime checks](https://ngrx.io/guide/store/configuration/runtime-checks) for verifying that your state and actions are serializable. However, per default these aren't turned on and you'll probably only notice problems with serializability once you run into bugs. Therefore it's advisable to activate the corresponding runtime checks for [`strictStateSerializability`](https://ngrx.io/guide/store/configuration/runtime-checks#strictstateserializability) and [`strictActionSerializability`](https://ngrx.io/guide/store/configuration/runtime-checks#strictactionserializability) - actually it's probably best to activate all available checks while you're at it. This can be done by passing a second configuration parameter to the [`StoreModule`](https://ngrx.io/api/store/StoreModule) during reducer registration:
 
 ```typescript
 @NgModule({
@@ -71,7 +71,7 @@ In contrast, you do not want these types or similar in your state:
 - [`HTMLElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement)
 - [`window`](https://developer.mozilla.org/en-US/docs/Web/API/Window) and similar
 
-While it's not strictly forbidden, you'll also want to avoid classes as their prototype chain can't be restored from JSON. Other than that, classes often tempt you to put functions into the state. Moreover, no classes and/or functions also means that observables shouldn't got into the state.
+While it's not strictly forbidden, you'll also want to avoid classes as their prototype chain can't be restored from JSON. Other than that, classes often tempt you to put functions into the state. Moreover, no classes and/or functions also means that observables shouldn't go into the state.
 
 ## Serializable Replacements
 
@@ -413,7 +413,7 @@ You'd have to populate such a service through effects while making sure that any
 
 ## Conclusion
 
-Serializibility is an important aspect when managing state with NgRx. While it requires us to deviate from certain types, there's a serializable replacement or at least a feasible workaround for every case. If your specific use-case is not covered, drop me a comment and we'll add it.
+Serializibility is an important aspect when managing state with NgRx. While it requires us to deviate from certain types, there's a serializable replacement or at least a feasible workaround for every case. If your specific use-case is not covered, drop me a comment and I'll add it.
 
 [[book]]
 | **[📕 Get the NgRx book to master all aspects of the Angular state management solution](https://gumroad.com/l/angular-ngrx-book)**
