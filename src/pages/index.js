@@ -106,7 +106,7 @@ const IndexPage = ({ data }) => {
             Explore Talks
           </Link>
         </div>
-        <h1>Projects</h1>
+        <h1>Public Projects</h1>
         <div className={styles.projects}>{Projects}</div>
       </div>
     </Layout>
