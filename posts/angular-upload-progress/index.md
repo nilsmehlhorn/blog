@@ -22,9 +22,9 @@ description: 'Upload files like PDF or ZIP in Angular programmatically with the 
 
 Since my article on [downloading files with Angular](https://nils-mehlhorn.de/posts/angular-file-download-progress) was well received, I've decided to also show how to apply the same pattern for uploads.
 
-Uploading files is again a common interaction with web apps. Whether you want your user to upload documents in the PDF format, some archives as ZIP or just a profile image in form of PNG or JPG - you'll need to implement a file upload and chances are that you also want to display some kind of progress indication.
+Uploading files is again a common interaction with web apps. Whether you want your user to upload documents in the PDF format, some archives as ZIP as well as a profile image or some kind of avatar in form of PNG or JPG - you'll need to implement a file upload and chances are that you also want to display some kind of progress indication.
 
-If you're just here for the plain upload and would rather have a simple on/off loading indication, take a look at my post on [implementing this with Angular and RxJS](https://nils-mehlhorn.de/posts/indicating-loading-the-right-way-in-angular) after the first section.
+If you're just here for the plain upload and would rather have a simple on/off loading indication, take a look at my post on [implementing this with Angular and RxJS](https://nils-mehlhorn.de/posts/indicating-loading-the-right-way-in-angular) after the first two sections.
 
 Here's a live example of the file upload dialog and progress bar which we're going to build. You can also find the code on [GitHub](https://github.com/nilsmehlhorn/ng-upload).
 
@@ -245,7 +245,7 @@ const calculateState = (upload: Upload, event: HttpEvent<unknown>): Upload => {
 }
 ```
 
-If an [`HttpProgressEvent`](https://angular.io/api/common/http/HttpProgressEvent) is emitted, we'll calculate the current progress and set the state property to `'IN_PROGRESS'`. We do this by returning a new `Upload` state from our state calculation function while incorporating information from the incoming event. On the other hand, once the HTTP request is finished, as indicated by an [`HttpResponse`](https://angular.io/api/common/http/HttpResponse), we can set the `progress` property to `100` and mark the upload as `'DONE'`.
+If an [`HttpProgressEvent`](https://angular.io/api/common/http/HttpProgressEvent) is emitted, we'll calculate the current progress and set the state property to `'IN_PROGRESS'`. We do this by returning a new `Upload` state from our state calculation function while incorporating information from the incoming event. On the other hand, once the HTTP request is finished, as indicated by an [`HttpResponse`](https://angular.io/api/common/http/HttpResponse), we can set the `progress` property to `100` and mark the upload as `'DONE'`. For all other events we'll keep (thus return) the state like it is.
 
 Finally, we can pass our `initialState` and the `calculateState` function to the RxJS [`scan`](https://rxjs.dev/api/operators/scan) operator and apply that to the observable returned from the [`HttpClient`](https://angular.io/api/common/http/HttpClient):
 
