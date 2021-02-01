@@ -1,5 +1,5 @@
 ---
-path: '/posts/angular-upload-progress'
+path: '/posts/angular-file-upload-progress'
 date: '2021-02-01'
 title: 'Angular File Upload with Progress'
 published: true
@@ -167,6 +167,9 @@ export class AppComponent implements OnDestroy {
   }
 }
 ```
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth Angular & RxJS knowledge
 
 ## Calculate Upload Progress
 
