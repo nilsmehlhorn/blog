@@ -287,7 +287,7 @@ export class AppComponent implements OnDestroy {
     if (this.file) {
       this.subscription = this.uploads
         .upload(this.file)
-        .subscribed((upload) => (this.upload = upload))
+        .subscribe((upload) => (this.upload = upload))
     }
   }
 }
