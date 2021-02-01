@@ -117,7 +117,7 @@ export const pageQuery = graphql`
           description
           banner {
             preview: childImageSharp {
-              fluid(maxWidth: 630, maxHeight: 250) {
+              fluid(maxWidth: 630, maxHeight: 250, cropFocus: CENTER) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
