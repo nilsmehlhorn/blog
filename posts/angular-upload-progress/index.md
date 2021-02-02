@@ -82,7 +82,7 @@ Unfortunately, it's pretty difficult to style file inputs and [Angular Material 
 <input hidden type="file" #fileInput (change)="onFileInput(fileInput.files)" />
 ```
 
-Again, I'm using the template reference variable to forward the click for the button to the input element. Since the file is available from the component instance once selected, we can also use it's name as the button text.
+Again, I'm using the template reference variable to forward the click for the button to the input element. Since the file is available from the component instance once selected, we can also use its name as the button text.
 
 ## Uploading Files with HttpClient
 
@@ -202,7 +202,7 @@ It has a `progress` property ranging from `0` to `100` and `state` property that
 const initialState: Upload = { state: 'PENDING', progress: 0 }
 ```
 
-Now we can define how intermediate states are calculated from an existing state and an incoming [`HttpEvent`](https://angular.io/api/common/http/HttpEvent). But first, I'll setup some [user-defined type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards) for distinguishing different type of events. These guards a functions which narrow the event type based on the `type` property that is available in every event:
+Now we can define how intermediate states are calculated from an existing state and an incoming [`HttpEvent`](https://angular.io/api/common/http/HttpEvent). But first, I'll setup some [user-defined type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards) for distinguishing different type of events. These guards are functions which narrow the event type based on the `type` property that is available in every event:
 
 ```typescript
 import {
