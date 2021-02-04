@@ -1,4 +1,11 @@
 - talk:
+    name: "State Management with NgRx"
+    date: '2020-12-21'
+    location: 'Tech Talks with Santosh'
+    link: 'https://www.youtube.com/watch?v=DhgbolCd2_E'
+    img: './ngrx-tech-talk.jpg'
+    description: 'Live stream session on state management with NgRx in Angular based on the NgRx book'
+- talk:
     name: "Undo-Redo with Angular & NgRx"
     date: '2020-10-28'
     location: 'iJS Munich'
