@@ -399,7 +399,7 @@ case "SAVED":
 While it's fun and a good learning experience to implement NgRx store and effects yourself, you should definitely stick with the official library for real Angular apps. This way you'll get a tested and type-safe implementation with a lot more features.
 
 [[info]]
-| If you want to learn solid NgRx foundations, you've come to the right place, because I'm writing a book on that and you can **[get it for free](https://gumroad.com/l/angular-ngrx-book)** 📖
+| If you want to learn solid NgRx foundations, you've come to the right place because I've written a book on that and you can **[get it here](https://gumroad.com/l/angular-ngrx-book)** 📖.
 
 I'm pouring all my experience into this complete learning resource while allowing you to pay what you want - it's my main goal to help people to gain proper software development skills, so share the link to the book with anyone who might like it.
 
