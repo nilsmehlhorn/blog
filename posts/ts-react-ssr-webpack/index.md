@@ -1,9 +1,9 @@
 ---
 path: '/posts/typescript-nodejs-react-ssr'
-date: '2021-03-30'
+date: '2021-04-02'
 title: 'Fullstack TypeScript: Node.js + React SSR'
 published: true
-tags: ['web development', 'react', 'node.js']
+tags: ['web development', 'react', 'nodejs']
 keywords: ['webpack', 'ssr', 'server-side rendering', 'tsconfig', 'ejs']
 banner: './typescript-nodejs-react-ssr.png'
 description: 'Setup a fullstack TypeScript web application project that uses Node.js and React with server-side rendering'
@@ -15,7 +15,7 @@ description: 'Setup a fullstack TypeScript web application project that uses Nod
 
 In this article I'll show you how to setup a fullstack TypeScript web application project that uses Node.js and React with server-side rendering (SSR). In the end, we'll have a clean, fast and fully type-safe build with a convenient development mode.
 
-You can find the code from this article [here on GitHub](https://github.com/nilsmehlhorn/ts-react-ssr-webpack).
+As always, the code from this article is [available on GitHub](https://github.com/nilsmehlhorn/ts-react-ssr-webpack).
 
 ## Concept
 
@@ -23,7 +23,7 @@ The following sketch shows you how everything is going to fit together in the en
 
 ![Concept of Node.js and React SSR setup](./react-typescript-node-ssr.png)
 
-You might've notice that React isn't directly part of the concept sketch. That's because it isn't integral too the setup itself but rather _just_ a library for rendering HTML. Usually, this HTML is described with the XML-like syntax extension for JavaScript called [JSX](https://reactjs.org/docs/introducing-jsx.html). In practice, any JSX can be replaced with corresponding calls to `React.createElement()`:
+You might've notice that React isn't directly part of the concept sketch. That's because it isn't integral too the setup itself but rather "just" a library for rendering HTML. Usually, this HTML is described with the XML-like syntax extension for JavaScript called [JSX](https://reactjs.org/docs/introducing-jsx.html). In practice, any JSX can be replaced with corresponding calls to `React.createElement()`:
 
 ```jsx
 // create React element with JSX
@@ -45,9 +45,14 @@ For many - myself included - build setups can seem [confusing](https://twitter.c
 
 First off, there are various bundler options (e.g. [Parcel](https://parceljs.org/), [Brunch](https://brunch.io/), [snowpack](https://www.snowpack.dev/) or [rollup.js](https://rollupjs.org/guide/en/)). While some of them might be easier to configure or yield better results (e.g. regarding bundle size), I'll stick with [webpack](https://webpack.js.org/) because it works for both client and server bundles while arguably being the most battle-tested solution with the biggest community.
 
-On the other hand, you can get a similar result without doing any configuration yourself and instead rely on frameworks like [Next.js](https://nextjs.org/) or higher-order tools like the [Nx Dev Tools](https://nx.dev/).
+On the other hand, you can get similar results without doing any configuration yourself and instead rely on frameworks like [Next.js](https://nextjs.org/).
 
 Nevertheless, as you're about to see, configuring a proper setup yourself is also a viable solution that gives you more flexibility and helps you understand all involved parts. I'm currently working on a [new application](https://sendlater.cemble.com/) where we started with a rather simple Node.js setup and evolved it along our feature requirements. Approaching projects like this allows you to deliver value fast and not get lost in analysis paralysis.
+
+## Prerequisites
+
+- [Install Node.js](https://nodejs.org/en/download/) (I'm using Node.js v14 here)
+- Setup an empty Node.js project either with `npm init` or by creating a [`package.json`](https://docs.npmjs.com/cli/v6/configuring-npm/package-json) yourself
 
 ## Running TypeScript in Node.js
 
@@ -92,7 +97,7 @@ server.listen(3000, () => {
 
 Here we create an Express server instance by invoking the default export of the `'express'` module. We can then register any HTTP endpoints on this server and specify what to do once a request comes in via a callback function. In our case, we'll have a single endpoint responding with some plain text to a GET request on the root path. After that we'll startup the server with the [`listen()`](https://expressjs.com/de/api.html#app.listen) function while passing a port and a callback that'll be invoked once our server is running.
 
-We'll then create a TypeScript compiler configuration for building our server code in the file `tsconfig.server.json`:
+We'll then create a TypeScript compiler configuration in the file `tsconfig.server.json` for building our server-side code:
 
 ```json
 // tsconfig.server.json
@@ -116,7 +121,7 @@ We'll then create a TypeScript compiler configuration for building our server co
 }
 ```
 
-I've add a little note explaining each compiler option. You can get the full explanation for each from the [documentation](https://www.typescriptlang.org/tsconfig).
+I've add a little comment explaining each compiler option. You can get the full explanation for each from the [documentation](https://www.typescriptlang.org/tsconfig). Note that `jsx` option allows us to compile any JSX (or [TSX](https://www.typescriptlang.org/docs/handbook/jsx.html)) expressions into plain `React.createElement()` statements.
 
 In order to run the compilation we can add an npm script to the `package.json` which should then look as follows:
 
@@ -145,7 +150,7 @@ Executing the `build:server` script as follows will give us a ready-to-run JavaS
 npm run build:server
 ```
 
-We'll run it with the `start` script which in turn invokes the Node.js CLI:
+Afterwards, we can startup this server with the `start` script which in turn invokes the Node.js CLI:
 
 ```
 npm start
@@ -166,7 +171,7 @@ We'll start setting up webpack for our server by installing the required tooling
 npm install --save-dev webpack webpack-cli ts-loader webpack-node-externals
 ```
 
-We'll make use of these packages in our webpack configuration exported in the CommonJS format from `webpack.config.js`:
+We'll make use of these packages in a webpack configuration exported in the CommonJS format from `webpack.config.js`:
 
 ```js
 // webpack.config.server.js
@@ -207,11 +212,13 @@ module.exports = {
 
 Let's go through each option here, again checkout the [documentation](https://webpack.js.org/configuration/) for more details.
 
-Inside the `entry` property we define an entry point for the server bundling, usually that's where the application should start. Setting `mode` to `'production'` instructs webpack to run all kinds of build optimizations. Via `output` we specify where webpack should put resulting files, for use that's in the `dist/` directory where `[name]` will be replace with the key from the `entry` dictionary. While bundling, we'll `resolve` all files with TypeScript or TSX (the type counterpart to JSX) - the latter is preparation for server-side rendering. Once resolved, we'll leverage the `ts-loader` to compile TypeScript code based on our existing compiler configuration.
+Inside the `entry` property we define an entry point for the server bundling, usually that's where the application should start. Setting `mode` to `'production'` instructs webpack to run all kinds of build optimizations. Via `output` we specify where webpack should put resulting files - in our case that's in the `dist/` directory where `[name]` will be replace with the key from the `entry` dictionary.
 
-Passing `webpack-node-externals` to the `externals` property will make webpack skip bundling files from the `node_modules` directory and instead require them at runtime. That's necessary because certain Node.js dependencies can't be bundled. Our compilation `target` is the Node.js runtime. Setting `node.__dirname` to false keeps the special [`__dirname`](https://nodejs.org/docs/latest/api/globals.html) path variable working as expected after the bundling.
+While bundling, we'll `resolve` all files with TypeScript or TSX. Once resolved, we'll leverage the `ts-loader` to compile TypeScript code based on our existing compiler configuration.
 
-Lastly, adapt our `build:server` to invoke the webpack CLI:
+Passing `webpack-node-externals` to the `externals` property will make webpack skip bundling files from the `node_modules` directory and instead import them at runtime. That's necessary because certain Node.js dependencies can't be bundled. Our compilation `target` is the Node.js runtime. Setting `node.__dirname` to `false` keeps the special [`__dirname`](https://nodejs.org/docs/latest/api/globals.html) path variable working as expected after the bundling.
+
+Lastly, adapt our `build:server` script to invoke the webpack CLI:
 
 ```json
 // package.json
@@ -219,6 +226,8 @@ Lastly, adapt our `build:server` to invoke the webpack CLI:
   "build:server": "webpack --config webpack.config.server.js"
 }
 ```
+
+That's it for our server build - onto the client-side!
 
 ## React SSR Setup with webpack and TypeScript
 
@@ -316,12 +325,12 @@ module.exports = {
 
 A lot of this should be familiar from the server bundle configuration. The major differences are that we're starting at `client/client.tsx` and outputting to `/dist/static` while compiling for the web as well as including a hash of the contents in the filename - the last bit is meant to prevent unwanted browser [caching](https://webpack.js.org/guides/caching/).
 
-The `clean-webpack-plugin` removes any obsolete build artifacts resulting from including the hash. Meanwhile, the `webpack-manifest-plugin` generates JSON file called `manifest.json` in the output directory from which we can gather the filename of latest built bundle. This will help us to serve HTML from the server. It'll look like this:
+The `clean-webpack-plugin` removes any obsolete build artifacts resulting from including the hash. Meanwhile, the `webpack-manifest-plugin` generates a JSON file called `manifest.json` in the output directory from which we can gather the filename of latest built bundle. This will help us to serve HTML from the server. It'll look something like this:
 
 ```json
 // dist/static/manifest.json
 {
-  "client.js": "/client/client.js"
+  "client.js": "client.f34004c91fb1606d0364.js"
 }
 ```
 
@@ -338,13 +347,13 @@ Here's another npm script for invoking the client bundling:
 
 We've now successfully setup builds for the server and client applications. The only things left to do is rendering HTML on the server while referencing the client-side bundle from that HTML.
 
-Right now, our server only has a single endpoint that responds with a simple message. That's where we'd now like to send HTML instead. We could technically generate this HTML through string concatenation, however, using a template engine like [EJS] is generally more convenient:
+Right now, our server only has a single endpoint that responds with a simple message. That's where we'd now like to send HTML instead. We could technically generate this HTML through string concatenation, however, using a template engine like [EJS](https://ejs.co/) is generally more convenient:
 
 ```bash
 npm install ejs
 ```
 
-We'll define a template with an HTML skeleton where we can include some HTML from the React server-side rendering as well as reference the client-side bundle for the rehydration. The following template expects the HTML to reside in a `component` template attribute while another attribute `assets` contains a property `client-js` with the public path (the one with the dynamic hash) to the client-side bundle:
+We'll define a template with an HTML skeleton where we can include some HTML from the React server-side rendering as well as reference the client-side bundle for the rehydration. The following template expects the HTML to reside in a `component` template attribute while another attribute `assets` contains a property `client-js` with the public path to the client-side bundle (the one with the dynamic hash):
 
 ```ejs
 <!-- server/views/client.ejs -->
@@ -361,9 +370,23 @@ We'll define a template with an HTML skeleton where we can include some HTML fro
 </html>
 ```
 
-Next up, we register EJS as Express's [view engine](https://expressjs.com/en/guide/using-template-engines.html) and specify a directory with corresponding templates. Also, we'll setup the `express.static` middleware to serve any files from `./static` - that's where the client bundle resides when both server and client are built.
+It's necessary to now also add the webpack copy plugin to our server bundling so that this template is available at a relative location to the resulting JavaScript code:
 
-Then we parse the manifest generated by webpack as preparation for the server-side rendering that'll now take place in the GET handler.
+```js
+// webpack.config.server.js
+const CopyPlugin = require('copy-webpack-plugin')
+
+module.exports = {
+  /* config */
+  plugins: [
+    new CopyPlugin({
+      patterns: [{ context: 'server', from: 'views', to: 'views' }],
+    }),
+  ],
+}
+```
+
+Next up, we register EJS as Express's [view engine](https://expressjs.com/en/guide/using-template-engines.html) and tell it to look for view templates in the `view/` directory. Also, we'll setup the `express.static` middleware to serve any files from `./static` - that's where the client bundle resides when both server and client are built.
 
 ```ts
 // server/server.ts
@@ -390,6 +413,8 @@ server.get('/', (req, res) => {
   res.render('client', { assets, component })
 })
 ```
+
+Then we parse the manifest generated by webpack as preparation for the server-side rendering that'll now take place in the GET handler.
 
 Note that you shouldn't use synchronous operations like [`fs.readFileSync()`](https://nodejs.org/api/fs.html#fs_fs_readfilesync_path_options) once your server is running. Instead use asynchronous counterparts like [`fs.readFile()`](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback) or [`fsPromises.readFile()`](https://nodejs.org/api/fs.html#fs_fspromises_readfile_path_options) so that the [Node.js event loop won't be blocked](https://nodejs.org/en/docs/guides/dont-block-the-event-loop/). Here it's fine to make an exception because we're doing it during startup and we want to make sure that the file can be loaded before the server starts.
 
@@ -480,11 +505,12 @@ The `--inspect` flag will make Node.js expose a [debugger](https://nodejs.org/en
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "type": "node", // debug Node.js
       "name": "Attach Node Debugger",
-      "request": "attach",
-      "sourceMaps": true,
-      "restart": true,
+      "request": "attach", // only attach to existing, don't launch
+      "sourceMaps": true, // look for source maps
+      "restart": true, // restart when loosing connection due to re-compile
+      // look for source-maps based on our bundle result
       "outFiles": ["${workspaceFolder}/dist/server.js"]
     }
   ]
@@ -492,3 +518,15 @@ The `--inspect` flag will make Node.js expose a [debugger](https://nodejs.org/en
 ```
 
 Note that you can also use `--inspect-brk` instead to have Node.js wait for the debugger to attach.
+
+## What's next
+
+I think this setup itself is already a decent basis for building server-side rendered thus SEO-friendly web applications with good performance.
+
+I'll address further extensions and improvements in follow-up posts, right now I'm thinking of the following:
+
+- SCSS integration with CSS modules
+- Performance improvements via library replacements
+- Integration with React routing
+
+Leave a comment below if anything is unclear or you have a suggestion for improving the setup.
