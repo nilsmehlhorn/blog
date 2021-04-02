@@ -13,7 +13,7 @@ description: 'Setup a fullstack TypeScript web application project that uses Nod
 
 ```
 
-In this article I'll show you how to setup a fullstack TypeScript web application project that uses Node.js and React with server-side rendering (SSR). In the end, we'll have a clean, fast and fully type-safe build with a convenient development mode.
+In this post I'll show you how to setup a fullstack TypeScript web application project that uses Node.js and React with server-side rendering (SSR). In the end, we'll have a clean, fast and fully type-safe build with a convenient development mode.
 
 As always, the code from this article is [available on GitHub](https://github.com/nilsmehlhorn/ts-react-ssr-webpack).
 
@@ -39,6 +39,8 @@ const element = React.createElement(
 
 As long as we factor in a step in our setup where we perform such a replacement, we'll be fine.
 
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth JavaScript knowledge
 ## Considerations
 
 For many - myself included - build setups can seem [confusing](https://twitter.com/jaffathecake/status/878160747909365761), especially when webpack configurations are involved. I'm hoping to demystify the topic as much as possible, however, I think that it's worth mentioning some alternatives.
@@ -228,7 +230,6 @@ Lastly, adapt our `build:server` script to invoke the webpack CLI:
 ```
 
 That's it for our server build - onto the client-side!
-
 ## React SSR Setup with webpack and TypeScript
 
 First, we'll install React and corresponding type declarations:
@@ -529,4 +530,6 @@ I'll address further extensions and improvements in follow-up posts, right now I
 - Performance improvements via library replacements
 - Integration with React routing
 
-Leave a comment below if anything is unclear or you have a suggestion for improving the setup.
+Join my mailing list and I'll notify you of any updates. Also, you can connect with me on [Twitter](https://twitter.com/n_mehlhorn) or [LinkedIn](https://www.linkedin.com/in/nils-mehlhorn/).
+
+Leave a comment below if anything is unclear or if you have a suggestion for improving the setup.
