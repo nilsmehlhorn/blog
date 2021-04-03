@@ -23,7 +23,7 @@ The following sketch shows you how everything is going to fit together in the en
 
 ![Concept of Node.js and React SSR setup](./react-typescript-node-ssr.png)
 
-You might've notice that React isn't directly part of the concept sketch. That's because it isn't integral too the setup itself but rather "just" a library for rendering HTML. Usually, this HTML is described with the XML-like syntax extension for JavaScript called [JSX](https://reactjs.org/docs/introducing-jsx.html). In practice, any JSX can be replaced with corresponding calls to `React.createElement()`:
+You might've notice that React isn't directly part of the concept sketch. That's because it isn't integral to the setup itself but rather "just" a library for rendering HTML. Usually, this HTML is described with the XML-like syntax extension for JavaScript called [JSX](https://reactjs.org/docs/introducing-jsx.html). In practice, any JSX can be replaced with corresponding calls to `React.createElement()`:
 
 ```jsx
 // create React element with JSX
@@ -60,19 +60,19 @@ Nevertheless, as you're about to see, configuring a proper setup yourself is als
 
 The Node.js server runtime only understands JavaScript - [roughly ES2015](https://node.green/) in either the CommonJS or ES module format, to be specific. However, for any mildly sophisticated project (or ones that might evolve into such) you're better off writing code in TypeScript. Type-safety has positive effects on maintainability - there's [scientific evidence](https://dl.acm.org/doi/10.1145/2816707.2816720) for that.
 
-Consequently, we can't run our TypeScript code directly but rather have to compile it into JavaScript and then run the result inside Node.js. We'll do this by levering the TypeScript compiler which you can install as a development dependency with the following command:
+Consequently, we can't run our TypeScript code directly but rather have to compile it into JavaScript and then run the result inside Node.js. We'll do this by leveraging the TypeScript compiler which you can install as a development dependency with the following command:
 
 ```bash
 npm install --save-dev typescript
 ```
 
-Let's create a basic server using the [Express](https://expressjs.com/) web framework in order to have something to compile. Express adds a small layer on-top of the regular Node.js APIs to make writing server-side web applications more convenient. You can install it as a regular depencency as follows:
+Let's create a basic server using the [Express](https://expressjs.com/) web framework in order to have something to compile. Express adds a small layer on-top of the regular Node.js APIs to make writing server-side web applications more convenient. You can install it as a regular dependency as follows:
 
 ```bash
 npm install --save express
 ```
 
-You'll also want to install type definitions for Node.js an Express so that TypeScript can understand their modules properly:
+You'll also want to install type definitions for Node.js and Express so that TypeScript can understand their modules properly:
 
 ```bash
 npm install --save-dev @types/node @types/express
@@ -123,7 +123,7 @@ We'll then create a TypeScript compiler configuration in the file `tsconfig.serv
 }
 ```
 
-I've add a little comment explaining each compiler option. You can get the full explanation for each from the [documentation](https://www.typescriptlang.org/tsconfig). Note that `jsx` option allows us to compile any JSX (or [TSX](https://www.typescriptlang.org/docs/handbook/jsx.html)) expressions into plain `React.createElement()` statements.
+I've added a little comment explaining each compiler option. You can get the full explanation for each from the [documentation](https://www.typescriptlang.org/tsconfig). Note that `jsx` option allows us to compile any JSX (or [TSX](https://www.typescriptlang.org/docs/handbook/jsx.html)) expressions into plain `React.createElement()` statements.
 
 In order to run the compilation we can add an npm script to the `package.json` which should then look as follows:
 
@@ -280,7 +280,7 @@ In order to compile a client-side bundle out of this code, we'll have to define 
 }
 ```
 
-Before writing the webpack configuration, we'll install two plugin: one that allows us to clean the output directory before each build and another one that generates a JSON file with information about the build output:
+Before writing the webpack configuration, we'll install two plugins: one that allows us to clean the output directory before each build and another one that generates a JSON file with information about the build output:
 
 ```bash
 npm install --save-dev clean-webpack-plugin webpack-manifest-plugin
@@ -326,7 +326,7 @@ module.exports = {
 
 A lot of this should be familiar from the server bundle configuration. The major differences are that we're starting at `client/client.tsx` and outputting to `/dist/static` while compiling for the web as well as including a hash of the contents in the filename - the last bit is meant to prevent unwanted browser [caching](https://webpack.js.org/guides/caching/).
 
-The `clean-webpack-plugin` removes any obsolete build artifacts resulting from including the hash. Meanwhile, the `webpack-manifest-plugin` generates a JSON file called `manifest.json` in the output directory from which we can gather the filename of latest built bundle. This will help us to serve HTML from the server. It'll look something like this:
+The `clean-webpack-plugin` removes any obsolete build artifacts resulting from including the hash. Meanwhile, the `webpack-manifest-plugin` generates a JSON file called `manifest.json` in the output directory from which we can gather the filename of the latest built bundle. This will help us to serve HTML from the server. It'll look something like this:
 
 ```json
 // dist/static/manifest.json
