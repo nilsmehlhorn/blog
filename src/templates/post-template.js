@@ -40,7 +40,7 @@ export default function Template({ data }) {
     <Layout>
       <SEO
         previewImage={previewImage}
-        keywords={[...frontmatter.tags, ...frontmatter.keywords]}
+        keywords={[...frontmatter.tags, ...(frontmatter.keywords ?? [])]}
         title={frontmatter.title}
         description={description}
         meta={meta}
