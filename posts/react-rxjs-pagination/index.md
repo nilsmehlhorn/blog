@@ -1,14 +1,14 @@
 ---
-path: '/posts/react-rxjs-pagination'
-date: '2021-04-27'
+path: '/posts/react-hooks-rxjs'
+date: '2021-05-04'
 title: 'React Hooks Are Not Reactive Programming'
 published: true
 tags: ['web development', 'react', 'frontend']
 banner: './react-rxjs-pagination-banner.jpg'
-description: 'Build a reusable pagination with React an RxJS for filtering and sorting dynamic data'
+description: "Here's why React Hooks are not reactive programming and how you can use RxJS knowledge from Angular in React"
 ---
 
-Recently I've increasingly started working with React which is a nice change of scenery. I've had to learn quite a few things about the framework while I was able to re-use basic web development skills (HTML, (S)CSS, JavaScript/TypeScript) and transfer some concepts like component-orientation. Glancing at React hooks I also hoped to profit off of my experience with reactive programming - but that didn't really turn out to be the case and here's why.
+I've increasingly started working with React which is a nice change of scenery. I've had to learn quite a few things about the framework while I was able to re-use basic web development skills (HTML, (S)CSS, JavaScript/TypeScript) and transfer concepts like component-orientation. Glancing at React hooks I also hoped to profit off of my experience with reactive programming - but that didn't really turn out to be the case and here's why.
 
 Using Angular made me learn RxJS and its underlying concept of observables. The nice thing here is that RxJS and reactive programming in general is fundamentally decoupled from any framework - it's a generic paradigm that you can apply in all sorts of domains where you're dealing with asynchronous problems.
 
@@ -47,7 +47,7 @@ const getUsers = () => {
 }
 ```
 
-In our concrete case, we'll first use the Promise-based Fetch API to executed and parse the HTTP request before emitting the response to the subscriber and immediately completing the observable. When the request should fail, the subscriber will also be notified. We'll additionally have teardown logic levering an [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API#aborting_a_fetch) to cancel an HTTP request.
+In our concrete case, we'll first use the Promise-based Fetch API to executed and parse the HTTP request before emitting the response to the subscriber and immediately completing the observable. When the request should fail, the subscriber will also be notified. We'll additionally have teardown logic levering an [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API#aborting_a_fetch) to cancel the HTTP request.
 
 Here's how we could use our little RxJS HTTP client:
 
