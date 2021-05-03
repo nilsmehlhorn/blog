@@ -111,7 +111,7 @@ We'll then create a TypeScript compiler configuration in the file `tsconfig.serv
     "skipLibCheck": true, // only check types we refer to from our code
     "forceConsistentCasingInFileNames": true, // prevents cross-OS problems
     "resolveJsonModule": true, // enable import of JSON files
-    "lib": ["es6"], // use JavaScript API ES6
+    "lib": ["es6", "dom"], // use JavaScript API ES6
     "target": "es6", // compile to ES6
     "jsx": "react", // compile JSX to React.createElement statements for SSR
     "allowJs": true, // allow import of JS modules
