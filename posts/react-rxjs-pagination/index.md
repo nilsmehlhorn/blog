@@ -71,21 +71,20 @@ const subscription = getUsers().subscribe(
 )
 ```
 
-Now, let's see how we'd implement a similar HTTP client within a custom React hook. First off, we'd probably rename the encapsulating function so that it contains the "use" prefix to comply with the [rules of hooks](https://reactjs.org/docs/hooks-rules.html).
+For good measure, [here's a demo](https://stackblitz.com/edit/angular-fetch-rxjs?file=src/app/app.component.ts) of how you'd use it in Angular. Note that you'll probably rather want to use [`fromFetch`](https://rxjs.dev/api/fetch/fromFetch), [`ajax`](https://rxjs.dev/api/ajax/ajax) or Angular's HttpClient in practice.
+
+Now, let's see how we'd implement a similar HTTP client within a [custom React hook](https://reactjs.org/docs/hooks-custom.html). First off, we'd probably rename the encapsulating function so that it contains the "use" prefix to comply with the [rules of hooks](https://reactjs.org/docs/hooks-rules.html).
 
 Then we create a functional state variable with [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) for holding a the response from our HTTP request. Our hook will always return the most recent states of both variables as a tuple - both starting off with as undefined.
 
-[[info]]
-| Recommended Read: [Deep dive: How do React hooks really work?](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/) by [swyx](https://twitter.com/swyx)
-
-The next hook that we'll leverage ist [`useEffect`](https://reactjs.org/docs/hooks-reference.html#useeffect) and it looks pretty similar to our Observable implementation: we kick off an HTTP request, parse the response and update the state - we can even return a teardown function.
+The next built-in hook that we'll leverage is [`useEffect`](https://reactjs.org/docs/hooks-reference.html#useeffect) and it looks pretty similar to our Observable implementation: we kick off an HTTP request, parse the response and update the state - we can even return a teardown function.
 
 ```ts
 import { useState, useEffect } from 'react'
 
 const useUsers = () => {
-  const [users, setUsers] = useState(undefined)
-  const [error, setError] = useState(undefined)
+  const [users, setUsers] = useState()
+  const [error, setError] = useState()
   useEffect(() => {
     const controller = new AbortController()
     const { signal } = controller
@@ -99,7 +98,7 @@ const useUsers = () => {
 }
 ```
 
-And here's how we'd use our custom hook inside a React component:
+And here's how we'd use our custom hook inside a React component ([live demo](https://stackblitz.com/edit/react-ts-nycsw7?file=index.tsx)):
 
 ```tsx
 import React from 'react'
@@ -110,20 +109,114 @@ const Users = () => {
     return <p>Starting request ...</p>
   }
   if (error) {
-    return <p>There has been an error: {error}</p>
+    return <p>There has been an error: {error.message}</p>
   }
   return <p>Received {users.length} users</p>
 }
 ```
 
-Looks all very similar, doesn't it? Coming from Angular you'd think the latter is just the React way of doing reactive programming - but it's not. It's the React way of scheduling view updates and we're levering it to encapsulate asynchronous stateful logic.
+Looks all very similar, doesn't it? Coming from Angular you'd think the latter is just the React way of doing reactive programming - but it's not. It's the React way of scheduling view updates and we're leveraging it to encapsulate asynchronous logic.
 
-- reactivity is opaque, it's not in the type (that's why "use" prefix required)
-- implementation is hard-wired to framework and not portable
+> I wonder how many people realize that React Hooks is really just disconnected, less declarative reactive programming. -- [Ben Lesh, RxJS Team Lead](https://twitter.com/BenLesh/status/1374755992378953730)
 
-RxJS on the other hand is universal abstraction
+Ben has made some great points comparing React hooks and observables [here](https://twitter.com/BenLesh/status/1118888489108422656).
+
+The point that I want to get across the most: hooks are React, reactivity is universal. You can easily get this from the fact that `getUsers()` from our example can be used with and without Angular while `useUsers()` only make sense when used inside a React component. Eventually, the "reactivity" of React hooks is opaque and hard-wired to the framework. It's not evident from the type of a hooked variable that it may change (e.g. `number` vs. `Observable<number>`). Hooks also don't really have an API surface. Instead they rely on the way you order your calls and how React schedules view updates. Those are also the reasons why you should do things like prefixing custom hooks with "use" - whether that rolls off the tongue or not.
+
+Hooks are a fascinating piece of work that highlights the power of functional programming, specifically closures. I'd recommend you read the well-written article [Deep dive: How do React hooks really work?](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/) by [swyx](https://twitter.com/swyx) to see this for yourself. The thing to keep in mind is that hooks are first and foremost focused on component rendering.
+
+Fortunately, RxJS and React hooks don't exclude each other. We can make them get along via a custom hook that takes an observable, subscribes to it and forwards events into hooked state variables:
+
+```ts
+export const useObservable = (observable) => {
+  const [value, setValue] = useState()
+  const [error, setError] = useState()
+
+  useEffect(() => {
+    const subscription = observable.subscribe(setValue, setError)
+    return () => subscription.unsubscribe()
+  }, [observable])
+
+  return [error, value]
+}
+```
+
+Once we have this little reactive helper we can replace our custom `useUsers()` hook with the existing RxJS-based HTTP client ([live demo](https://stackblitz.com/edit/react-fetch-rxjs-hook)):
+
+```tsx
+import React from 'react'
+
+const Users = () => {
+  const [error, users] = useObservable(getUsers())
+  if (!users) {
+    return <p>Starting request ...</p>
+  }
+  if (error) {
+    return <p>There has been an error: {error.message}</p>
+  }
+  return <p>Received {users.length} users</p>
+}
+```
+
+Essentially, such a hook is similar to Angular's [AsyncPipe](https://angular.io/api/common/AsyncPipe) or a [similar structural directive](https://nils-mehlhorn.de/posts/angular-observable-directive). It's a bridge for synchronizing reactive code with a framework's change detection mechanism.
+
+Again, in practice you could use a more battle-tested solution like one of the following:
+
+- https://github.com/streamich/react-use
+- https://github.com/LeetCode-OpenSource/rxjs-hooks
+- https://github.com/crimx/observable-hooks
+
+I won't argue that you should outsource all logic via RxJS - especially if it's not asynchronous. Rather, I want you to understand the trade-offs between coupling logic to the change detection mechanism of your chosen view framework. More importantly, I want to show the strength of Observable as a universal abstraction which will allow you to write portable and framework-independent code for working with asynchronous event collections.
+
+Here's another example for this: in a previous post I've developed a [pagination data source for Angular](https://nils-mehlhorn.de/posts/angular-material-pagination-datasource) with RxJS. This data source is basically an abstraction of a paginated REST endpoint offering an observable stream of a page and methods for fetching the next page as well as sorting and filtering by one-off queries.
+
+Apart from the explicit implementation of a TypeScript interface there's not a single reference to the Angular framework in the data source. That way, we can re-use it in a React project without changing the actual implementation one bit. A paginated table component for displaying users could then look as follows:
+
+```ts
+import React, { useRef } from 'react'
+import { useObservable } from 'react-use'
+import { Sort, SortOrder } from '../lib/page'
+import { Pagination } from '../lib/pagination'
+import { getUsersPage, User, UserQuery } from '../lib/users'
+
+const initialSort: Sort<User> = { property: 'id', order: 'asc' }
+const initialQuery: UserQuery = { search: '', registrationDate: undefined }
+const pageSize = 5
+
+export const Table: React.FC = () => {
+  const { current: pagination } = useRef(
+    new Pagination<User, UserQuery>(
+      getUsersPage,
+      initialSort,
+      initialQuery,
+      pageSize
+    )
+  )
+  const page = useObservable(pagination.page$)
+
+  const onQuerySearchChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    pagination.queryBy({ search: target.value })
+  }
+
+  const onNextPage = () => pagination.fetch(page.number + 1)
+
+  const onPreviousPage = () => pagination.fetch(page.number - 1)
+
+  /* more event handlers */
+
+  return /* table JSX */
+}
+```
+
+Here's a live demo of this (also, [code on GitHub](https://github.com/nilsmehlhorn/react-rxjs-pagination-example)):
+
+<iframe src="https://codesandbox.io/embed/react-rxjs-pagination-example-c0vw9?fontsize=14&hidenavigation=1&module=%2Fsrc%2Fcomponents%2FTable.tsx&theme=light&view=preview"
+     style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+     title="fancy-sunset-c0vw9"
+     allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+     sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+   ></iframe>
 
 <small>\* there might be differences between the terms "framework" and "library" but I'll just call everything framework here</small>
-
-https://twitter.com/BenLesh/status/1374755992378953730
-https://twitter.com/BenLesh/status/1118888489108422656
