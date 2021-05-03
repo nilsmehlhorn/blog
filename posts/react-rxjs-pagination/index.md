@@ -118,6 +118,11 @@ const Users = () => {
 
 Looks all very similar, doesn't it? Coming from Angular you'd think the latter is just the React way of doing reactive programming - but it's not. It's the React way of scheduling view updates and we're levering it to encapsulate asynchronous stateful logic.
 
+- reactivity is opaque, it's not in the type (that's why "use" prefix required)
+- implementation is hard-wired to framework and not portable
+
+RxJS on the other hand is universal abstraction
+
 <small>\* there might be differences between the terms "framework" and "library" but I'll just call everything framework here</small>
 
 https://twitter.com/BenLesh/status/1374755992378953730
