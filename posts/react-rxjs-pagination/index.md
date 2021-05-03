@@ -8,9 +8,9 @@ banner: './react-rxjs-pagination-banner.jpg'
 description: 'Build a reusable pagination with React an RxJS for filtering and sorting dynamic data'
 ---
 
-In a previous post I've developed a [pagination data source for Angular](https://nils-mehlhorn.de/posts/angular-material-pagination-datasource) with RxJS. Now recently I've started working with React which is a nice change of scenery. I've had to learn quite a few things about the framework. -- other things I could transfer (lead to reactivity)
+Recently I've increasingly started working with React which is a nice change of scenery. I've had to learn quite a few things about the framework while I was able to re-use basic web development skills (HTML, (S)CSS, JavaScript/TypeScript) and transfer some concepts like component-orientation. Glancing at React hooks I also hoped to profit off of my experience with reactive programming - but that didn't really turn out to be the case and here's why.
 
-Using Angular made me learn RxJS and its underlying reactive concepts of observables. The nice thing here is that RxJS and reactive programming in general is fundamentally decoupled from any framework - it's a generic paradigm that you can apply in all sorts of domains where you're dealing with asynchronous problems.
+Using Angular made me learn RxJS and its underlying concept of observables. The nice thing here is that RxJS and reactive programming in general is fundamentally decoupled from any framework - it's a generic paradigm that you can apply in all sorts of domains where you're dealing with asynchronous problems.
 
 > RxJS is a library for composing asynchronous and event-based programs by using observable sequences. It provides one core type, the Observable, satellite types (Observer, Schedulers, Subjects) and operators inspired by Array#extras (map, filter, reduce, every, etc) to allow handling asynchronous events as collections. -- [RxJS Docs](https://rxjs.dev/guide/overview)
 
@@ -24,13 +24,9 @@ Actually, kind of yes and also kind of no for that last one. The name definitely
 
 > There is an internal joke in the team that React should have been called “Schedule” because React does not want to be fully “reactive” -- [React Docs, Design Principles](https://reactjs.org/docs/design-principles.html)
 
-It might seem like that has changed with the introduction of function components and specifically [hooks](https://reactjs.org/docs/hooks-intro.html).
+It might seem like that has changed with the introduction of function components and specifically [hooks](https://reactjs.org/docs/hooks-intro.html). Let's see how they compare to RxJS observables by looking at an example where we encapsulate an HTTP request made with the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
-Take a look at the following example where I'm encapsulating an HTTP request made with the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) into an observable.
-
-The callback (or subscribe function) passed to the [`Observable`](https://rxjs.dev/api/index/class/Observable) constructor will be executed upon [subscription](https://rxjs.dev/guide/subscription). This callback receives a `subscriber` to whom we can then emit observable values via [`subscriber.next()`](https://rxjs.dev/api/index/class/Subscriber#next) as well as signalize completion or failure of the underlying operation via [`subscriber.complete()`](https://rxjs.dev/api/index/class/Subscriber#complete) and [`subscriber.error()`](https://rxjs.dev/api/index/class/Subscriber#error) respectively. A subscribe function can optionally return another callback (teardown logic) that'll be invoked when the observable is unsubscribed. This allows us to implement cancellation.
-
-In our concrete case, we'll first use the Promise-based Fetch API to executed and parse the HTTP request before emitting the response to the subscriber and immediately completing the observable. When the request should fail, the subscriber will also be notified. We'll additionally have teardown logic levering an [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API#aborting_a_fetch) to cancel an HTTP request.
+We'll start with the RxJS version where we can create a custom observable with the [`Observable`](https://rxjs.dev/api/index/class/Observable) constructor. It accepts a callback (or subscribe function) which will be executed upon [subscription](https://rxjs.dev/guide/subscription). This callback receives a `subscriber` to whom we can subsequently emit values via [`subscriber.next()`](https://rxjs.dev/api/index/class/Subscriber#next) as well as signalize completion or failure of the underlying operation via [`subscriber.complete()`](https://rxjs.dev/api/index/class/Subscriber#complete) and [`subscriber.error()`](https://rxjs.dev/api/index/class/Subscriber#error) respectively. A subscribe function can optionally return another callback (teardown logic) that'll be invoked when the observable is unsubscribed. This allows us to implement cancellation.
 
 ```ts
 import { Observable } from 'rxjs'
@@ -50,6 +46,8 @@ const getUsers = () => {
   })
 }
 ```
+
+In our concrete case, we'll first use the Promise-based Fetch API to executed and parse the HTTP request before emitting the response to the subscriber and immediately completing the observable. When the request should fail, the subscriber will also be notified. We'll additionally have teardown logic levering an [`AbortController`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API#aborting_a_fetch) to cancel an HTTP request.
 
 Here's how we could use our little RxJS HTTP client:
 
@@ -77,7 +75,7 @@ Now, let's see how we'd implement a similar HTTP client within a [custom React h
 
 Then we create a functional state variable with [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) for holding a the response from our HTTP request. Our hook will always return the most recent states of both variables as a tuple - both starting off with as undefined.
 
-The next built-in hook that we'll leverage is [`useEffect`](https://reactjs.org/docs/hooks-reference.html#useeffect) and it looks pretty similar to our Observable implementation: we kick off an HTTP request, parse the response and update the state - we can even return a teardown function.
+The next built-in hook that we'll leverage is [`useEffect`](https://reactjs.org/docs/hooks-reference.html#useeffect) which can be used similar to the Observable constructor: pass a callback where we kick off an HTTP request, parse the response and update the state - we can even return a teardown function. The second parameter is an optional list of values that will be watched by React. When one of the values changes, the effect will be run again. Passing an empty list makes sure that our effect runs only once when a component which uses the hook is created. In turn, when you pass no list at all the effect will run every time the component is re-rendered.
 
 ```ts
 import { useState, useEffect } from 'react'
@@ -166,7 +164,7 @@ Again, in practice you could use a more battle-tested solution like one of the f
 - https://github.com/LeetCode-OpenSource/rxjs-hooks
 - https://github.com/crimx/observable-hooks
 
-I won't argue that you should outsource all logic via RxJS - especially if it's not asynchronous. Rather, I want you to understand the trade-offs between coupling logic to the change detection mechanism of your chosen view framework. More importantly, I want to show the strength of Observable as a universal abstraction which will allow you to write portable and framework-independent code for working with asynchronous event collections.
+Now, don't get me wrong, using hooks for asynchronous code is fine in many cases. After all, observables are probably not the most convenient [abstraction for asynchronous operations that produce a single value](https://twitter.com/BenLesh/status/1385252078788825088) like HTTP requests. I won't argue that you should outsource all logic via RxJS - especially if it's not asynchronous. Rather, I want you to understand the trade-offs between coupling logic to the change detection mechanism of your chosen view framework. More importantly, I want to show the strength of Observable as a universal abstraction which will allow you to write portable and framework-independent code for working with asynchronous event collections.
 
 Here's another example for this: in a previous post I've developed a [pagination data source for Angular](https://nils-mehlhorn.de/posts/angular-material-pagination-datasource) with RxJS. This data source is basically an abstraction of a paginated REST endpoint offering an observable stream of a page and methods for fetching the next page as well as sorting and filtering by one-off queries.
 
