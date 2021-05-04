@@ -1,14 +1,14 @@
 ---
 path: '/posts/react-hooks-rxjs'
 date: '2021-05-04'
-title: 'React Hooks Are Not Reactive Programming'
+title: 'React Hooks vs. RxJS'
 published: true
 tags: ['web development', 'react', 'frontend']
 banner: './react-rxjs-pagination-banner.jpg'
 description: "Here's why React Hooks are not reactive programming and how you can use RxJS knowledge from Angular in React"
 ---
 
-I've increasingly started working with React which is a nice change of scenery. I've had to learn quite a few things about the framework while I was able to re-use basic web development skills (HTML, (S)CSS, JavaScript/TypeScript) and transfer concepts like component-orientation. Glancing at React hooks I also hoped to profit off of my experience with reactive programming - but that didn't really turn out to be the case and here's why.
+I'm currently working a lot with React which is a nice change of scenery. Coming from Angular I've had to learn quite a few things about the framework while I was able to re-use basic web development skills (HTML, (S)CSS, JavaScript/TypeScript) and transfer concepts like component-orientation. Glancing at React hooks I also hoped to profit off of my experience with reactive programming - but that didn't really turn out to be the case and here's why.
 
 Using Angular made me learn RxJS and its underlying concept of observables. The nice thing here is that RxJS and reactive programming in general is fundamentally decoupled from any framework - it's a generic paradigm that you can apply in all sorts of domains where you're dealing with asynchronous problems.
 
@@ -73,7 +73,7 @@ For good measure, [here's a demo](https://stackblitz.com/edit/angular-fetch-rxjs
 
 Now, let's see how we'd implement a similar HTTP client within a [custom React hook](https://reactjs.org/docs/hooks-custom.html). First off, we'd probably rename the encapsulating function so that it contains the "use" prefix to comply with the [rules of hooks](https://reactjs.org/docs/hooks-rules.html).
 
-Then we create a functional state variable with [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) for holding a the response from our HTTP request. Our hook will always return the most recent states of both variables as a tuple - both starting off with as undefined.
+Then we create a functional two state variables with [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) for holding a the response from our HTTP request and possibly an error. Our hook will always return the most recent states of both variables as a tuple - both starting off with as undefined.
 
 The next built-in hook that we'll leverage is [`useEffect`](https://reactjs.org/docs/hooks-reference.html#useeffect) which can be used similar to the Observable constructor: pass a callback where we kick off an HTTP request, parse the response and update the state - we can even return a teardown function. The second parameter is an optional list of values that will be watched by React. When one of the values changes, the effect will be run again. Passing an empty list makes sure that our effect runs only once when a component which uses the hook is created. In turn, when you pass no list at all the effect will run every time the component is re-rendered.
 
@@ -121,7 +121,7 @@ Ben has made some great points comparing React hooks and observables [here](http
 
 The point that I want to get across the most: hooks are React, reactivity is universal. You can easily get this from the fact that `getUsers()` from our example can be used with and without Angular while `useUsers()` only make sense when used inside a React component. Eventually, the "reactivity" of React hooks is opaque and hard-wired to the framework. It's not evident from the type of a hooked variable that it may change (e.g. `number` vs. `Observable<number>`). Hooks also don't really have an API surface. Instead they rely on the way you order your calls and how React schedules view updates. Those are also the reasons why you should do things like prefixing custom hooks with "use" - whether that rolls off the tongue or not.
 
-Hooks are a fascinating piece of work that highlights the power of functional programming, specifically closures. I'd recommend you read the well-written article [Deep dive: How do React hooks really work?](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/) by [swyx](https://twitter.com/swyx) to see this for yourself. The thing to keep in mind is that hooks are first and foremost focused on component rendering. They're not primarily meant for orchestrating asynchronous, possibly long-living event streams - also known as reactive programming.
+Hooks are a fascinating piece of work that highlights the power of functional programming, specifically closures. I'd recommend you read the well-written article [Deep dive: How do React hooks really work?](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/) by [swyx](https://twitter.com/swyx) to see this for yourself. The thing to keep in mind is that hooks are first and foremost focused on component rendering. They're not primarily meant for composing asynchronous, possibly long-living event streams - also known as reactive programming.
 
 Fortunately, RxJS and React hooks don't exclude each other. We can make them get along via a custom hook that takes an observable, subscribes to it and forwards events into hooked state variables:
 
