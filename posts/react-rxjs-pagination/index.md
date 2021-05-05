@@ -71,6 +71,9 @@ const subscription = getUsers().subscribe(
 
 For good measure, [here's a demo](https://stackblitz.com/edit/angular-fetch-rxjs?file=src/app/app.component.ts) of how you'd use it in Angular. Note that you'll probably rather want to use [`fromFetch`](https://rxjs.dev/api/fetch/fromFetch), [`ajax`](https://rxjs.dev/api/ajax/ajax) or Angular's HttpClient in practice.
 
+[[info]]
+| Anything unclear? Don't hesitate to post a comment below or ping me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn)
+
 Now, let's see how we'd implement a similar HTTP client within a [custom React hook](https://reactjs.org/docs/hooks-custom.html). First off, we'd probably rename the encapsulating function so that it contains the "use" prefix to comply with the [rules of hooks](https://reactjs.org/docs/hooks-rules.html).
 
 Then we create a functional two state variables with [`useState`](https://reactjs.org/docs/hooks-reference.html#usestate) for holding a the response from our HTTP request and possibly an error. Our hook will always return the most recent states of both variables as a tuple - both starting off with as undefined.
@@ -120,6 +123,9 @@ Looks all very similar, doesn't it? Coming from Angular you'd think the latter i
 Ben has made some great points comparing React hooks and observables [here](https://twitter.com/BenLesh/status/1118888489108422656).
 
 The point that I want to get across the most: hooks are React, reactivity is universal. You can easily get this from the fact that `getUsers()` from our example can be used with and without Angular while `useUsers()` only make sense when used inside a React component. Eventually, the "reactivity" of React hooks is opaque and hard-wired to the framework. It's not evident from the type of a hooked variable that it may change (e.g. `number` vs. `Observable<number>`). Hooks also don't really have an API surface. Instead they rely on the way you order your calls and how React schedules view updates. Those are also the reasons why you should do things like prefixing custom hooks with "use" - whether that rolls off the tongue or not.
+
+[[info]]
+| Join my [mailing list](https://nils-mehlhorn.de/newsletter) and follow me on Twitter [@n_mehlhorn](https://twitter.com/n_mehlhorn) for more in-depth knowledge on web development.
 
 Hooks are a fascinating piece of work that highlights the power of functional programming, specifically closures. I'd recommend you read the well-written article [Deep dive: How do React hooks really work?](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/) by [swyx](https://twitter.com/swyx) to see this for yourself. The thing to keep in mind is that hooks are first and foremost focused on component rendering. They're not primarily meant for composing asynchronous, possibly long-living event streams - also known as reactive programming.
 
