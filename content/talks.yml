@@ -1,4 +1,11 @@
 - talk:
+    name: "NgRx Book with Nils Mehlhorn"
+    date: '2021-02-19'
+    location: 'Angular Air'
+    link: 'https://www.youtube.com/watch?v=yh-77lwREP4'
+    img: './angular-air-ngrx.jpg'
+    description: 'Live videocast about NgRx and my book'
+- talk:
     name: "State Management with NgRx"
     date: '2020-12-21'
     location: 'Tech Talks with Santosh'
