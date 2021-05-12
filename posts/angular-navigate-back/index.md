@@ -109,7 +109,7 @@ This solves the problem we had before and the user can now navigate back to the 
 
 Sadly, there's one edge case: if the application is started on the detail router after opening the browser or a new tab there won't be an entry in the history to go back to. In that case `location.back()` will throw the user out of your Angular app. There's also no API for directly inspecting the browser history as that might pose security issues, but there's still a way how we can fix this.
 
-We'll create a service for wrapping the back navigation. There we'll also be listening to router events of type [NavigationEnd](https://angular.io/api/router/NavigationEnd) to manage an app-specific navigation history. Now, if the history still contains entries after popping the current URL off of the stack, we can safely navigate back. Otherwise we're falling back to the application route:
+We'll create a service for wrapping the back navigation. There we'll also be listening to router events of type [NavigationEnd](https://angular.io/api/router/NavigationEnd) to manage an app-specific navigation history. Now, if the history still contains entries after popping the current URL off of the stack, we can safely navigate back. Otherwise we're falling back to the application root:
 
 ```typescript
 import { Injectable } from '@angular/core'
