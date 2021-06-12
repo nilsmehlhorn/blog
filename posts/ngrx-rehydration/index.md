@@ -56,18 +56,18 @@ The popular approach for implementing re-hydration is based on [meta-reducers](h
 
 Persisting the result state is pretty straight-forward from inside a meta-reducer: we'll serialize the state object to JSON and put it into the [`localStorage`](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage). When you've taken care to keep the state serializable, this should work right-away. 
 
-Additionally, NgRx calls reducers once with an undefined state and an [`INIT`](https://ngrx.io/api/store/INIT) action to retrieve the initial state. This would be the place for parsing a potentially existing stored state and returning it instead of the underlying reducer's initial state. Here's how a corresponding meta-reducer might look:
+Additionally, NgRx calls root reducers once with an undefined state and an [`INIT`](https://ngrx.io/api/store/INIT) action to retrieve the initial state. The same happens for feature reducers, however, they'll receive the [`UPDATE`](https://ngrx.io/api/store/UPDATE) action. Checking for both of these actions provides a place for parsing a potentially existing stored state and returning it instead of the underlying reducer's initial state. Here's how a corresponding meta-reducer might look:
 
 ```typescript
 // hydration.reducer.ts
-import { ActionReducer, INIT } from "@ngrx/store";
+import { ActionReducer, INIT, UPDATE } from "@ngrx/store";
 import { RootState } from "..";
 
 export const hydrationMetaReducer = (
   reducer: ActionReducer<RootState>
 ): ActionReducer<RootState> => {
   return (state, action) => {
-    if (action.type === INIT) {
+    if (action.type === INIT || action.type === UPDATE) {
       const storageValue = localStorage.getItem("state");
       if (storageValue) {
         try {
