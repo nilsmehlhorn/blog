@@ -242,7 +242,7 @@ npm install --save-dev @types/react @types/react-dom
 Then we create a separate directory `client/` for our client-side thus React code. I'll write a simple React component representing the frontend app inside `app.tsx`:
 
 ```tsx
-// client/app.tsx
+// client/components/app.tsx
 import React from 'react'
 
 export const App: React.FC = () => <p>Hello from Client</p>
