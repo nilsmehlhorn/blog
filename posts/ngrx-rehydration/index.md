@@ -1,6 +1,7 @@
 ---
 path: '/posts/ngrx-keep-state-refresh'
 date: '2020-11-10'
+update: '2021-06-12'
 title: 'How to Keep NgRx State on Refresh'
 published: true
 tags: ['web development', 'frontend', 'angular']
